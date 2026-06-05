@@ -6,7 +6,9 @@ import { CinematicHero } from "@/components/portfolio/CinematicHero";
 import { Section } from "@/components/portfolio/Section";
 import { useReveal } from "@/hooks/use-reveal";
 import { Mail, Linkedin, Github, Award, Cloud, Code2, GraduationCap, ServerCog, FileSpreadsheet } from "lucide-react";
-import himanshiPhoto from "@/assets/himanshi.jpeg.asset.json";
+
+/** Profile photo — served as a static file from /public */
+const HIMANSHI_PHOTO = "/himanshi.jpg";
 
 
 
@@ -92,7 +94,7 @@ function HomePage() {
             <div className="photo-wrap float-y">
               <div className="photo-ring" />
               <div className="photo-frame scan-line glow-pulse">
-                <img src={himanshiPhoto.url} alt="Himanshi Yenugupalli portrait" loading="lazy" />
+                <img src={HIMANSHI_PHOTO} alt="Himanshi Yenugupalli portrait" loading="lazy" />
               </div>
               <span className="corner c-tl" />
               <span className="corner c-tr" />

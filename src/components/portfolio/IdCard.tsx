@@ -1,16 +1,30 @@
 /**
- * Neon Identity Card — refined edition.
- * Circular profile photo crowns the top center, ringed by a glowing neon
- * halo and rotating conic gradient. Below it: name + role, then the
- * field list, QR + barcode, and a status pill. Elegant serif typography
- * for the headline, mono for technical labels.
+ * Premium Identity Card — corporate employee badge edition.
+ *
+ * Features:
+ *   - Real profile photo (uploaded image, served from /public)
+ *   - Glassmorphism card body with neon purple accent
+ *   - Rotating conic halo behind the photo
+ *   - Circuit-board trace background texture
+ *   - Metal lanyard slot at top center
+ *   - Holographic shimmer overlay
+ *   - Desktop-only hover tilt effect (CSS only, no JS)
+ *   - `floatDisabled` prop — pass on mobile to skip the CSS float animation
  */
-import himanshi from "@/assets/himanshi.jpeg.asset.json";
+
+/** Path to Himanshi's profile photo — served from /public as a static file */
+const PHOTO_URL = "/himanshi.jpg";
 
 const NEON = "#c026d3";
 const NEON_SOFT = "#d946ef";
+const NEON_GLOW = "rgba(192,38,211,0.5)";
 
-export function IdCard() {
+interface IdCardProps {
+  /** When true, suppresses the cardFloat CSS animation (used on mobile) */
+  floatDisabled?: boolean;
+}
+
+export function IdCard({ floatDisabled = false }: IdCardProps) {
   const fields: [string, string][] = [
     ["ID", "HY-78901"],
     ["DEPT", "AI TRAINING"],
@@ -20,44 +34,60 @@ export function IdCard() {
 
   return (
     <div
-      className="card-float id-card-glass"
+      className={floatDisabled ? "id-card-glass id-card-tilt" : "card-float id-card-glass id-card-tilt"}
       style={{
-        width: "min(308px, 86vw)",
-        transform: "rotate(-3deg)",
+        width: "min(320px, 90vw)",
         transformOrigin: "top center",
+        // Note: card-float applies rotate via CSS animation keyframe.
+        // When floatDisabled, we apply a static tilt instead.
+        transform: floatDisabled ? "rotate(-2deg)" : undefined,
       }}
     >
-      {/* Metal slot at top center — strap clip plugs in here */}
+      {/* ── Metal lanyard slot at top center ── */}
       <div
         style={{
           position: "relative",
-          width: 64,
-          height: 16,
-          margin: "0 auto -8px",
-          borderRadius: 3,
+          width: 70,
+          height: 18,
+          margin: "0 auto -9px",
+          borderRadius: "4px 4px 3px 3px",
           background:
-            "linear-gradient(180deg, #6a7280 0%, #2a313c 50%, #14181f 100%)",
+            "linear-gradient(180deg, #8a9ab0 0%, #4a5668 40%, #2a313c 70%, #14181f 100%)",
           boxShadow:
-            "inset 0 1px 0 rgba(255,255,255,0.4), inset 0 -1px 0 rgba(0,0,0,0.7), 0 2px 4px rgba(0,0,0,0.7)",
+            "inset 0 1px 0 rgba(255,255,255,0.45), inset 0 -1px 0 rgba(0,0,0,0.8), " +
+            "0 3px 6px rgba(0,0,0,0.8), 0 0 0 1px rgba(0,0,0,0.5)",
           zIndex: 3,
         }}
       >
+        {/* Slot opening */}
         <div
           style={{
             position: "absolute",
-            top: 4,
+            top: 5,
             left: "50%",
             transform: "translateX(-50%)",
-            width: 34,
-            height: 5,
+            width: 38,
+            height: 6,
             borderRadius: 2,
-            background: "linear-gradient(180deg, #050709 0%, #1a1f28 100%)",
-            boxShadow: "inset 0 1px 1px rgba(0,0,0,0.95)",
+            background: "linear-gradient(180deg, #020305 0%, #0f1218 100%)",
+            boxShadow: "inset 0 1px 2px rgba(0,0,0,0.98), inset 0 0 4px rgba(0,0,0,0.9)",
+          }}
+        />
+        {/* Slot highlight */}
+        <div
+          style={{
+            position: "absolute",
+            top: 2,
+            left: 6,
+            right: 6,
+            height: 1,
+            borderRadius: 1,
+            background: "rgba(255,255,255,0.35)",
           }}
         />
       </div>
 
-      {/* Outer neon glow halo */}
+      {/* ── Outer glowing border ── */}
       <div
         data-hover
         style={{
@@ -65,29 +95,30 @@ export function IdCard() {
           borderRadius: 22,
           padding: 0,
           background:
-            "linear-gradient(160deg, rgba(255,255,255,0.10), rgba(255,255,255,0.02))",
-          backdropFilter: "blur(22px) saturate(140%)",
-          WebkitBackdropFilter: "blur(22px) saturate(140%)",
-          border: `1px solid rgba(217,70,239,0.55)`,
+            "linear-gradient(160deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02))",
+          backdropFilter: "blur(24px) saturate(150%)",
+          WebkitBackdropFilter: "blur(24px) saturate(150%)",
+          border: `1px solid rgba(217,70,239,0.6)`,
           boxShadow:
-            `0 0 0 1px rgba(255,255,255,0.06) inset,` +
-            `0 0 14px ${NEON},` +
-            `0 0 36px ${NEON_SOFT},` +
-            `0 0 80px rgba(192,38,211,0.35),` +
-            `0 30px 60px -20px rgba(0,0,0,0.7)`,
+            `0 0 0 1px rgba(255,255,255,0.07) inset,` +
+            `0 0 16px ${NEON},` +
+            `0 0 40px ${NEON_SOFT},` +
+            `0 0 90px rgba(192,38,211,0.3),` +
+            `0 35px 70px -20px rgba(0,0,0,0.75)`,
         }}
       >
+        {/* ── Card body ── */}
         <div
           style={{
             position: "relative",
             borderRadius: 20,
             overflow: "hidden",
             background:
-              "linear-gradient(160deg, rgba(255,255,255,0.08) 0%, rgba(168,85,247,0.06) 45%, rgba(255,255,255,0.03) 100%)",
-            padding: "26px 18px 16px",
+              "linear-gradient(160deg, rgba(255,255,255,0.09) 0%, rgba(140,60,220,0.07) 45%, rgba(255,255,255,0.03) 100%)",
+            padding: "28px 20px 18px",
           }}
         >
-          {/* faint circuit board trace pattern */}
+          {/* Circuit board trace pattern */}
           <svg
             aria-hidden
             width="100%"
@@ -95,7 +126,7 @@ export function IdCard() {
             style={{
               position: "absolute",
               inset: 0,
-              opacity: 0.32,
+              opacity: 0.28,
               pointerEvents: "none",
             }}
           >
@@ -119,13 +150,82 @@ export function IdCard() {
             <rect width="100%" height="100%" fill="url(#circuitTrace)" />
           </svg>
 
-          {/* TOP — circular profile photo with conic halo */}
+          {/* Holographic shimmer overlay */}
+          <div
+            aria-hidden
+            className="holo"
+            style={{
+              position: "absolute",
+              inset: 0,
+              borderRadius: 20,
+              pointerEvents: "none",
+            }}
+          />
+
+          {/* ── Company branding strip ── */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: 16,
+              position: "relative",
+            }}
+          >
+            <div
+              className="font-mono"
+              style={{
+                fontSize: 7.5,
+                letterSpacing: "0.32em",
+                textTransform: "uppercase",
+                color: "rgba(240,171,252,0.7)",
+                textShadow: `0 0 6px ${NEON}`,
+              }}
+            >
+              AI · Corp
+            </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 5,
+                padding: "3px 8px",
+                borderRadius: 4,
+                background: "rgba(192,38,211,0.1)",
+                border: `1px solid rgba(217,70,239,0.3)`,
+              }}
+            >
+              <span
+                className="pulse-dot"
+                style={{
+                  width: 5,
+                  height: 5,
+                  borderRadius: "50%",
+                  background: "#22c55e",
+                  boxShadow: "0 0 6px #22c55e",
+                }}
+              />
+              <span
+                className="font-mono"
+                style={{
+                  fontSize: 6.5,
+                  letterSpacing: "0.28em",
+                  color: "#22c55e",
+                  textTransform: "uppercase",
+                }}
+              >
+                Active
+              </span>
+            </div>
+          </div>
+
+          {/* ── Profile photo with conic halo ── */}
           <div
             style={{
               position: "relative",
               display: "flex",
               justifyContent: "center",
-              marginBottom: 14,
+              marginBottom: 16,
             }}
           >
             {/* Rotating conic halo */}
@@ -134,28 +234,47 @@ export function IdCard() {
               aria-hidden
               style={{
                 position: "absolute",
-                width: 134,
-                height: 134,
-                top: -6,
+                width: 140,
+                height: 140,
+                top: -8,
                 borderRadius: "50%",
                 background:
                   `conic-gradient(from 0deg, ${NEON} 0%, transparent 30%, ${NEON_SOFT} 55%, transparent 80%, ${NEON} 100%)`,
-                filter: "blur(8px)",
-                opacity: 0.85,
+                filter: "blur(9px)",
+                opacity: 0.9,
                 zIndex: 0,
+              }}
+            />
+            {/* Secondary inner halo */}
+            <div
+              className="spin-slow"
+              aria-hidden
+              style={{
+                position: "absolute",
+                width: 128,
+                height: 128,
+                top: -2,
+                borderRadius: "50%",
+                background:
+                  `conic-gradient(from 180deg, transparent 0%, rgba(168,85,247,0.4) 30%, transparent 60%, rgba(217,70,239,0.3) 80%, transparent 100%)`,
+                filter: "blur(5px)",
+                opacity: 0.7,
+                zIndex: 0,
+                animationDuration: "14s",
+                animationDirection: "reverse",
               }}
             />
             {/* Photo ring */}
             <div
               style={{
                 position: "relative",
-                width: 122,
-                height: 122,
+                width: 124,
+                height: 124,
                 borderRadius: "50%",
                 padding: 3,
                 background: `linear-gradient(135deg, ${NEON}, ${NEON_SOFT} 50%, #7c3aed)`,
                 boxShadow:
-                  `0 0 18px ${NEON}, 0 0 44px rgba(217,70,239,0.55), inset 0 0 0 1px rgba(0,0,0,0.6)`,
+                  `0 0 20px ${NEON}, 0 0 50px rgba(217,70,239,0.5), inset 0 0 0 1px rgba(0,0,0,0.6)`,
                 zIndex: 1,
               }}
             >
@@ -166,111 +285,119 @@ export function IdCard() {
                   borderRadius: "50%",
                   overflow: "hidden",
                   background: "#000",
-                  border: `1.5px solid rgba(0,0,0,0.8)`,
+                  border: `2px solid rgba(0,0,0,0.8)`,
                 }}
               >
                 <img
-                  src={himanshi.url}
+                  src={PHOTO_URL}
                   alt="Himanshi Yenugupalli"
+                  width={120}
+                  height={120}
+                  fetchPriority="high"
                   style={{
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",
+                    objectPosition: "center top",
                     display: "block",
-                    filter: "saturate(1.02) contrast(1.06)",
+                    filter: "saturate(1.04) contrast(1.07) brightness(1.02)",
                   }}
                 />
               </div>
-              {/* Tiny corner badge */}
+              {/* Online status badge */}
               <span
                 className="pulse-dot"
                 style={{
                   position: "absolute",
-                  right: 4,
+                  right: 5,
                   bottom: 8,
                   width: 14,
                   height: 14,
                   borderRadius: "50%",
                   background: "#22c55e",
-                  border: "2px solid #050309",
-                  boxShadow: "0 0 8px #22c55e",
+                  border: "2.5px solid #050309",
+                  boxShadow: "0 0 10px #22c55e, 0 0 20px rgba(34,197,94,0.4)",
                   zIndex: 2,
                 }}
               />
             </div>
           </div>
 
-          {/* Name + role */}
-          <div style={{ textAlign: "center", marginBottom: 12, position: "relative" }}>
+          {/* ── Name + role ── */}
+          <div style={{ textAlign: "center", marginBottom: 14, position: "relative" }}>
             <div
               style={{
                 fontFamily: '"Cormorant Garamond", serif',
-                fontSize: 22,
+                fontSize: 23,
                 fontWeight: 600,
                 letterSpacing: "-0.005em",
                 color: "#f8f1ff",
                 lineHeight: 1.05,
-                textShadow: `0 0 14px rgba(217,70,239,0.45)`,
+                textShadow: `0 0 16px rgba(217,70,239,0.4)`,
               }}
             >
-              Himanshi <span style={{ fontStyle: "italic", color: "#f0abfc", fontWeight: 500 }}>Yenugupalli</span>
+              Himanshi{" "}
+              <span style={{ fontStyle: "italic", color: "#f0abfc", fontWeight: 500 }}>
+                Yenugupalli
+              </span>
             </div>
             <div
               className="font-mono"
               style={{
-                marginTop: 6,
+                marginTop: 7,
                 fontSize: 9,
                 letterSpacing: "0.3em",
                 textTransform: "uppercase",
                 color: "#f0abfc",
-                textShadow: `0 0 6px ${NEON}`,
+                textShadow: `0 0 7px ${NEON}`,
               }}
             >
               AI · Data Annotator
             </div>
           </div>
 
-          {/* Divider */}
+          {/* ── Divider ── */}
           <div
             aria-hidden
             style={{
               height: 1,
               width: "100%",
-              background: `linear-gradient(90deg, transparent, ${NEON}, transparent)`,
-              opacity: 0.55,
-              marginBottom: 12,
+              background: `linear-gradient(90deg, transparent, ${NEON}, rgba(217,70,239,0.4), transparent)`,
+              opacity: 0.6,
+              marginBottom: 14,
             }}
           />
 
-          {/* Field grid — compact two-column */}
+          {/* ── Field grid ── */}
           <div
             style={{
               display: "grid",
               gridTemplateColumns: "1fr 1fr",
-              gap: "8px 12px",
+              gap: "9px 14px",
               position: "relative",
-              marginBottom: 14,
+              marginBottom: 16,
             }}
           >
             {fields.map(([k, v]) => (
               <div
                 key={k}
                 className="font-mono"
-                style={{ display: "flex", flexDirection: "column", gap: 1 }}
+                style={{ display: "flex", flexDirection: "column", gap: 2 }}
               >
                 <span
                   style={{
                     fontSize: 7,
                     letterSpacing: "0.22em",
-                    color: "#f0abfc",
+                    color: "rgba(240,171,252,0.65)",
                     textShadow: `0 0 4px ${NEON}`,
+                    textTransform: "uppercase",
                   }}
                 >
                   {k}
                 </span>
                 <span
                   style={{
-                    fontSize: 10,
+                    fontSize: 10.5,
                     letterSpacing: "0.06em",
                     color: "#f5f3ee",
                     fontWeight: 600,
@@ -282,7 +409,7 @@ export function IdCard() {
             ))}
           </div>
 
-          {/* BOTTOM ROW — QR + barcode */}
+          {/* ── QR + Barcode row ── */}
           <div
             style={{
               display: "grid",
@@ -295,13 +422,13 @@ export function IdCard() {
             {/* QR code (synthetic) */}
             <div
               style={{
-                width: 54,
-                height: 54,
+                width: 56,
+                height: 56,
                 background: "#000",
                 border: `1px solid ${NEON}`,
-                borderRadius: 4,
+                borderRadius: 5,
                 padding: 3,
-                boxShadow: `0 0 8px ${NEON}`,
+                boxShadow: `0 0 10px ${NEON_GLOW}`,
               }}
             >
               <div
@@ -340,18 +467,18 @@ export function IdCard() {
             </div>
 
             {/* Barcode block */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
               <div
                 style={{
                   display: "flex",
                   alignItems: "end",
                   gap: 1.2,
-                  height: 34,
-                  padding: "4px 6px",
-                  background: "rgba(0,0,0,0.6)",
+                  height: 36,
+                  padding: "4px 7px",
+                  background: "rgba(0,0,0,0.65)",
                   border: `1px solid ${NEON}`,
-                  borderRadius: 4,
-                  boxShadow: `0 0 8px ${NEON}`,
+                  borderRadius: 5,
+                  boxShadow: `0 0 10px ${NEON_GLOW}`,
                 }}
               >
                 {Array.from({ length: 36 }).map((_, i) => {
@@ -376,7 +503,7 @@ export function IdCard() {
                   letterSpacing: "0.28em",
                   color: "#f0abfc",
                   textAlign: "center",
-                  textShadow: `0 0 4px ${NEON}`,
+                  textShadow: `0 0 5px ${NEON}`,
                 }}
               >
                 HY-78901
@@ -384,16 +511,16 @@ export function IdCard() {
             </div>
           </div>
 
-          {/* Status pill */}
+          {/* ── Status pill ── */}
           <div
             className="flex items-center justify-between"
             style={{
-              marginTop: 12,
-              padding: "6px 10px",
+              marginTop: 14,
+              padding: "7px 12px",
               borderRadius: 999,
-              background: "rgba(192,38,211,0.08)",
-              border: `1px solid ${NEON}`,
-              boxShadow: `inset 0 0 6px rgba(192,38,211,0.3)`,
+              background: "rgba(192,38,211,0.09)",
+              border: `1px solid rgba(217,70,239,0.45)`,
+              boxShadow: `inset 0 0 8px rgba(192,38,211,0.25), 0 0 12px rgba(192,38,211,0.12)`,
             }}
           >
             <div className="flex items-center gap-2">
@@ -410,7 +537,7 @@ export function IdCard() {
               <span
                 className="font-mono"
                 style={{
-                  fontSize: 8,
+                  fontSize: 8.5,
                   letterSpacing: "0.24em",
                   color: "#f5f3ee",
                   textTransform: "uppercase",
@@ -424,7 +551,8 @@ export function IdCard() {
               style={{
                 fontSize: 7,
                 letterSpacing: "0.28em",
-                color: "#f0abfc",
+                color: "rgba(240,171,252,0.7)",
+                textTransform: "uppercase",
               }}
             >
               SCAN ME
