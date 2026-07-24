@@ -259,15 +259,15 @@ function HeroIntro() {
         style={{
           display: "inline-flex", alignItems: "center", gap: 10,
           padding: "7px 14px", borderRadius: 999,
-          background: "rgba(168,85,247,0.06)",
-          border: "1px solid rgba(168,85,247,0.32)",
-          color: "rgba(192,132,252,0.95)",
+          background: "rgba(245,158,11,0.06)",
+          border: "1px solid rgba(245,158,11,0.32)",
+          color: "rgba(245,158,11,0.95)",
           fontSize: 10.5, letterSpacing: "0.32em", textTransform: "uppercase",
           marginBottom: 32,
           backdropFilter: "blur(10px)",
         }}
       >
-        <span className="pulse-dot" style={{ width: 7, height: 7, borderRadius: 999, background: "#c084fc" }} />
+        <span className="pulse-dot" style={{ width: 7, height: 7, borderRadius: 999, background: "#f59e0b" }} />
         available for work
       </motion.div>
 

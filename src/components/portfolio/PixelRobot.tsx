@@ -1,17 +1,17 @@
 import { useEffect, useRef } from "react";
 
 // Palette
-// 0 transparent, 1 outline, 2 dark body, 3 mid body, 4 accent green,
-// 5 visor, 6 highlight, 7 amber rivet
+// 0 transparent, 1 outline, 2 dark body, 3 mid body, 4 accent amber,
+// 5 visor gold, 6 highlight, 7 amber rivet
 const PAL = [
   "transparent",
   "#06080c",
   "#1a2332",
   "#3a4a5a",
-  "#a855f7",
-  "#c084fc",
+  "#f59e0b",
+  "#fcd34d",
   "#e2e8f0",
-  "#f0a832",
+  "#d97706",
 ];
 
 // 12 cols × 16 rows mech/chibi
@@ -72,7 +72,7 @@ export function PixelRobot() {
       // soft shadow
       ctx.save();
       ctx.globalAlpha = 0.3;
-      ctx.fillStyle = "#a855f7";
+      ctx.fillStyle = "#f59e0b";
       ctx.beginPath();
       ctx.ellipse((COLS * PX) / 2 + sway, ROWS * PX + 4, COLS * PX * 0.32, 2.5, 0, 0, Math.PI * 2);
       ctx.fill();
@@ -92,7 +92,7 @@ export function PixelRobot() {
           }
           if (v === 4) {
             const pulse = 0.5 + 0.5 * Math.sin(t * 2.2);
-            ctx.fillStyle = pulse > 0.85 ? "#c084fc" : "#a855f7";
+            ctx.fillStyle = pulse > 0.85 ? "#fcd34d" : "#f59e0b";
           } else {
             ctx.fillStyle = PAL[v];
           }
@@ -125,7 +125,7 @@ export function PixelRobot() {
         pointerEvents: "none",
         zIndex: 40,
         imageRendering: "pixelated",
-        filter: "drop-shadow(0 8px 18px rgba(168,85,247,0.35))",
+        filter: "drop-shadow(0 8px 18px rgba(245,158,11,0.3))",
       }}
     />
   );
