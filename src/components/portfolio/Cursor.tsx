@@ -60,7 +60,7 @@ export function Cursor() {
       for (let i = 0; i < nodes.length - 1; i++) {
         const a = nodes[i], b = nodes[i + 1];
         const alpha = (i + 1) / nodes.length * 0.55;
-        ctx.strokeStyle = `rgba(168,85,247,${alpha})`;
+        ctx.strokeStyle = `rgba(245,158,11,${alpha})`;
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
@@ -70,7 +70,7 @@ export function Cursor() {
         const t = (pulse + i / nodes.length) % 1;
         const px = a.x + (b.x - a.x) * t;
         const py = a.y + (b.y - a.y) * t;
-        ctx.fillStyle = `rgba(192,132,252,${alpha + 0.3})`;
+        ctx.fillStyle = `rgba(252,211,77,${alpha + 0.3})`;
         ctx.beginPath();
         ctx.arc(px, py, 1.5, 0, Math.PI * 2);
         ctx.fill();
@@ -78,7 +78,7 @@ export function Cursor() {
       // Last node to arrow base
       if (nodes.length) {
         const last = nodes[nodes.length - 1];
-        ctx.strokeStyle = "rgba(192,132,252,0.6)";
+        ctx.strokeStyle = "rgba(252,211,77,0.6)";
         ctx.lineWidth = 1.2;
         ctx.beginPath();
         ctx.moveTo(last.x, last.y);
@@ -91,11 +91,11 @@ export function Cursor() {
         const n = nodes[i];
         const age = (frame - n.born) / 60;
         const a = Math.max(0, 1 - age) * 0.9;
-        ctx.fillStyle = `rgba(168,85,247,${a})`;
+        ctx.fillStyle = `rgba(245,158,11,${a})`;
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
         ctx.fill();
-        ctx.strokeStyle = `rgba(192,132,252,${a * 0.7})`;
+        ctx.strokeStyle = `rgba(252,211,77,${a * 0.7})`;
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.r + 2.5, 0, Math.PI * 2);
@@ -103,7 +103,7 @@ export function Cursor() {
       }
 
       // Arrow head
-      const color = hovering ? "#c084fc" : "#a855f7";
+      const color = hovering ? "#fcd34d" : "#f59e0b";
       const size = hovering ? 22 : 16;
       ctx.save();
       ctx.translate(curX, curY);

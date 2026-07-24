@@ -44,7 +44,7 @@ function Particles({ count = 36 }: { count?: number }) {
             width: p.d,
             height: p.d,
             borderRadius: 999,
-            background: i % 4 === 0 ? "#c084fc" : i % 4 === 1 ? "#7fd4ff" : "#ffffff",
+            background: i % 4 === 0 ? "#fcd34d" : i % 4 === 1 ? "#f59e0b" : "#ffffff",
             boxShadow: "0 0 8px currentColor",
             opacity: 0.4,
             willChange: "transform",
@@ -301,7 +301,7 @@ function HeroIntro() {
             marginTop: "-0.08em",
           }}
         >
-          Yenugupalli<span style={{ color: "#c084fc" }}>.</span>
+          Yenugupalli<span style={{ color: "#f59e0b" }}>.</span>
         </span>
       </motion.h1>
 
@@ -316,7 +316,7 @@ function HeroIntro() {
           maxWidth: 620, lineHeight: 1.8,
         }}
       >
-        AI Data Annotator <span style={{ color: "#a855f7" }}>|</span> Human Data Contributor <span style={{ color: "#a855f7" }}>|</span> IT Graduate
+        AI Data Annotator <span style={{ color: "#f59e0b" }}>|</span> Human Data Contributor <span style={{ color: "#f59e0b" }}>|</span> IT Graduate
       </motion.div>
     </div>
   );
@@ -680,11 +680,11 @@ function DesktopHero() {
                 bottom: 48,
                 left: "clamp(24px, 6vw, 96px)",
                 fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: "0.4em",
-                color: "rgba(192,132,252,0.7)", textTransform: "uppercase",
+                color: "rgba(245,158,11,0.7)", textTransform: "uppercase",
                 display: "flex", alignItems: "center", gap: 14,
               }}
             >
-              <span style={{ width: 32, height: 1, background: "linear-gradient(90deg, #c084fc, transparent)" }} />
+              <span style={{ width: 32, height: 1, background: "linear-gradient(90deg, #f59e0b, transparent)" }} />
               scroll to swipe
             </motion.div>
           </div>

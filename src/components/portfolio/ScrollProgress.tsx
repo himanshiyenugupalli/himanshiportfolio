@@ -14,7 +14,7 @@ export function ScrollProgress() {
   }, []);
   return (
     <div style={{ position: "fixed", top: 56, left: 0, height: 2, width: "100%", zIndex: 50, background: "transparent" }}>
-      <div style={{ height: "100%", width: `${p}%`, background: "#a855f7", boxShadow: "0 0 8px rgba(168,85,247,0.5)", transition: "width .1s" }} />
+      <div style={{ height: "100%", width: `${p}%`, background: "#f59e0b", boxShadow: "0 0 8px rgba(245,158,11,0.5)", transition: "width .1s" }} />
     </div>
   );
 }
