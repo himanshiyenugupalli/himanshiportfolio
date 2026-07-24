@@ -102,44 +102,45 @@ function ContinuousStrap({ endX, endY }: { endX: number; endY: number }) {
     >
       <defs>
         <linearGradient id="strapFabric" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%"  stopColor="#1a0633" />
-          <stop offset="8%"  stopColor="#26094a" />
-          <stop offset="22%" stopColor="#3a0e70" />
-          <stop offset="42%" stopColor="#5e1cb0" />
-          <stop offset="50%" stopColor="#8a2be2" />
-          <stop offset="58%" stopColor="#5e1cb0" />
-          <stop offset="78%" stopColor="#3a0e70" />
-          <stop offset="92%" stopColor="#26094a" />
-          <stop offset="100%" stopColor="#1a0633" />
+          <stop offset="0%"  stopColor="#1a1506" />
+          <stop offset="8%"  stopColor="#2e2508" />
+          <stop offset="22%" stopColor="#54430e" />
+          <stop offset="42%" stopColor="#856a16" />
+          <stop offset="50%" stopColor="#b5901c" />
+          <stop offset="58%" stopColor="#856a16" />
+          <stop offset="78%" stopColor="#54430e" />
+          <stop offset="92%" stopColor="#2e2508" />
+          <stop offset="100%" stopColor="#1a1506" />
         </linearGradient>
         <linearGradient id="strapHotline" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%"  stopColor="rgba(230,190,255,0)" />
-          <stop offset="38%" stopColor="rgba(230,190,255,0)" />
-          <stop offset="50%" stopColor="rgba(235,205,255,0.45)" />
-          <stop offset="62%" stopColor="rgba(230,190,255,0)" />
-          <stop offset="100%" stopColor="rgba(230,190,255,0)" />
+          <stop offset="0%"  stopColor="rgba(253,230,138,0)" />
+          <stop offset="38%" stopColor="rgba(253,230,138,0)" />
+          <stop offset="50%" stopColor="rgba(253,230,138,0.45)" />
+          <stop offset="62%" stopColor="rgba(253,230,138,0)" />
+          <stop offset="100%" stopColor="rgba(253,230,138,0)" />
         </linearGradient>
         <linearGradient id="strapSheen" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%"  stopColor="rgba(170,80,240,0)" />
-          <stop offset="62%" stopColor="rgba(170,80,240,0)" />
-          <stop offset="70%" stopColor="rgba(190,100,250,0.35)" />
-          <stop offset="78%" stopColor="rgba(170,80,240,0)" />
-          <stop offset="100%" stopColor="rgba(170,80,240,0)" />
+          <stop offset="0%"  stopColor="rgba(245,158,11,0)" />
+          <stop offset="62%" stopColor="rgba(245,158,11,0)" />
+          <stop offset="70%" stopColor="rgba(252,211,77,0.35)" />
+          <stop offset="78%" stopColor="rgba(245,158,11,0)" />
+          <stop offset="100%" stopColor="rgba(245,158,11,0)" />
         </linearGradient>
         <pattern id="strapWeave" width="1.1" height="1.1" patternUnits="userSpaceOnUse">
           <rect width="1.1" height="1.1" fill="transparent" />
-          <line x1="0" y1="0.22" x2="1.1" y2="0.22" stroke="rgba(255,215,255,0.13)" strokeWidth="0.14" />
-          <line x1="0" y1="0.55" x2="1.1" y2="0.55" stroke="rgba(50,12,85,0.30)"    strokeWidth="0.16" />
-          <line x1="0" y1="0.85" x2="1.1" y2="0.85" stroke="rgba(255,200,255,0.07)" strokeWidth="0.12" />
+          <line x1="0" y1="0.22" x2="1.1" y2="0.22" stroke="rgba(253,243,219,0.13)" strokeWidth="0.14" />
+          <line x1="0" y1="0.55" x2="1.1" y2="0.55" stroke="rgba(85,60,12,0.30)"    strokeWidth="0.16" />
+          <line x1="0" y1="0.85" x2="1.1" y2="0.85" stroke="rgba(253,230,138,0.07)" strokeWidth="0.12" />
         </pattern>
         <pattern id="strapFiber" width="0.6" height="1.2" patternUnits="userSpaceOnUse">
-          <line x1="0.15" y1="0" x2="0.15" y2="1.2" stroke="rgba(235,190,255,0.09)" strokeWidth="0.12" />
-          <line x1="0.45" y1="0" x2="0.45" y2="1.2" stroke="rgba(45,12,80,0.28)" strokeWidth="0.12" />
+          <rect width="0.6" height="1.2" fill="transparent" />
+          <line x1="0.15" y1="0" x2="0.15" y2="1.2" stroke="rgba(253,230,138,0.09)" strokeWidth="0.12" />
+          <line x1="0.45" y1="0" x2="0.45" y2="1.2" stroke="rgba(85,60,12,0.28)" strokeWidth="0.12" />
         </pattern>
         <pattern id="strapTwill" width="2.4" height="2.4" patternUnits="userSpaceOnUse" patternTransform="rotate(28)">
           <rect width="2.4" height="2.4" fill="transparent" />
-          <line x1="0" y1="0.6" x2="2.4" y2="0.6" stroke="rgba(220,170,255,0.10)" strokeWidth="0.18" />
-          <line x1="0" y1="1.5" x2="2.4" y2="1.5" stroke="rgba(30,8,60,0.22)" strokeWidth="0.16" />
+          <line x1="0" y1="0.6" x2="2.4" y2="0.6" stroke="rgba(253,230,138,0.10)" strokeWidth="0.18" />
+          <line x1="0" y1="1.5" x2="2.4" y2="1.5" stroke="rgba(85,60,12,0.22)" strokeWidth="0.16" />
         </pattern>
         <filter id="strapSoftBlur" x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur stdDeviation="0.35" />
@@ -153,19 +154,19 @@ function ContinuousStrap({ endX, endY }: { endX: number; endY: number }) {
         <filter id="strapNoise" x="0%" y="0%" width="100%" height="100%">
           <feTurbulence type="fractalNoise" baseFrequency="2.4" numOctaves="2" seed="7" result="n" />
           <feColorMatrix in="n" type="matrix"
-            values="0 0 0 0 0.10
-                    0 0 0 0 0.03
-                    0 0 0 0 0.18
-                    0 0 0 0.55 0" />
+            values="0 0 0 0 0.60
+                    0 0 0 0 0.40
+                    0 0 0 0 0.05
+                    0 0 0 0 0.55 0" />
           <feComposite in2="SourceGraphic" operator="in" />
         </filter>
         <filter id="strapEdgeWear" x="0%" y="0%" width="100%" height="100%">
           <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" seed="3" result="w" />
           <feColorMatrix in="w" type="matrix"
-            values="0 0 0 0 0.65
-                    0 0 0 0 0.35
-                    0 0 0 0 0.95
-                    0 0 0 0.7 -0.35" />
+            values="0 0 0 0 0.90
+                    0 0 0 0 0.60
+                    0 0 0 0 0.10
+                    0 0 0 0 0.7 -0.35" />
           <feComposite in2="SourceGraphic" operator="in" />
         </filter>
         <linearGradient id="clipMetal" x1="0" y1="0" x2="0" y2="1">
