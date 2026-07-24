@@ -53,7 +53,7 @@ export function Nav() {
         left: 0,
         right: 0,
         zIndex: 60,
-        fontFamily: "var(--font-mono)",
+        fontFamily: "var(--font-sans)",
         display: "flex",
         justifyContent: "center",
         pointerEvents: "none",
@@ -67,11 +67,10 @@ export function Nav() {
           width: "min(1020px, calc(100% - 20px))",
           borderRadius: 22,
           padding: "1px",
-          /* gradient ring */
           background:
-            "linear-gradient(135deg, rgba(192,132,252,0.55), rgba(168,85,247,0.18) 30%, rgba(61,139,255,0.45) 60%, rgba(192,132,252,0.55))",
+            "linear-gradient(135deg, rgba(245,158,11,0.4), rgba(245,158,11,0.1) 40%, rgba(217,119,6,0.3))",
           boxShadow:
-            "0 18px 60px -10px rgba(0,0,0,0.65), 0 0 50px rgba(168,85,247,0.18)",
+            "0 18px 60px -10px rgba(0,0,0,0.65), 0 0 30px rgba(245,158,11,0.12)",
         }}
       >
         {/* inner glass surface */}
@@ -81,72 +80,12 @@ export function Nav() {
             borderRadius: 21,
             overflow: "hidden",
             background:
-              "linear-gradient(180deg, rgba(14,8,28,0.72), rgba(8,5,18,0.78))",
+              "linear-gradient(180deg, rgba(21,26,36,0.85), rgba(14,17,23,0.92))",
             backdropFilter: "blur(26px) saturate(180%)",
             WebkitBackdropFilter: "blur(26px) saturate(180%)",
           }}
         >
-          {/* glass highlight sheen on top */}
-          <div
-            aria-hidden
-            style={{
-              position: "absolute",
-              inset: 0,
-              background:
-                "linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.015) 35%, transparent 70%)",
-              pointerEvents: "none",
-            }}
-          />
-          {/* soft noise / frosted texture */}
-          <div
-            aria-hidden
-            style={{
-              position: "absolute",
-              inset: 0,
-              opacity: 0.08,
-              mixBlendMode: "overlay",
-              pointerEvents: "none",
-              backgroundImage:
-                "radial-gradient(rgba(255,255,255,0.6) 0.7px, transparent 0.7px)",
-              backgroundSize: "3px 3px",
-            }}
-          />
-          {/* moving aurora light streak */}
-          <div
-            aria-hidden
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              height: 1,
-              background:
-                "linear-gradient(90deg, transparent, #c084fc 35%, #7dd3fc 55%, transparent)",
-              backgroundSize: "200% 100%",
-              animation: "gradShift 5s linear infinite",
-              opacity: 0.9,
-            }}
-          />
-          <div
-            aria-hidden
-            style={{
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              right: 0,
-              height: 1,
-              background:
-                "linear-gradient(90deg, transparent, rgba(168,85,247,0.5), transparent)",
-            }}
-          />
-          {/* corner brackets */}
-          <span style={{ position: "absolute", top: 6, left: 6, width: 9, height: 9, borderTop: "1px solid #c084fc", borderLeft: "1px solid #c084fc", opacity: .8 }} />
-          <span style={{ position: "absolute", top: 6, right: 6, width: 9, height: 9, borderTop: "1px solid #c084fc", borderRight: "1px solid #c084fc", opacity: .8 }} />
-          <span style={{ position: "absolute", bottom: 6, left: 6, width: 9, height: 9, borderBottom: "1px solid #c084fc", borderLeft: "1px solid #c084fc", opacity: .8 }} />
-          <span style={{ position: "absolute", bottom: 6, right: 6, width: 9, height: 9, borderBottom: "1px solid #c084fc", borderRight: "1px solid #c084fc", opacity: .8 }} />
-
-          <div className="flex items-center justify-between gap-2 sm:gap-3 px-2 sm:px-4 py-2.5 relative">
-            {/* LEFT — refined monogram brand */}
+          <div className="flex items-center justify-between gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 relative">
             {/* LEFT — bracketed monogram logo */}
             <a
               href="#top"
@@ -157,10 +96,10 @@ export function Nav() {
               <span
                 className="font-bold transition-transform duration-200 group-hover/brand:scale-105"
                 style={{
-                  color: "#c084fc",
+                  color: "#f59e0b",
                   fontSize: 14,
                   letterSpacing: "0.02em",
-                  textShadow: "0 0 12px rgba(192,132,252,0.4)",
+                  textShadow: "0 0 12px rgba(245,158,11,0.4)",
                 }}
               >
                 [HY]
@@ -169,7 +108,7 @@ export function Nav() {
                 style={{
                   fontSize: 12,
                   fontWeight: 400,
-                  color: "rgba(226, 232, 240, 0.6)",
+                  color: "rgba(243, 244, 246, 0.65)",
                   letterSpacing: "0.06em",
                 }}
               >
@@ -182,10 +121,8 @@ export function Nav() {
               ref={trackRef}
               className="relative flex items-center p-1 rounded-full"
               style={{
-                background:
-                  "linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.25))",
-                border: "1px solid rgba(192,132,252,0.14)",
-                boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)",
+                background: "rgba(0,0,0,0.35)",
+                border: "1px solid rgba(245,158,11,0.15)",
               }}
               onMouseLeave={() => setHoverIdx(null)}
             >
@@ -200,10 +137,8 @@ export function Nav() {
                     left: pillRect.left,
                     width: pillRect.width,
                     borderRadius: 999,
-                    background:
-                      "linear-gradient(135deg, rgba(168,85,247,0.28), rgba(61,139,255,0.22))",
-                    boxShadow:
-                      "0 0 0 1px rgba(192,132,252,0.45) inset, 0 0 22px rgba(168,85,247,0.35), 0 4px 14px rgba(0,0,0,0.4)",
+                    background: "rgba(245,158,11,0.18)",
+                    boxShadow: "0 0 0 1px rgba(245,158,11,0.35) inset",
                     transition:
                       "left .45s cubic-bezier(.2,.8,.2,1), width .45s cubic-bezier(.2,.8,.2,1)",
                     pointerEvents: "none",
@@ -222,27 +157,15 @@ export function Nav() {
                     data-hover
                     ref={(el) => { itemsRef.current[i] = el; }}
                     onMouseEnter={() => setHoverIdx(i)}
-                    className="relative flex items-center gap-1.5 px-1.5 sm:px-3.5 py-1.5 rounded-full transition-colors"
+                    className="relative flex items-center gap-1 px-2.5 sm:px-4 py-1.5 rounded-full transition-colors"
                     style={{
-                      color: isActive || isHover ? "#f5f3ee" : "#8899aa",
+                      color: isActive || isHover ? "#f3f4f6" : "#9ca3af",
                       zIndex: 1,
                     }}
                   >
                     <span
-                      className="hidden md:inline text-[9px] font-mono"
-                      style={{
-                        color:
-                          isActive || isHover
-                            ? "#c084fc"
-                            : "rgba(136,153,170,0.45)",
-                        transition: "color .25s",
-                      }}
-                    >
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span
-                      className="text-[9px] sm:text-[12px] uppercase tracking-[0.08em] sm:tracking-[0.18em]"
-                      style={{ fontWeight: 600 }}
+                      className="text-[11px] sm:text-[13px] capitalize"
+                      style={{ fontWeight: isActive ? 600 : 400 }}
                     >
                       {label}
                     </span>
@@ -251,40 +174,20 @@ export function Nav() {
               })}
             </div>
 
-            {/* RIGHT — CTA */}
+            {/* RIGHT — single CTA button */}
             <a
               href="#contact"
               data-hover
-              className="hidden sm:inline-flex shine items-center gap-2 px-4 py-1.5 rounded-full text-[11px] uppercase tracking-[0.22em] font-semibold shrink-0 transition-all"
+              className="hidden sm:inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[12px] font-medium shrink-0 transition-all"
               style={{
-                background:
-                  "linear-gradient(135deg, #a855f7 0%, #c084fc 55%, #7dd3fc 110%)",
-                color: "#10001f",
-                boxShadow:
-                  "0 6px 22px rgba(168,85,247,0.5), inset 0 1px 0 rgba(255,255,255,0.45)",
+                background: "#f59e0b",
+                color: "#0e1117",
+                boxShadow: "0 4px 14px rgba(245,158,11,0.3)",
               }}
-              onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-2px)"; }}
+              onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-1px)"; }}
               onMouseLeave={(e) => { e.currentTarget.style.transform = "translateY(0)"; }}
             >
-              <span
-                className="pulse-dot"
-                style={{ width: 6, height: 6, borderRadius: 999, background: "#10001f" }}
-              />
-              hire me
-            </a>
-            <a
-              href="#contact"
-              data-hover
-              className="sm:hidden inline-flex items-center justify-center rounded-full shrink-0"
-              style={{
-                width: 34, height: 30,
-                background: "linear-gradient(135deg, #a855f7, #c084fc 55%, #7dd3fc)",
-                color: "#10001f",
-                boxShadow: "0 4px 14px rgba(168,85,247,0.45)",
-              }}
-              aria-label="contact"
-            >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              Contact
             </a>
           </div>
         </div>

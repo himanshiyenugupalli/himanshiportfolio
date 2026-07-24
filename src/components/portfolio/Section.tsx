@@ -1,43 +1,42 @@
 import { ReactNode } from "react";
 
 export function Section({
-  id, index, label, command, children,
-}: { id: string; index: string; label: string; command: string; children: ReactNode }) {
-  // Split label into primary + accent (first word display, rest serif italic)
+  id, index, label, tag = "LAB NOTEBOOK", children,
+}: { id: string; index: string; label: string; tag?: string; command?: string; children: ReactNode }) {
   const parts = label.trim().split(/\s+/);
   const primary = parts[0] ?? label;
   const accent = parts.slice(1).join(" ");
 
   return (
-    <section id={id} className="relative" style={{ padding: "88px 0", zIndex: 5 }}>
+    <section id={id} className="relative" style={{ padding: "80px 0", zIndex: 5 }}>
       <div className="mx-auto max-w-6xl px-6">
-        <div className="reveal" style={{ marginBottom: 56 }}>
+        <div className="reveal" style={{ marginBottom: 48 }}>
           <div
-            className="font-mono"
             style={{
-              fontSize: 11,
-              letterSpacing: "0.4em",
+              fontFamily: "var(--font-mono)",
+              fontSize: 10,
+              letterSpacing: "0.25em",
               textTransform: "uppercase",
-              color: "rgba(170,185,200,0.55)",
-              marginBottom: 14,
+              color: "rgba(245, 158, 11, 0.8)",
+              marginBottom: 12,
               display: "flex",
               alignItems: "center",
-              gap: 14,
+              gap: 12,
             }}
           >
-            <span style={{ color: "#c084fc" }}>{index}</span>
+            <span style={{ color: "#f59e0b", fontWeight: 600 }}>[{index}]</span>
             <span
               style={{
                 display: "inline-block",
-                width: 40,
+                width: 32,
                 height: 1,
-                background: "linear-gradient(90deg, rgba(192,132,252,0.6), transparent)",
+                background: "rgba(245, 158, 11, 0.3)",
               }}
             />
-            <span>{command}</span>
+            <span style={{ color: "rgba(156, 163, 175, 0.7)" }}>{tag}</span>
           </div>
 
-          <h2 className="sec-heading" style={{ margin: 0, lineHeight: 0.92 }}>
+          <h2 className="sec-heading" style={{ margin: 0, lineHeight: 1.05 }}>
             <span className="sec-heading-primary">{primary}</span>
             {accent && (
               <>
@@ -50,10 +49,11 @@ export function Section({
           <div
             aria-hidden
             style={{
-              marginTop: 22,
-              width: 80,
-              height: 1,
-              background: "linear-gradient(90deg, rgba(168,85,247,0.6), transparent)",
+              marginTop: 18,
+              width: 60,
+              height: 2,
+              borderRadius: 1,
+              background: "linear-gradient(90deg, #f59e0b, transparent)",
             }}
           />
         </div>

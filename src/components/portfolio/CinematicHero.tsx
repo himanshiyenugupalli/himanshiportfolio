@@ -22,7 +22,7 @@ import { ArrowRight, Mail } from "lucide-react";
  */
 
 const SERIF = "'Inter', sans-serif";
-const DISPLAY = "'Space Grotesk', sans-serif";
+const DISPLAY = "'Fraunces', Georgia, serif";
 
 // ─── Particles ────────────────────────────────────────────────────────────────
 function Particles({ count = 36 }: { count?: number }) {
@@ -327,18 +327,24 @@ function HeroCopy() {
   return (
     <div style={{ maxWidth: 600 }}>
       <div
-        className="font-mono"
         style={{
-          display: "inline-block",
-          fontSize: 11,
-          letterSpacing: "0.32em",
+          display: "inline-flex",
+          alignItems: "center",
+          gap: 6,
+          fontSize: 10.5,
+          fontFamily: "var(--font-mono)",
+          letterSpacing: "0.22em",
           textTransform: "uppercase",
-          color: "#7fd4ff",
-          textShadow: "0 0 14px rgba(127,212,255,0.5)",
+          color: "#f59e0b",
+          background: "rgba(245, 158, 11, 0.08)",
+          border: "1px solid rgba(245, 158, 11, 0.25)",
+          padding: "4px 10px",
+          borderRadius: 4,
           marginBottom: 16,
         }}
       >
-        AI Data Annotation
+        <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#f59e0b" }} />
+        QA & RLHF ANNOTATION LAB
       </div>
 
       <h2
@@ -347,8 +353,8 @@ function HeroCopy() {
           fontFamily: DISPLAY,
           fontWeight: 700,
           fontSize: "clamp(2.2rem, 4.5vw, 3.6rem)",
-          letterSpacing: "-0.035em",
-          color: "#f5f3ee",
+          letterSpacing: "-0.025em",
+          color: "#f3f4f6",
           lineHeight: 1.08,
         }}
       >
@@ -356,7 +362,9 @@ function HeroCopy() {
         <span
           style={{
             display: "block",
-            color: "#e8d9b5",
+            fontStyle: "italic",
+            fontWeight: 600,
+            color: "#f59e0b",
             marginTop: "0.08em",
           }}
         >
@@ -367,7 +375,7 @@ function HeroCopy() {
       <p
         style={{
           marginTop: 14,
-          color: "rgba(226, 232, 240, 0.75)",
+          color: "rgba(243, 244, 246, 0.75)",
           fontSize: 16,
           lineHeight: 1.5,
           fontFamily: "var(--font-sans)",
@@ -384,8 +392,7 @@ function HeroCopy() {
           height: 1,
           width: "100%",
           maxWidth: 420,
-          background:
-            "linear-gradient(90deg, rgba(168,85,247,0.45), rgba(127,212,255,0.2), transparent)",
+          background: "linear-gradient(90deg, rgba(245,158,11,0.4), transparent)",
         }}
       />
 
@@ -405,11 +412,9 @@ function HeroCopy() {
             key={s.label}
             style={{
               padding: "10px 18px",
-              borderRadius: 10,
-              background: "rgba(18, 10, 31, 0.75)",
-              border: "1px solid rgba(168, 85, 247, 0.25)",
-              backdropFilter: "blur(12px)",
-              boxShadow: "0 4px 16px rgba(0,0,0,0.3)",
+              borderRadius: 8,
+              background: "#151a24",
+              border: "1px solid rgba(245, 158, 11, 0.2)",
               display: "flex",
               flexDirection: "column",
               gap: 2,
@@ -417,22 +422,22 @@ function HeroCopy() {
             }}
           >
             <span
-              className="font-mono"
               style={{
-                fontSize: 9.5,
-                letterSpacing: "0.22em",
+                fontFamily: "var(--font-mono)",
+                fontSize: 9,
+                letterSpacing: "0.2em",
                 textTransform: "uppercase",
-                color: "#7fd4ff",
+                color: "#9ca3af",
               }}
             >
               {s.label}
             </span>
             <span
               style={{
-                fontFamily: "Space Grotesk, sans-serif",
-                fontSize: 20,
+                fontFamily: "var(--font-display)",
+                fontSize: 22,
                 fontWeight: 700,
-                color: "#f5f3ee",
+                color: "#f59e0b",
                 letterSpacing: "-0.02em",
               }}
             >
@@ -443,16 +448,33 @@ function HeroCopy() {
       </div>
 
       <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 28 }}>
-        <a href="#contact" className="btn-cta">
+        <a
+          href="#contact"
+          className="btn-fill"
+          style={{
+            background: "#f59e0b",
+            color: "#0e1117",
+            borderColor: "#f59e0b",
+            fontWeight: 600,
+            borderRadius: 6,
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 8,
+          }}
+        >
           <Mail size={14} /> Connect Me
         </a>
         <a
           href="#projects"
-          className="btn-cta"
+          className="btn-outline"
           style={{
-            background: "rgba(127,212,255,0.08)",
-            borderColor: "rgba(127,212,255,0.35)",
-            color: "#cde7ff",
+            background: "rgba(245,158,11,0.06)",
+            borderColor: "rgba(245,158,11,0.3)",
+            color: "#f3f4f6",
+            borderRadius: 6,
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 8,
           }}
         >
           See Work <ArrowRight size={14} />
