@@ -3,16 +3,13 @@
  *
  * Features:
  *   - Real profile photo (uploaded image, served from /public)
- *   - Glassmorphism card body with neon purple accent
+ *   - Clean flat dark glassmorphism card body
  *   - Rotating conic halo behind the photo
- *   - Circuit-board trace background texture
  *   - Metal lanyard slot at top center
- *   - Holographic shimmer overlay
- *   - Desktop-only hover tilt effect (CSS only, no JS)
- *   - `floatDisabled` prop — pass on mobile to skip the CSS float animation
+ *   - Monospace ID & barcode styling
+ *   - Desktop-only hover tilt effect
  */
 
-/** Path to Himanshi's profile photo — served from /public as a static file */
 const PHOTO_URL = "/himanshi.jpg";
 
 const NEON = "#c026d3";
@@ -25,21 +22,13 @@ interface IdCardProps {
 }
 
 export function IdCard({ floatDisabled = false }: IdCardProps) {
-  const fields: [string, string][] = [
-    ["ID", "HY-78901"],
-    ["DEPT", "AI TRAINING"],
-    ["ROLE", "DATA ANNOTATOR"],
-    ["EXPIRES", "12/26"],
-  ];
-
   return (
     <div
       className={floatDisabled ? "id-card-glass id-card-tilt" : "card-float id-card-glass id-card-tilt"}
       style={{
         width: "min(320px, 90vw)",
+        height: 440,
         transformOrigin: "top center",
-        // Note: card-float applies rotate via CSS animation keyframe.
-        // When floatDisabled, we apply a static tilt instead.
         transform: floatDisabled ? "rotate(-2deg)" : undefined,
       }}
     >
@@ -92,6 +81,7 @@ export function IdCard({ floatDisabled = false }: IdCardProps) {
         data-hover
         style={{
           position: "relative",
+          height: "100%",
           borderRadius: 22,
           padding: 0,
           background:
@@ -107,49 +97,20 @@ export function IdCard({ floatDisabled = false }: IdCardProps) {
             `0 35px 70px -20px rgba(0,0,0,0.75)`,
         }}
       >
-        {/* ── Card body ── */}
+        {/* ── Card body: Flat background without network/circuit pattern ── */}
         <div
           style={{
             position: "relative",
+            height: "100%",
             borderRadius: 20,
             overflow: "hidden",
-            background:
-              "linear-gradient(160deg, rgba(255,255,255,0.09) 0%, rgba(140,60,220,0.07) 45%, rgba(255,255,255,0.03) 100%)",
-            padding: "28px 20px 18px",
+            background: "linear-gradient(160deg, #160926 0%, #0d0618 100%)",
+            padding: "26px 20px 20px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
           }}
         >
-          {/* Circuit board trace pattern */}
-          <svg
-            aria-hidden
-            width="100%"
-            height="100%"
-            style={{
-              position: "absolute",
-              inset: 0,
-              opacity: 0.28,
-              pointerEvents: "none",
-            }}
-          >
-            <defs>
-              <pattern
-                id="circuitTrace"
-                width="34"
-                height="34"
-                patternUnits="userSpaceOnUse"
-              >
-                <path
-                  d="M0 17 H10 V6 H22 V17 H34 M17 0 V12 M17 22 V34 M6 28 H17"
-                  stroke={NEON}
-                  strokeWidth="0.5"
-                  fill="none"
-                />
-                <circle cx="10" cy="6" r="1.1" fill={NEON} />
-                <circle cx="22" cy="17" r="1.1" fill={NEON_SOFT} />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#circuitTrace)" />
-          </svg>
-
           {/* Holographic shimmer overlay */}
           <div
             aria-hidden
@@ -162,37 +123,39 @@ export function IdCard({ floatDisabled = false }: IdCardProps) {
             }}
           />
 
-          {/* ── Company branding strip ── */}
+          {/* ── Header row: Company branding + Status badge ── */}
           <div
             style={{
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              marginBottom: 16,
               position: "relative",
+              zIndex: 2,
             }}
           >
             <div
               className="font-mono"
               style={{
-                fontSize: 7.5,
+                fontSize: 8,
                 letterSpacing: "0.32em",
                 textTransform: "uppercase",
-                color: "rgba(240,171,252,0.7)",
+                color: "rgba(240,171,252,0.75)",
                 textShadow: `0 0 6px ${NEON}`,
               }}
             >
-              AI · Corp
+              AI · CORP
             </div>
+
+            {/* Single Status badge: Available */}
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
                 gap: 5,
-                padding: "3px 8px",
-                borderRadius: 4,
-                background: "rgba(192,38,211,0.1)",
-                border: `1px solid rgba(217,70,239,0.3)`,
+                padding: "3px 9px",
+                borderRadius: 999,
+                background: "rgba(34,197,94,0.12)",
+                border: "1px solid rgba(34,197,94,0.35)",
               }}
             >
               <span
@@ -208,13 +171,13 @@ export function IdCard({ floatDisabled = false }: IdCardProps) {
               <span
                 className="font-mono"
                 style={{
-                  fontSize: 6.5,
-                  letterSpacing: "0.28em",
+                  fontSize: 7.5,
+                  letterSpacing: "0.22em",
                   color: "#22c55e",
                   textTransform: "uppercase",
                 }}
               >
-                Active
+                Available
               </span>
             </div>
           </div>
@@ -225,7 +188,7 @@ export function IdCard({ floatDisabled = false }: IdCardProps) {
               position: "relative",
               display: "flex",
               justifyContent: "center",
-              marginBottom: 16,
+              margin: "12px 0 8px",
             }}
           >
             {/* Rotating conic halo */}
@@ -323,30 +286,30 @@ export function IdCard({ floatDisabled = false }: IdCardProps) {
             </div>
           </div>
 
-          {/* ── Name + role ── */}
-          <div style={{ textAlign: "center", marginBottom: 14, position: "relative" }}>
+          {/* ── Name + Role + ID block ── */}
+          <div style={{ textAlign: "center", position: "relative", zIndex: 2 }}>
             <div
               style={{
-                fontFamily: '"Cormorant Garamond", serif',
-                fontSize: 23,
-                fontWeight: 600,
-                letterSpacing: "-0.005em",
+                fontFamily: "var(--font-display)",
+                fontSize: 22,
+                fontWeight: 700,
+                letterSpacing: "-0.01em",
                 color: "#f8f1ff",
-                lineHeight: 1.05,
+                lineHeight: 1.1,
                 textShadow: `0 0 16px rgba(217,70,239,0.4)`,
               }}
             >
               Himanshi{" "}
-              <span style={{ fontStyle: "italic", color: "#f0abfc", fontWeight: 500 }}>
+              <span style={{ color: "#f0abfc", fontWeight: 700 }}>
                 Yenugupalli
               </span>
             </div>
             <div
               className="font-mono"
               style={{
-                marginTop: 7,
+                marginTop: 6,
                 fontSize: 9,
-                letterSpacing: "0.3em",
+                letterSpacing: "0.28em",
                 textTransform: "uppercase",
                 color: "#f0abfc",
                 textShadow: `0 0 7px ${NEON}`,
@@ -354,136 +317,55 @@ export function IdCard({ floatDisabled = false }: IdCardProps) {
             >
               AI · Data Annotator
             </div>
-          </div>
-
-          {/* ── Divider ── */}
-          <div
-            aria-hidden
-            style={{
-              height: 1,
-              width: "100%",
-              background: `linear-gradient(90deg, transparent, ${NEON}, rgba(217,70,239,0.4), transparent)`,
-              opacity: 0.6,
-              marginBottom: 14,
-            }}
-          />
-
-          {/* ── Field grid ── */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "9px 14px",
-              position: "relative",
-              marginBottom: 16,
-            }}
-          >
-            {fields.map(([k, v]) => (
-              <div
-                key={k}
-                className="font-mono"
-                style={{ display: "flex", flexDirection: "column", gap: 2 }}
-              >
-                <span
-                  style={{
-                    fontSize: 7,
-                    letterSpacing: "0.22em",
-                    color: "rgba(240,171,252,0.65)",
-                    textShadow: `0 0 4px ${NEON}`,
-                    textTransform: "uppercase",
-                  }}
-                >
-                  {k}
-                </span>
-                <span
-                  style={{
-                    fontSize: 10.5,
-                    letterSpacing: "0.06em",
-                    color: "#f5f3ee",
-                    fontWeight: 600,
-                  }}
-                >
-                  {v}
-                </span>
-              </div>
-            ))}
-          </div>
-
-          {/* ── QR + Barcode row ── */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "auto 1fr",
-              gap: 10,
-              alignItems: "end",
-              position: "relative",
-            }}
-          >
-            {/* QR code (synthetic) */}
             <div
+              className="font-mono"
               style={{
-                width: 56,
-                height: 56,
-                background: "#000",
-                border: `1px solid ${NEON}`,
-                borderRadius: 5,
-                padding: 3,
-                boxShadow: `0 0 10px ${NEON_GLOW}`,
+                marginTop: 6,
+                fontSize: 10,
+                letterSpacing: "0.25em",
+                color: "rgba(240,171,252,0.8)",
+                textTransform: "uppercase",
               }}
             >
-              <div
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  display: "grid",
-                  gridTemplateColumns: "repeat(9, 1fr)",
-                  gridTemplateRows: "repeat(9, 1fr)",
-                  gap: 1,
-                }}
-              >
-                {Array.from({ length: 81 }).map((_, i) => {
-                  const r = Math.floor(i / 9);
-                  const c = i % 9;
-                  const corner =
-                    (r < 3 && c < 3) ||
-                    (r < 3 && c > 5) ||
-                    (r > 5 && c < 3);
-                  const cornerEdge =
-                    corner &&
-                    (r === 0 || c === 0 || r === 2 || c === 2 ||
-                     (r < 3 && c === 8) || (r === 0 && c > 5) ||
-                     (r === 2 && c > 5) || (r > 5 && c === 0) ||
-                     (r > 5 && c === 2) || (r === 8 && c < 3));
-                  const cornerCenter = corner && r % 4 === 1 && c % 4 === 1;
-                  const on = cornerEdge || cornerCenter || ((i * 977) % 7 < 3);
-                  return (
-                    <span
-                      key={i}
-                      style={{ background: on ? "#f5f3ee" : "transparent" }}
-                    />
-                  );
-                })}
-              </div>
+              ID: HY-78901
             </div>
+          </div>
 
-            {/* Barcode block */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
+          {/* ── Bottom Barcode / QR Strip (No label text) ── */}
+          <div
+            style={{
+              position: "relative",
+              zIndex: 2,
+              paddingTop: 8,
+              borderTop: "1px solid rgba(217,70,239,0.25)",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: 12,
+                background: "rgba(0,0,0,0.45)",
+                padding: "8px 12px",
+                borderRadius: 8,
+                border: "1px solid rgba(217,70,239,0.3)",
+                boxShadow: `0 0 12px ${NEON_GLOW}`,
+              }}
+            >
+              {/* Synthetic Barcode lines */}
               <div
                 style={{
                   display: "flex",
                   alignItems: "end",
-                  gap: 1.2,
-                  height: 36,
-                  padding: "4px 7px",
-                  background: "rgba(0,0,0,0.65)",
-                  border: `1px solid ${NEON}`,
-                  borderRadius: 5,
-                  boxShadow: `0 0 10px ${NEON_GLOW}`,
+                  gap: 1.5,
+                  height: 28,
+                  flex: 1,
                 }}
               >
-                {Array.from({ length: 36 }).map((_, i) => {
-                  const w = (i * 53) % 3 === 0 ? 2.5 : 1.2;
-                  const skip = (i * 31) % 5 === 0;
+                {Array.from({ length: 42 }).map((_, i) => {
+                  const w = (i * 47) % 3 === 0 ? 2.5 : 1.2;
+                  const skip = (i * 29) % 6 === 0;
                   return (
                     <span
                       key={i}
@@ -491,72 +373,50 @@ export function IdCard({ floatDisabled = false }: IdCardProps) {
                         width: w,
                         height: "100%",
                         background: skip ? "transparent" : "#f5f3ee",
+                        opacity: 0.9,
                       }}
                     />
                   );
                 })}
               </div>
-              <span
-                className="font-mono"
-                style={{
-                  fontSize: 8,
-                  letterSpacing: "0.28em",
-                  color: "#f0abfc",
-                  textAlign: "center",
-                  textShadow: `0 0 5px ${NEON}`,
-                }}
-              >
-                HY-78901
-              </span>
-            </div>
-          </div>
 
-          {/* ── Status pill ── */}
-          <div
-            className="flex items-center justify-between"
-            style={{
-              marginTop: 14,
-              padding: "7px 12px",
-              borderRadius: 999,
-              background: "rgba(192,38,211,0.09)",
-              border: `1px solid rgba(217,70,239,0.45)`,
-              boxShadow: `inset 0 0 8px rgba(192,38,211,0.25), 0 0 12px rgba(192,38,211,0.12)`,
-            }}
-          >
-            <div className="flex items-center gap-2">
-              <span
-                className="pulse-dot"
+              {/* Synthetic Mini QR code */}
+              <div
                 style={{
-                  width: 7,
-                  height: 7,
-                  borderRadius: 999,
-                  background: "#22c55e",
-                  boxShadow: "0 0 8px #22c55e",
-                }}
-              />
-              <span
-                className="font-mono"
-                style={{
-                  fontSize: 8.5,
-                  letterSpacing: "0.24em",
-                  color: "#f5f3ee",
-                  textTransform: "uppercase",
+                  width: 28,
+                  height: 28,
+                  background: "#000",
+                  border: `1px solid ${NEON}`,
+                  borderRadius: 3,
+                  padding: 2,
+                  shrink: 0,
                 }}
               >
-                Available
-              </span>
+                <div
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    display: "grid",
+                    gridTemplateColumns: "repeat(6, 1fr)",
+                    gridTemplateRows: "repeat(6, 1fr)",
+                    gap: 0.5,
+                  }}
+                >
+                  {Array.from({ length: 36 }).map((_, i) => {
+                    const r = Math.floor(i / 6);
+                    const c = i % 6;
+                    const corner = (r < 2 && c < 2) || (r < 2 && c > 3) || (r > 3 && c < 2);
+                    const on = corner || ((i * 823) % 5 < 2);
+                    return (
+                      <span
+                        key={i}
+                        style={{ background: on ? "#f5f3ee" : "transparent" }}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
             </div>
-            <span
-              className="font-mono"
-              style={{
-                fontSize: 7,
-                letterSpacing: "0.28em",
-                color: "rgba(240,171,252,0.7)",
-                textTransform: "uppercase",
-              }}
-            >
-              SCAN ME
-            </span>
           </div>
         </div>
       </div>

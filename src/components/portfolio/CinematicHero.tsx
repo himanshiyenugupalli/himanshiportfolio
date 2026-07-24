@@ -21,8 +21,8 @@ import { ArrowRight, Mail } from "lucide-react";
  *   [ Section C: Description + CTAs ]
  */
 
-const SERIF = "'Instrument Serif', 'Cormorant Garamond', serif";
-const DISPLAY = "'Cormorant Garamond', 'Instrument Serif', serif";
+const SERIF = "'Inter', sans-serif";
+const DISPLAY = "'Space Grotesk', sans-serif";
 
 // ─── Particles ────────────────────────────────────────────────────────────────
 function Particles({ count = 36 }: { count?: number }) {
@@ -281,7 +281,7 @@ function HeroIntro() {
           style={{
             display: "block",
             fontFamily: DISPLAY,
-            fontWeight: 900,
+            fontWeight: 700,
             textTransform: "uppercase",
             fontSize: "clamp(3.2rem, 10vw, 10rem)",
             letterSpacing: "-0.045em",
@@ -293,11 +293,10 @@ function HeroIntro() {
         <span
           style={{
             display: "block",
-            fontFamily: SERIF,
-            fontStyle: "italic",
-            fontWeight: 400,
+            fontFamily: DISPLAY,
+            fontWeight: 700,
             fontSize: "clamp(2.8rem, 9vw, 9rem)",
-            letterSpacing: "-0.02em",
+            letterSpacing: "-0.03em",
             color: "#e8d9b5",
             marginTop: "-0.08em",
           }}
@@ -326,15 +325,17 @@ function HeroIntro() {
 // ─── Shared "about" copy + CTAs (Panel 2 right / Mobile Section 3) ────────────
 function HeroCopy() {
   return (
-    <div>
+    <div style={{ maxWidth: 600 }}>
       <div
         className="font-mono"
         style={{
           display: "inline-block",
-          fontSize: 11, letterSpacing: "0.32em", textTransform: "uppercase",
+          fontSize: 11,
+          letterSpacing: "0.32em",
+          textTransform: "uppercase",
           color: "#7fd4ff",
           textShadow: "0 0 14px rgba(127,212,255,0.5)",
-          marginBottom: 18,
+          marginBottom: 16,
         }}
       >
         AI Data Annotation
@@ -344,24 +345,19 @@ function HeroCopy() {
         style={{
           margin: 0,
           fontFamily: DISPLAY,
-          fontWeight: 900,
-          textTransform: "uppercase",
-          fontSize: "clamp(1.6rem, 5vw, 3.6rem)",
+          fontWeight: 700,
+          fontSize: "clamp(2.2rem, 4.5vw, 3.6rem)",
           letterSpacing: "-0.035em",
           color: "#f5f3ee",
-          lineHeight: 1,
+          lineHeight: 1.08,
         }}
       >
-        Empowering AI
+        Empowering AI{" "}
         <span
           style={{
             display: "block",
-            fontFamily: SERIF,
-            fontStyle: "italic",
-            fontWeight: 400,
             color: "#e8d9b5",
-            letterSpacing: "-0.01em",
-            marginTop: "0.1em",
+            marginTop: "0.08em",
           }}
         >
           through human input
@@ -370,43 +366,95 @@ function HeroCopy() {
 
       <p
         style={{
-          marginTop: 24, maxWidth: 560,
-          color: "rgba(226,232,240,0.82)",
-          fontSize: 15.5, lineHeight: 1.7,
+          marginTop: 14,
+          color: "rgba(226, 232, 240, 0.75)",
+          fontSize: 16,
+          lineHeight: 1.5,
           fontFamily: "var(--font-sans)",
         }}
       >
-        Passionate about improving AI systems through high-quality data
-        annotation, evaluation, and human feedback. Experienced in
-        multilingual AI training workflows, RLHF-based projects, and
-        quality-focused data contributions.
+        RLHF · Multilingual QA · Human feedback at scale.
       </p>
 
+      {/* Clear visual separation */}
       <div
-        className="font-mono"
+        aria-hidden
         style={{
-          marginTop: 24, display: "flex", flexWrap: "wrap", gap: 18,
-          fontSize: 10.5, letterSpacing: "0.24em", textTransform: "uppercase",
-          color: "rgba(192,132,252,0.85)",
+          margin: "24px 0",
+          height: 1,
+          width: "100%",
+          maxWidth: 420,
+          background:
+            "linear-gradient(90deg, rgba(168,85,247,0.45), rgba(127,212,255,0.2), transparent)",
+        }}
+      />
+
+      {/* Compact horizontal row of 2 small stat cards */}
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: 14,
         }}
       >
         {[
-          ["Projects", "120+"],
-          ["Annotations", "50K+"],
-          ["Impact", "High-quality"],
-        ].map(([k, v]) => (
-          <div key={k} style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-            <span style={{ color: "rgba(170,185,200,0.65)" }}>{k}</span>
-            <span style={{ color: "#f5f3ee", fontSize: 14, letterSpacing: "0.1em" }}>{v}</span>
+          { label: "PROJECTS", value: "120+" },
+          { label: "ANNOTATIONS", value: "50K+" },
+        ].map((s) => (
+          <div
+            key={s.label}
+            style={{
+              padding: "10px 18px",
+              borderRadius: 10,
+              background: "rgba(18, 10, 31, 0.75)",
+              border: "1px solid rgba(168, 85, 247, 0.25)",
+              backdropFilter: "blur(12px)",
+              boxShadow: "0 4px 16px rgba(0,0,0,0.3)",
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+              minWidth: 130,
+            }}
+          >
+            <span
+              className="font-mono"
+              style={{
+                fontSize: 9.5,
+                letterSpacing: "0.22em",
+                textTransform: "uppercase",
+                color: "#7fd4ff",
+              }}
+            >
+              {s.label}
+            </span>
+            <span
+              style={{
+                fontFamily: "Space Grotesk, sans-serif",
+                fontSize: 20,
+                fontWeight: 700,
+                color: "#f5f3ee",
+                letterSpacing: "-0.02em",
+              }}
+            >
+              {s.value}
+            </span>
           </div>
         ))}
       </div>
 
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 32 }}>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 28 }}>
         <a href="#contact" className="btn-cta">
           <Mail size={14} /> Connect Me
         </a>
-        <a href="#projects" className="btn-cta" style={{ background: "rgba(127,212,255,0.08)", borderColor: "rgba(127,212,255,0.35)", color: "#cde7ff" }}>
+        <a
+          href="#projects"
+          className="btn-cta"
+          style={{
+            background: "rgba(127,212,255,0.08)",
+            borderColor: "rgba(127,212,255,0.35)",
+            color: "#cde7ff",
+          }}
+        >
           See Work <ArrowRight size={14} />
         </a>
       </div>

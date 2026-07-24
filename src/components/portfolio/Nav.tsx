@@ -53,7 +53,7 @@ export function Nav() {
         left: 0,
         right: 0,
         zIndex: 60,
-        fontFamily: "'Space Mono', monospace",
+        fontFamily: "var(--font-mono)",
         display: "flex",
         justifyContent: "center",
         pointerEvents: "none",
@@ -147,123 +147,34 @@ export function Nav() {
 
           <div className="flex items-center justify-between gap-2 sm:gap-3 px-2 sm:px-4 py-2.5 relative">
             {/* LEFT — refined monogram brand */}
-            <a href="#top" data-hover className="flex items-center gap-3 shrink-0 sm:pl-1.5 group/brand">
-              <div
-                className="relative flex items-center justify-center"
+            {/* LEFT — bracketed monogram logo */}
+            <a
+              href="#top"
+              data-hover
+              className="flex items-center gap-2 shrink-0 sm:pl-1.5 group/brand font-mono select-none"
+              style={{ fontFamily: "var(--font-mono)" }}
+            >
+              <span
+                className="font-bold transition-transform duration-200 group-hover/brand:scale-105"
                 style={{
-                  width: 38,
-                  height: 38,
-                  borderRadius: 12,
-                  padding: 1,
-                  background:
-                    "conic-gradient(from 140deg, #c084fc, #7dd3fc, #a855f7, #c084fc)",
-                  boxShadow:
-                    "0 6px 20px rgba(168,85,247,0.45), 0 0 0 1px rgba(192,132,252,0.35)",
+                  color: "#c084fc",
+                  fontSize: 14,
+                  letterSpacing: "0.02em",
+                  textShadow: "0 0 12px rgba(192,132,252,0.4)",
                 }}
               >
-                <div
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    borderRadius: 11,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    background:
-                      "linear-gradient(150deg, #16091f 0%, #0b0414 60%, #1a0a2e 100%)",
-                    position: "relative",
-                    overflow: "hidden",
-                  }}
-                >
-                  {/* glass highlight */}
-                  <span
-                    aria-hidden
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      background:
-                        "linear-gradient(160deg, rgba(255,255,255,0.18) 0%, transparent 45%)",
-                      pointerEvents: "none",
-                    }}
-                  />
-                  <span
-                    style={{
-                      fontFamily: '"Cormorant Garamond", serif',
-                      fontWeight: 600,
-                      fontStyle: "italic",
-                      fontSize: 17,
-                      letterSpacing: "-0.04em",
-                      background:
-                        "linear-gradient(135deg, #f5f3ee 0%, #e0c8ff 50%, #7dd3fc 100%)",
-                      WebkitBackgroundClip: "text",
-                      backgroundClip: "text",
-                      color: "transparent",
-                      lineHeight: 1,
-                      transform: "translateY(0.5px)",
-                    }}
-                  >
-                    HY
-                  </span>
-                </div>
-                <span
-                  className="absolute -top-0.5 -right-0.5 pulse-dot"
-                  style={{
-                    width: 7,
-                    height: 7,
-                    borderRadius: 999,
-                    background: "#7dd3fc",
-                    boxShadow: "0 0 10px #7dd3fc",
-                  }}
-                />
-              </div>
-
-              <div className="hidden sm:flex flex-col leading-tight">
-                <span
-                  style={{
-                    fontFamily: '"Cormorant Garamond", serif',
-                    fontWeight: 500,
-                    fontSize: 19,
-                    color: "#f5f3ee",
-                    letterSpacing: "-0.015em",
-                    lineHeight: 1,
-                  }}
-                >
-                  <span style={{ fontStyle: "italic" }}>H</span>imanshi
-                  <span
-                    style={{
-                      color: "#c084fc",
-                      fontStyle: "italic",
-                      marginLeft: 1,
-                    }}
-                  >
-                    .
-                  </span>
-                </span>
-                <span
-                  className="font-mono"
-                  style={{
-                    marginTop: 4,
-                    fontSize: 8,
-                    letterSpacing: "0.42em",
-                    textTransform: "uppercase",
-                    color: "rgba(192,132,252,0.78)",
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 6,
-                  }}
-                >
-                  <span
-                    aria-hidden
-                    style={{
-                      width: 14,
-                      height: 1,
-                      background:
-                        "linear-gradient(90deg, rgba(192,132,252,0.7), transparent)",
-                    }}
-                  />
-                  ai · annotator
-                </span>
-              </div>
+                [HY]
+              </span>
+              <span
+                style={{
+                  fontSize: 12,
+                  fontWeight: 400,
+                  color: "rgba(226, 232, 240, 0.6)",
+                  letterSpacing: "0.06em",
+                }}
+              >
+                annotator
+              </span>
             </a>
 
             {/* CENTER — links with sliding glow pill */}
