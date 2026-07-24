@@ -102,15 +102,15 @@ function ContinuousStrap({ endX, endY }: { endX: number; endY: number }) {
     >
       <defs>
         <linearGradient id="strapFabric" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%"  stopColor="#1a1506" />
-          <stop offset="8%"  stopColor="#2e2508" />
-          <stop offset="22%" stopColor="#54430e" />
-          <stop offset="42%" stopColor="#856a16" />
-          <stop offset="50%" stopColor="#b5901c" />
-          <stop offset="58%" stopColor="#856a16" />
-          <stop offset="78%" stopColor="#54430e" />
-          <stop offset="92%" stopColor="#2e2508" />
-          <stop offset="100%" stopColor="#1a1506" />
+          <stop offset="0%"  stopColor="#b45309" />
+          <stop offset="8%"  stopColor="#d97706" />
+          <stop offset="22%" stopColor="#f59e0b" />
+          <stop offset="42%" stopColor="#fbbf24" />
+          <stop offset="50%" stopColor="#fef08a" />
+          <stop offset="58%" stopColor="#fbbf24" />
+          <stop offset="78%" stopColor="#f59e0b" />
+          <stop offset="92%" stopColor="#d97706" />
+          <stop offset="100%" stopColor="#b45309" />
         </linearGradient>
         <linearGradient id="strapHotline" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0%"  stopColor="rgba(253,230,138,0)" />
