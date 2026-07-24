@@ -3,7 +3,7 @@
  *
  * Features:
  *   - Real profile photo (uploaded image, served from /public)
- *   - Clean flat dark glassmorphism card body
+ *   - Clean flat dark glassmorphism card body (amber/gold theme matched)
  *   - Rotating conic halo behind the photo
  *   - Metal lanyard slot at top center
  *   - Monospace ID & barcode styling
@@ -12,9 +12,9 @@
 
 const PHOTO_URL = "/himanshi.jpg";
 
-const NEON = "#c026d3";
-const NEON_SOFT = "#d946ef";
-const NEON_GLOW = "rgba(192,38,211,0.5)";
+const NEON = "#d97706"; // Warm amber/gold
+const NEON_SOFT = "#f59e0b"; // Bright amber
+const NEON_GLOW = "rgba(245,158,11,0.4)";
 
 interface IdCardProps {
   /** When true, suppresses the cardFloat CSS animation (used on mobile) */
@@ -88,12 +88,12 @@ export function IdCard({ floatDisabled = false }: IdCardProps) {
             "linear-gradient(160deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02))",
           backdropFilter: "blur(24px) saturate(150%)",
           WebkitBackdropFilter: "blur(24px) saturate(150%)",
-          border: `1px solid rgba(217,70,239,0.6)`,
+          border: `1px solid rgba(245,158,11,0.6)`,
           boxShadow:
             `0 0 0 1px rgba(255,255,255,0.07) inset,` +
             `0 0 16px ${NEON},` +
             `0 0 40px ${NEON_SOFT},` +
-            `0 0 90px rgba(192,38,211,0.3),` +
+            `0 0 90px rgba(245,158,11,0.22),` +
             `0 35px 70px -20px rgba(0,0,0,0.75)`,
         }}
       >
@@ -104,7 +104,7 @@ export function IdCard({ floatDisabled = false }: IdCardProps) {
             height: "100%",
             borderRadius: 20,
             overflow: "hidden",
-            background: "linear-gradient(160deg, #160926 0%, #0d0618 100%)",
+            background: "linear-gradient(160deg, #181d28 0%, #0e1117 100%)",
             padding: "26px 20px 20px",
             display: "flex",
             flexDirection: "column",
@@ -139,7 +139,7 @@ export function IdCard({ floatDisabled = false }: IdCardProps) {
                 fontSize: 8,
                 letterSpacing: "0.32em",
                 textTransform: "uppercase",
-                color: "rgba(240,171,252,0.75)",
+                color: "rgba(253,230,138,0.75)",
                 textShadow: `0 0 6px ${NEON}`,
               }}
             >
@@ -219,7 +219,7 @@ export function IdCard({ floatDisabled = false }: IdCardProps) {
                 top: -2,
                 borderRadius: "50%",
                 background:
-                  `conic-gradient(from 180deg, transparent 0%, rgba(168,85,247,0.4) 30%, transparent 60%, rgba(217,70,239,0.3) 80%, transparent 100%)`,
+                  `conic-gradient(from 180deg, transparent 0%, rgba(245,158,11,0.4) 30%, transparent 60%, rgba(217,119,6,0.3) 80%, transparent 100%)`,
                 filter: "blur(5px)",
                 opacity: 0.7,
                 zIndex: 0,
@@ -235,9 +235,9 @@ export function IdCard({ floatDisabled = false }: IdCardProps) {
                 height: 124,
                 borderRadius: "50%",
                 padding: 3,
-                background: `linear-gradient(135deg, ${NEON}, ${NEON_SOFT} 50%, #7c3aed)`,
+                background: `linear-gradient(135deg, ${NEON}, ${NEON_SOFT} 50%, #b45309)`,
                 boxShadow:
-                  `0 0 20px ${NEON}, 0 0 50px rgba(217,70,239,0.5), inset 0 0 0 1px rgba(0,0,0,0.6)`,
+                  `0 0 20px ${NEON}, 0 0 50px rgba(245,158,11,0.4), inset 0 0 0 1px rgba(0,0,0,0.6)`,
                 zIndex: 1,
               }}
             >
@@ -296,11 +296,11 @@ export function IdCard({ floatDisabled = false }: IdCardProps) {
                 letterSpacing: "-0.01em",
                 color: "#f8f1ff",
                 lineHeight: 1.1,
-                textShadow: `0 0 16px rgba(217,70,239,0.4)`,
+                textShadow: `0 0 16px rgba(245,158,11,0.35)`,
               }}
             >
               Himanshi{" "}
-              <span style={{ color: "#f0abfc", fontWeight: 700 }}>
+              <span style={{ color: "#fcd34d", fontWeight: 700 }}>
                 Yenugupalli
               </span>
             </div>
@@ -311,7 +311,7 @@ export function IdCard({ floatDisabled = false }: IdCardProps) {
                 fontSize: 9,
                 letterSpacing: "0.28em",
                 textTransform: "uppercase",
-                color: "#f0abfc",
+                color: "#fcd34d",
                 textShadow: `0 0 7px ${NEON}`,
               }}
             >
@@ -323,7 +323,7 @@ export function IdCard({ floatDisabled = false }: IdCardProps) {
                 marginTop: 6,
                 fontSize: 10,
                 letterSpacing: "0.25em",
-                color: "rgba(240,171,252,0.8)",
+                color: "rgba(253,230,138,0.8)",
                 textTransform: "uppercase",
               }}
             >
@@ -337,7 +337,7 @@ export function IdCard({ floatDisabled = false }: IdCardProps) {
               position: "relative",
               zIndex: 2,
               paddingTop: 8,
-              borderTop: "1px solid rgba(217,70,239,0.25)",
+              borderTop: "1px solid rgba(245,158,11,0.25)",
             }}
           >
             <div
@@ -349,7 +349,7 @@ export function IdCard({ floatDisabled = false }: IdCardProps) {
                 background: "rgba(0,0,0,0.45)",
                 padding: "8px 12px",
                 borderRadius: 8,
-                border: "1px solid rgba(217,70,239,0.3)",
+                border: "1px solid rgba(245,158,11,0.3)",
                 boxShadow: `0 0 12px ${NEON_GLOW}`,
               }}
             >

@@ -497,12 +497,9 @@ function MobileHero() {
         aria-hidden
         style={{
           position: "absolute", inset: 0, pointerEvents: "none",
-          background:
-            "radial-gradient(55% 40% at 15% 25%, rgba(168,85,247,0.25), transparent 70%)," +
-            "radial-gradient(40% 35% at 85% 70%, rgba(61,139,255,0.18), transparent 70%)",
+          background: "radial-gradient(50% 50% at 50% 50%, rgba(245,158,11,0.06), transparent 70%)",
         }}
       />
-      <div className="orb orb-a" style={{ position: "absolute", opacity: 0.4 }} />
       <Particles count={18} />
 
       {/* ── Section A: Name + Intro ── */}
@@ -539,13 +536,13 @@ function MobileHero() {
           className="font-mono"
           style={{
             fontSize: 10, letterSpacing: "0.4em", textTransform: "uppercase",
-            color: "rgba(192,132,252,0.6)", marginBottom: 28,
+            color: "rgba(245,158,11,0.65)", marginBottom: 28,
             display: "flex", alignItems: "center", gap: 10,
           }}
         >
-          <span style={{ width: 24, height: 1, background: "linear-gradient(90deg, rgba(192,132,252,0.5), transparent)" }} />
+          <span style={{ width: 24, height: 1, background: "linear-gradient(90deg, rgba(245,158,11,0.4), transparent)" }} />
           identity card
-          <span style={{ width: 24, height: 1, background: "linear-gradient(90deg, transparent, rgba(192,132,252,0.5))" }} />
+          <span style={{ width: 24, height: 1, background: "linear-gradient(90deg, transparent, rgba(245,158,11,0.4))" }} />
         </motion.div>
 
         {/* ID Card — no float animation on mobile, just fade-in */}
@@ -638,15 +635,9 @@ function DesktopHero() {
           aria-hidden
           style={{
             position: "absolute", inset: -80, x: bgX,
-            background:
-              "radial-gradient(45% 50% at 18% 35%, rgba(168,85,247,0.22), transparent 70%)," +
-              "radial-gradient(35% 40% at 60% 80%, rgba(61,139,255,0.16), transparent 70%)," +
-              "radial-gradient(30% 35% at 92% 20%, rgba(127,212,255,0.18), transparent 70%)," +
-              "radial-gradient(35% 40% at 130% 60%, rgba(168,85,247,0.20), transparent 70%)",
+            background: "radial-gradient(50% 50% at 50% 50%, rgba(245,158,11,0.06), transparent 70%)",
           }}
         />
-        <div className="orb orb-a" style={{ position: "absolute" }} />
-        <div className="orb orb-b" style={{ position: "absolute" }} />
         <Particles count={36} />
 
         {/* Swiping track — 200vw, holds both panels + strap */}
