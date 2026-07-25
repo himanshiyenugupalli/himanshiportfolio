@@ -3,6 +3,7 @@
  */
 
 import { CheckCircle2, ShieldAlert, Sparkles, FileText } from "lucide-react";
+import { StaggerGroup } from "../motion/StaggerGroup";
 
 export function AnnotationProcess() {
   const steps = [
@@ -48,13 +49,13 @@ export function AnnotationProcess() {
         </span>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {steps.map((s, idx) => {
           const Icon = s.icon;
           return (
             <div
               key={s.num}
-              className="relative p-4 rounded-lg border border-zinc-800/80 bg-zinc-900/40 hover:border-amber-500/40 transition-colors group"
+              className="relative p-5 h-full rounded-lg border border-zinc-800/80 bg-zinc-900/40 hover:-translate-y-1 hover:border-amber-500/45 hover:shadow-[0_0_20px_rgba(245,158,11,0.12)] transition-all duration-200 group"
             >
               <div className="flex items-center justify-between mb-3">
                 <span className="font-mono text-xs text-amber-500 font-semibold">{s.num}</span>
@@ -65,14 +66,14 @@ export function AnnotationProcess() {
               <h4 className="font-display text-base font-semibold text-text mb-1">{s.title}</h4>
               <p className="text-xs text-text2 leading-relaxed">{s.desc}</p>
               {idx < steps.length - 1 && (
-                <div className="hidden lg:block absolute -right-2 top-1/2 -translate-y-1/2 text-muted z-10">
+                <div className="hidden lg:block absolute -right-3 top-1/2 -translate-y-1/2 text-muted z-10">
                   →
                 </div>
               )}
             </div>
           );
         })}
-      </div>
+      </StaggerGroup>
     </div>
   );
 }

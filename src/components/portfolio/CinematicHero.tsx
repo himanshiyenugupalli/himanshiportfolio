@@ -272,39 +272,46 @@ function HeroIntro() {
         available for work
       </motion.div>
 
-      <motion.h1
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.1, delay: 0.3, ease: [0.2, 0.8, 0.2, 1] }}
-        style={{ margin: 0, lineHeight: 0.88 }}
+      <h1
+        style={{ margin: 0, lineHeight: 0.88, display: "flex", flexDirection: "column" }}
       >
-        <span
-          style={{
-            display: "block",
-            fontFamily: DISPLAY,
-            fontWeight: 700,
-            textTransform: "uppercase",
-            fontSize: "clamp(3.2rem, 10vw, 10rem)",
-            letterSpacing: "-0.045em",
-            color: "#f5f3ee",
-          }}
-        >
-          Himanshi
+        <span style={{ display: "block", overflow: "hidden" }}>
+          <motion.span
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+            style={{
+              display: "block",
+              fontFamily: DISPLAY,
+              fontWeight: 700,
+              textTransform: "uppercase",
+              fontSize: "clamp(3.2rem, 10vw, 10rem)",
+              letterSpacing: "-0.045em",
+              color: "#f5f3ee",
+            }}
+          >
+            Himanshi
+          </motion.span>
         </span>
-        <span
-          style={{
-            display: "block",
-            fontFamily: DISPLAY,
-            fontWeight: 700,
-            fontSize: "clamp(2.8rem, 9vw, 9rem)",
-            letterSpacing: "-0.03em",
-            color: "#e8d9b5",
-            marginTop: "-0.08em",
-          }}
-        >
-          Yenugupalli<span style={{ color: "#f59e0b" }}>.</span>
+        <span style={{ display: "block", overflow: "hidden" }}>
+          <motion.span
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.38, ease: "easeOut" }}
+            style={{
+              display: "block",
+              fontFamily: DISPLAY,
+              fontWeight: 700,
+              fontSize: "clamp(2.8rem, 9vw, 9rem)",
+              letterSpacing: "-0.03em",
+              color: "#e8d9b5",
+              marginTop: "-0.08em",
+            }}
+          >
+            Yenugupalli<span style={{ color: "#f59e0b" }}>.</span>
+          </motion.span>
         </span>
-      </motion.h1>
+      </h1>
 
       <motion.div
         initial={{ opacity: 0 }}
@@ -398,7 +405,19 @@ function HeroCopy() {
       />
 
       {/* Compact horizontal row of 2 small stat cards */}
-      <div
+      <motion.div
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        variants={{
+          hidden: {},
+          show: {
+            transition: {
+              staggerChildren: 0.1,
+              delayChildren: 0.4,
+            }
+          }
+        }}
         style={{
           display: "flex",
           flexWrap: "wrap",
@@ -409,8 +428,12 @@ function HeroCopy() {
           { label: "PROJECTS", value: "120+" },
           { label: "ANNOTATIONS", value: "50K+" },
         ].map((s) => (
-          <div
+          <motion.div
             key={s.label}
+            variants={{
+              hidden: { opacity: 0, y: 15 },
+              show: { opacity: 1, y: 0, transition: { duration: 0.4 } }
+            }}
             style={{
               padding: "10px 18px",
               borderRadius: 8,
@@ -444,9 +467,9 @@ function HeroCopy() {
             >
               {s.value}
             </span>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 28 }}>
         <a
@@ -548,10 +571,9 @@ function MobileHero() {
 
         {/* ID Card — no float animation on mobile, just fade-in */}
         <motion.div
-          initial={{ opacity: 0, y: 32, scale: 0.96 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.9, ease: [0.2, 0.8, 0.2, 1] }}
+          initial={{ opacity: 0, y: 20, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
           style={{
             display: "flex",
             justifyContent: "center",
@@ -674,8 +696,8 @@ function DesktopHero() {
             <HeroIntro />
             {/* scroll hint */}
             <motion.div
-              animate={{ x: [0, 8, 0], opacity: [0.5, 1, 0.5] }}
-              transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+              animate={{ y: [0, -6, 0], opacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
               style={{
                 position: "absolute",
                 bottom: 48,
@@ -734,9 +756,14 @@ function DesktopHero() {
                       pointerEvents: "none",
                     }}
                   />
-                  <div style={{ marginTop: 6 }}>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    style={{ marginTop: 6 }}
+                  >
                     <IdCard />
-                  </div>
+                  </motion.div>
                 </motion.div>
               </div>
 

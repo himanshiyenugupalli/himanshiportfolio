@@ -389,7 +389,7 @@ export function IdCard({ floatDisabled = false }: IdCardProps) {
                   border: `1px solid ${NEON}`,
                   borderRadius: 3,
                   padding: 2,
-                  shrink: 0,
+                  flexShrink: 0,
                 }}
               >
                 <div

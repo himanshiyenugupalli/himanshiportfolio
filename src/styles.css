@@ -1,4 +1,4 @@
-@import "tailwindcss" source(none);
+@import "tailwindcss";
 @source "../src";
 @import "tw-animate-css";
 
@@ -565,7 +565,6 @@
     0 18px 50px -20px rgba(0,0,0,0.7),
     inset 0 1px 0 rgba(255,255,255,0.04);
 }
-.flip-card-front {}
 .flip-card-back {
   transform: rotateY(180deg);
   background:

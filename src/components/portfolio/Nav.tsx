@@ -19,7 +19,7 @@ export function Nav() {
   useEffect(() => {
     const ids = LINKS.map(([, h]) => h.slice(1));
     const onScroll = () => {
-      setScrolled(window.scrollY > 30);
+      setScrolled(window.scrollY > 50);
       const y = window.scrollY + window.innerHeight * 0.35;
       let cur = ids[0];
       for (const id of ids) {
@@ -57,7 +57,7 @@ export function Nav() {
         display: "flex",
         justifyContent: "center",
         pointerEvents: "none",
-        transition: "top .45s cubic-bezier(.2,.8,.2,1)",
+        transition: "all .45s cubic-bezier(.2,.8,.2,1)",
       }}
     >
       <div
@@ -66,11 +66,14 @@ export function Nav() {
           pointerEvents: "auto",
           width: "min(1020px, calc(100% - 20px))",
           borderRadius: 22,
-          padding: "1px",
-          background:
-            "linear-gradient(135deg, rgba(245,158,11,0.4), rgba(245,158,11,0.1) 40%, rgba(217,119,6,0.3))",
-          boxShadow:
-            "0 18px 60px -10px rgba(0,0,0,0.65), 0 0 30px rgba(245,158,11,0.12)",
+          padding: scrolled ? "1px" : "0px",
+          background: scrolled
+            ? "linear-gradient(135deg, rgba(245,158,11,0.4), rgba(245,158,11,0.1) 40%, rgba(217,119,6,0.3))"
+            : "transparent",
+          boxShadow: scrolled
+            ? "0 18px 60px -10px rgba(0,0,0,0.65), 0 0 30px rgba(245,158,11,0.12)"
+            : "none",
+          transition: "all 0.3s ease",
         }}
       >
         {/* inner glass surface */}
@@ -79,10 +82,12 @@ export function Nav() {
             position: "relative",
             borderRadius: 21,
             overflow: "hidden",
-            background:
-              "linear-gradient(180deg, rgba(21,26,36,0.85), rgba(14,17,23,0.92))",
-            backdropFilter: "blur(26px) saturate(180%)",
-            WebkitBackdropFilter: "blur(26px) saturate(180%)",
+            background: scrolled
+              ? "linear-gradient(180deg, rgba(21,26,36,0.85), rgba(14,17,23,0.92))"
+              : "transparent",
+            backdropFilter: scrolled ? "blur(12px) saturate(180%)" : "none",
+            WebkitBackdropFilter: scrolled ? "blur(12px) saturate(180%)" : "none",
+            transition: "all 0.3s ease",
           }}
         >
           <div className="flex items-center justify-between gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 relative">
@@ -121,13 +126,14 @@ export function Nav() {
               ref={trackRef}
               className="relative flex items-center p-1 rounded-full"
               style={{
-                background: "rgba(0,0,0,0.35)",
-                border: "1px solid rgba(245,158,11,0.15)",
+                background: scrolled ? "rgba(0,0,0,0.35)" : "transparent",
+                border: scrolled ? "1px solid rgba(245,158,11,0.15)" : "1px solid transparent",
+                transition: "all 0.3s ease",
               }}
               onMouseLeave={() => setHoverIdx(null)}
             >
               {/* Sliding glow pill */}
-              {pillRect && (
+              {pillRect && scrolled && (
                 <div
                   aria-hidden
                   style={{
@@ -157,17 +163,20 @@ export function Nav() {
                     data-hover
                     ref={(el) => { itemsRef.current[i] = el; }}
                     onMouseEnter={() => setHoverIdx(i)}
-                    className="relative flex items-center gap-1 px-2.5 sm:px-4 py-1.5 rounded-full transition-colors"
+                    className="relative flex items-center gap-1 px-2.5 sm:px-4 py-1.5 rounded-full transition-colors group"
                     style={{
                       color: isActive || isHover ? "#f3f4f6" : "#9ca3af",
                       zIndex: 1,
                     }}
                   >
                     <span
-                      className="text-[11px] sm:text-[13px] capitalize"
+                      className="text-[11px] sm:text-[13px] capitalize relative pb-1"
                       style={{ fontWeight: isActive ? 600 : 400 }}
                     >
                       {label}
+                      <span
+                        className="absolute bottom-0 left-0 w-full h-[1.5px] bg-amber-500 origin-left scale-x-0 transition-transform duration-200 ease-out group-hover:scale-x-100"
+                      />
                     </span>
                   </a>
                 );
