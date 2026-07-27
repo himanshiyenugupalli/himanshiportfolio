@@ -1,6 +1,5 @@
 import { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment } from "@react-three/drei";
 import { useScroll, useReducedMotion } from "framer-motion";
 import * as THREE from "three";
 
@@ -9,9 +8,8 @@ function HeadphonesModel({ scrollProgress, shouldReduceMotion }: { scrollProgres
   
   const materialProps = {
     color: "#e6c9a0",
-    metalness: 1.0,
-    roughness: 0.08,
-    envMapIntensity: 1.8,
+    metalness: 0.9,
+    roughness: 0.2,
   };
 
   useFrame((state) => {
@@ -101,18 +99,18 @@ export default function ChromeHeadphones({ sectionRef }: ChromeHeadphonesProps) 
     <div className="w-full h-full min-h-[300px] md:min-h-[400px] relative pointer-events-none select-none">
       <Canvas
         camera={{ position: [0, 0, 3.8], fov: 45 }}
-        gl={{ antialias: true, alpha: true }}
+        gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       >
-        <ambientLight intensity={0.4} />
-        <directionalLight position={[2, 4, 3]} intensity={1.5} />
-        <directionalLight position={[-2, -2, -1]} intensity={0.5} />
+        <ambientLight intensity={0.6} />
+        <hemisphereLight intensity={0.4} color="#ffffff" groundColor="#222222" />
+        <directionalLight position={[5, 10, 5]} intensity={1.8} />
+        <directionalLight position={[-5, 5, -5]} intensity={0.8} color="#eed7b5" />
+        <pointLight position={[0, -2, 3]} intensity={0.8} />
         
         <HeadphonesModel 
           scrollProgress={scrollYProgress} 
           shouldReduceMotion={shouldReduceMotion} 
         />
-        
-        <Environment preset="sunset" />
       </Canvas>
     </div>
   );
