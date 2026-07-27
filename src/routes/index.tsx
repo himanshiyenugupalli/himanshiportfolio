@@ -224,7 +224,7 @@ function HomePage() {
           <div>
             <RubricShowcase />
           </div>
-          <div className="hidden lg:block w-full h-[480px] relative pointer-events-none z-20">
+          <div className="w-full h-[320px] lg:h-[480px] relative pointer-events-none z-20">
             <Suspense fallback={null}>
               <ChromeHeadphones sectionRef={rubricRef} />
             </Suspense>
