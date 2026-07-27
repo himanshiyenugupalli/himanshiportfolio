@@ -12,7 +12,7 @@ import { Mail, Linkedin, Github, Award, Cloud, Code2, GraduationCap, ServerCog, 
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { StaggerGroup } from "@/components/motion/StaggerGroup";
 
-const ChromeHeadphones = lazy(() => import("@/components/ChromeHeadphones"));
+import ChromeHeadphones from "@/components/ChromeHeadphones";
 
 /** Profile photo — served as a static file from /public */
 const HIMANSHI_PHOTO = "/himanshi.jpg";
@@ -225,9 +225,7 @@ function HomePage() {
             <RubricShowcase />
           </div>
           <div className="w-full h-[320px] lg:h-[480px] relative pointer-events-none z-20">
-            <Suspense fallback={null}>
-              <ChromeHeadphones sectionRef={rubricRef} />
-            </Suspense>
+            <ChromeHeadphones sectionRef={rubricRef} />
           </div>
         </div>
       </Section>
