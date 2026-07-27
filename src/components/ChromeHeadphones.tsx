@@ -43,7 +43,7 @@ function HeadphonesModel({ scrollProgress, shouldReduceMotion }: { scrollProgres
   });
 
   return (
-    <group ref={meshRef} scale={1.25}>
+    <group ref={meshRef} scale={1.15}>
       {/* Headband (Torus) */}
       <mesh rotation={[0, 0, 0]}>
         <torusGeometry args={[1.2, 0.08, 32, 64, Math.PI]} />
