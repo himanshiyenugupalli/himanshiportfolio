@@ -139,7 +139,7 @@ function HomePage() {
                 </div>
                 <div
                   className="mt-3 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-center"
-                  style={{ background: "#151a24", border: "1px solid rgba(245,158,11,0.25)", color: "#f59e0b", borderRadius: 4 }}
+                  style={{ background: "#151a24", border: "1px solid rgba(230, 201, 160,0.25)", color: "#e6c9a0", borderRadius: 4 }}
                 >
                   SUBJECT: HIMANSHI Y.
                 </div>
@@ -195,7 +195,7 @@ function HomePage() {
               y={25}
             >
               {/* Timeline marker */}
-              <span className="absolute -left-[31px] md:-left-[45px] top-1.5 flex items-center justify-center w-4 h-4 rounded-full bg-zinc-950 border-2 border-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.5)] z-10" />
+              <span className="absolute -left-[31px] md:-left-[45px] top-1.5 flex items-center justify-center w-4 h-4 rounded-full bg-zinc-950 border-2 border-amber-500 shadow-[0_0_8px_rgba(230, 201, 160,0.5)] z-10" />
 
               <div className="card grid md:grid-cols-[200px_1fr] gap-6 border border-zinc-800 bg-zinc-900/50 hover:border-amber-500/35 transition-all duration-300 hover:shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
                 <div>
@@ -242,7 +242,7 @@ function HomePage() {
           ].map((g) => (
             <div
               key={g.label}
-              className="card border border-zinc-800 bg-zinc-900/60 p-5 hover:border-amber-500/35 hover:-translate-y-1 hover:shadow-[0_4px_20px_rgba(245,158,11,0.08)] transition-all duration-300"
+              className="card border border-zinc-800 bg-zinc-900/60 p-5 hover:border-amber-500/35 hover:-translate-y-1 hover:shadow-[0_4px_20px_rgba(230, 201, 160,0.08)] transition-all duration-300"
             >
               <div className="flex items-center justify-between border-b border-zinc-800 pb-3 mb-4">
                 <h3 className="font-display font-bold text-lg text-text">{g.label}</h3>
@@ -424,7 +424,7 @@ function HomePage() {
                 { Icon: Github, label: "github.com/himanshi-yen", href: "#" },
               ].map(({ Icon, label, href }) => (
                 <a key={label} href={href} data-hover
-                  className="flex items-center gap-3 font-mono text-[13px] text-text2 px-4 py-3 rounded border border-zinc-800 bg-zinc-900/60 hover:border-amber-500/40 hover:text-amber-400 hover:shadow-[0_2px_12px_rgba(245,158,11,0.05)] transition-all duration-300 group"
+                  className="flex items-center gap-3 font-mono text-[13px] text-text2 px-4 py-3 rounded border border-zinc-800 bg-zinc-900/60 hover:border-amber-500/40 hover:text-amber-400 hover:shadow-[0_2px_12px_rgba(230, 201, 160,0.05)] transition-all duration-300 group"
                 >
                   <Icon size={16} className="text-amber-500" />
                   <span>{label}</span>
