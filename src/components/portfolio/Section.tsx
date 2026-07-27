@@ -9,7 +9,7 @@ export function Section({
 
   return (
     <section id={id} className="relative" style={{ padding: "80px 0", zIndex: 5 }}>
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-[1380px] px-6 md:px-10 lg:px-12">
         <div className="reveal" style={{ marginBottom: 48 }}>
           <div
             style={{

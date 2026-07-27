@@ -32,7 +32,7 @@ export function RubricShowcase() {
       </div>
 
       {/* Response Comparison Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4">
         {/* Response A (Winner) */}
         <ScrollReveal delay={0.2} y={15} className="h-full">
           <div className="p-4 h-full rounded-lg bg-zinc-950 border-2 border-amber-500/50 relative flex flex-col justify-between">

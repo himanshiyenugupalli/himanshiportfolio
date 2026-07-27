@@ -64,7 +64,7 @@ export function Nav() {
         className="relative group"
         style={{
           pointerEvents: "auto",
-          width: "min(1020px, calc(100% - 20px))",
+          width: "min(1280px, calc(100% - 20px))",
           borderRadius: 22,
           padding: scrolled ? "1px" : "0px",
           background: scrolled

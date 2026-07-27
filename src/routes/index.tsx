@@ -1,3 +1,4 @@
+import { useRef, lazy, Suspense } from "react";
 import { Nav } from "@/components/portfolio/Nav";
 import { ScrollProgress } from "@/components/portfolio/ScrollProgress";
 import { PixelRobot } from "@/components/portfolio/PixelRobot";
@@ -10,6 +11,8 @@ import { useReveal } from "@/hooks/use-reveal";
 import { Mail, Linkedin, Github, Award, Cloud, Code2, GraduationCap, ServerCog, FileSpreadsheet, ExternalLink, CheckCircle } from "lucide-react";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { StaggerGroup } from "@/components/motion/StaggerGroup";
+
+const ChromeHeadphones = lazy(() => import("@/components/ChromeHeadphones"));
 
 /** Profile photo — served as a static file from /public */
 const HIMANSHI_PHOTO = "/himanshi.jpg";
@@ -105,6 +108,9 @@ const CERTS = [
 
 function HomePage() {
   useReveal();
+  const aboutRef = useRef<HTMLDivElement>(null);
+  const rubricRef = useRef<HTMLDivElement>(null);
+
   return (
     <div id="top" style={{ position: "relative", zIndex: 3 }}>
       <Nav />
@@ -116,58 +122,61 @@ function HomePage() {
       <CinematicHero />
 
       {/* STATS DASHBOARD WIDGETS */}
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-[1380px] px-6 md:px-10 lg:px-12">
         <StatsDashboard />
       </div>
 
       {/* ABOUT */}
       <Section id="about" index="01" label="ABOUT" tag="ANNOTATOR SPEC SHEET">
-        <div className="grid md:grid-cols-[300px_1fr] gap-8 md:gap-10 items-start">
-          {/* Photo frame */}
-          <div className="reveal-left flex justify-center md:justify-start">
-            <div className="photo-wrap float-y">
-              <div className="photo-frame border-2 border-amber-500/40 rounded-lg overflow-hidden shadow-xl">
-                <img src={HIMANSHI_PHOTO} alt="Himanshi Yenugupalli portrait" loading="lazy" />
+        <div ref={aboutRef} className="relative">
+
+          <div className="grid md:grid-cols-[300px_1fr] gap-8 md:gap-10 items-start">
+            {/* Photo frame */}
+            <div className="reveal-left flex justify-center md:justify-start">
+              <div className="photo-wrap float-y">
+                <div className="photo-frame border-2 border-amber-500/40 rounded-lg overflow-hidden shadow-xl">
+                  <img src={HIMANSHI_PHOTO} alt="Himanshi Yenugupalli portrait" loading="lazy" />
+                </div>
+                <div
+                  className="mt-3 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-center"
+                  style={{ background: "#151a24", border: "1px solid rgba(245,158,11,0.25)", color: "#f59e0b", borderRadius: 4 }}
+                >
+                  SUBJECT: HIMANSHI Y.
+                </div>
               </div>
-              <div
-                className="mt-3 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-center"
-                style={{ background: "#151a24", border: "1px solid rgba(245,158,11,0.25)", color: "#f59e0b", borderRadius: 4 }}
-              >
-                SUBJECT: HIMANSHI Y.
+            </div>
+
+            {/* Annotator Data Sheet Card */}
+            <div className="reveal card border border-amber-500/20 bg-zinc-900/60 p-6">
+              <div className="flex items-center justify-between border-b border-zinc-800 pb-3 mb-4 font-mono text-xs text-muted">
+                <span className="text-amber-500 font-semibold">[ ANNOTATOR_PROFILE.DAT ]</span>
+                <span>CONFIDENCE: HIGH</span>
+              </div>
+
+              <div className="space-y-3 text-sm text-text2 leading-relaxed">
+                <p>
+                  <strong className="text-text">Himanshi Yenugupalli</strong> is an AI Data Annotator & RLHF Specialist focusing on instruction tuning (SFT), reward model preference ranking, and multilingual annotation QA.
+                </p>
+                <div className="grid sm:grid-cols-2 gap-3 pt-2 font-mono text-xs">
+                  <div className="p-2.5 rounded bg-zinc-950/80 border border-zinc-800">
+                    <span className="text-muted block text-[10px] uppercase">Core Modalities</span>
+                    <span className="text-amber-400 font-medium">Text · Multilingual · Audio</span>
+                  </div>
+                  <div className="p-2.5 rounded bg-zinc-950/80 border border-zinc-800">
+                    <span className="text-muted block text-[10px] uppercase">Languages</span>
+                    <span className="text-amber-400 font-medium">Hindi (Native) · English · Telugu</span>
+                  </div>
+                </div>
+                <p className="pt-2 text-xs">
+                  Obsessed with rubric clarity, edge-case disambiguation, and honest label distributions to ensure reward models generalize effectively.
+                </p>
               </div>
             </div>
           </div>
 
-          {/* Annotator Data Sheet Card */}
-          <div className="reveal card border border-amber-500/20 bg-zinc-900/60 p-6">
-            <div className="flex items-center justify-between border-b border-zinc-800 pb-3 mb-4 font-mono text-xs text-muted">
-              <span className="text-amber-500 font-semibold">[ ANNOTATOR_PROFILE.DAT ]</span>
-              <span>CONFIDENCE: HIGH</span>
-            </div>
-
-            <div className="space-y-3 text-sm text-text2 leading-relaxed">
-              <p>
-                <strong className="text-text">Himanshi Yenugupalli</strong> is an AI Data Annotator & RLHF Specialist focusing on instruction tuning (SFT), reward model preference ranking, and multilingual annotation QA.
-              </p>
-              <div className="grid sm:grid-cols-2 gap-3 pt-2 font-mono text-xs">
-                <div className="p-2.5 rounded bg-zinc-950/80 border border-zinc-800">
-                  <span className="text-muted block text-[10px] uppercase">Core Modalities</span>
-                  <span className="text-amber-400 font-medium">Text · Multilingual · Audio</span>
-                </div>
-                <div className="p-2.5 rounded bg-zinc-950/80 border border-zinc-800">
-                  <span className="text-muted block text-[10px] uppercase">Languages</span>
-                  <span className="text-amber-400 font-medium">Hindi (Native) · English · Telugu</span>
-                </div>
-              </div>
-              <p className="pt-2 text-xs">
-                Obsessed with rubric clarity, edge-case disambiguation, and honest label distributions to ensure reward models generalize effectively.
-              </p>
-            </div>
-          </div>
+          {/* Process workflow showcase */}
+          <AnnotationProcess />
         </div>
-
-        {/* Process workflow showcase */}
-        <AnnotationProcess />
       </Section>
 
       {/* EXPERIENCE */}
@@ -210,8 +219,17 @@ function HomePage() {
           ))}
         </div>
 
-        {/* Sample Rubric / Critique Showcase */}
-        <RubricShowcase />
+        {/* Sample Rubric / Critique Showcase & Headphones layout */}
+        <div ref={rubricRef} className="grid grid-cols-1 lg:grid-cols-[1fr_480px] gap-12 items-center mt-12">
+          <div>
+            <RubricShowcase />
+          </div>
+          <div className="hidden lg:block w-full h-[480px] relative pointer-events-none z-20">
+            <Suspense fallback={null}>
+              <ChromeHeadphones sectionRef={rubricRef} />
+            </Suspense>
+          </div>
+        </div>
       </Section>
 
       {/* SKILLS */}
@@ -450,7 +468,7 @@ function HomePage() {
       </Section>
 
       <footer className="relative border-t border-zinc-800 z-10">
-        <div className="mx-auto max-w-6xl px-6 py-6 flex flex-wrap items-center justify-between gap-3">
+        <div className="mx-auto max-w-[1380px] px-6 md:px-10 lg:px-12 py-6 flex flex-wrap items-center justify-between gap-3">
           <span className="font-mono text-[11px] text-muted">© 2026 Himanshi Yenugupalli // QA Lab Notebook</span>
           <span className="font-mono text-[11px] text-muted">Curated with precision · Human feedback at scale</span>
         </div>
