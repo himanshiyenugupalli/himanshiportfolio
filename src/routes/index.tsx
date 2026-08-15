@@ -125,7 +125,7 @@ function HomePage() {
       <section id="about" className="py-24 md:py-36 border-t border-white/10 relative overflow-hidden bg-transparent z-10">
         <div className="max-w-[1440px] mx-auto px-6 md:px-12">
           {/* Section Indicator */}
-          <div className="font-mono text-[10px] tracking-[0.3em] text-white/40 mb-6 uppercase">
+          <div className="font-mono text-[12px] tracking-[0.3em] text-white/50 mb-6 uppercase">
             01 / PROFILE
           </div>
 
@@ -158,7 +158,7 @@ function HomePage() {
                   alt="Himanshi Yenugupalli"
                   className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-2 border-white/20 shadow-lg"
                 />
-                <div className="font-mono text-[11px] tracking-widest text-white/50 uppercase">
+                <div className="font-mono text-[12px] tracking-widest text-white/60 uppercase font-semibold">
                   HIMANSHI YENUGUPALLI
                 </div>
               </ScrollReveal>
@@ -183,7 +183,7 @@ function HomePage() {
 
           {/* Capabilities Horizontal Strip */}
           <div className="mt-20 border-t border-white/10 pt-8">
-            <div className="font-mono text-[9px] tracking-[0.3em] text-white/40 mb-8 uppercase">
+            <div className="font-mono text-[11px] tracking-[0.3em] text-white/50 mb-8 uppercase font-semibold">
               CAPABILITIES
             </div>
             
@@ -192,7 +192,7 @@ function HomePage() {
               {CAPABILITIES.map((cap) => (
                 <div
                   key={cap}
-                  className="py-5 px-4 font-mono text-[10px] md:text-[11px] tracking-wider text-white/80 border-r border-t border-white/10 flex items-center justify-center text-center uppercase hover:bg-white/5 transition-colors"
+                  className="py-5 px-4 font-mono text-[12px] md:text-[13px] tracking-wider text-white/90 border-r border-t border-white/10 flex items-center justify-center text-center uppercase font-medium hover:bg-white/5 transition-colors"
                 >
                   {cap}
                 </div>
@@ -211,13 +211,13 @@ function HomePage() {
             
             {/* Left Col: Introduction + Languages */}
             <div>
-              <div className="font-mono text-[10px] tracking-[0.3em] text-white/40 mb-6 uppercase">
+              <div className="font-mono text-[12px] tracking-[0.3em] text-white/50 mb-6 uppercase">
                 02 / PROFESSIONAL JOURNEY
               </div>
               <h2 className="font-display text-[9vw] md:text-[5vw] font-bold tracking-wider leading-[0.9] text-white uppercase mb-4">
                 EXPERIENCE
               </h2>
-              <div className="font-sans text-[11px] tracking-[0.2em] font-bold text-white/90 uppercase mb-6">
+              <div className="font-sans text-[13px] tracking-[0.2em] font-bold text-white/90 uppercase mb-6">
                 BUILDING BETTER DATA FOR BETTER AI
               </div>
               
@@ -229,20 +229,20 @@ function HomePage() {
 
               {/* Interactive Languages display */}
               <div className="mt-12 space-y-4">
-                <div className="font-mono text-[9px] tracking-[0.3em] text-white/40 uppercase mb-4">
+                <div className="font-mono text-[11px] tracking-[0.3em] text-white/50 uppercase mb-4 font-semibold">
                   LANGUAGES
                 </div>
                 <div className="flex flex-col gap-3.5">
-                  <div className="flex items-center gap-3 font-mono text-[11px] tracking-widest text-white/80">
-                    <span className="w-2.5 h-2.5 rounded-full border border-white/40 flex items-center justify-center text-[7px]">◇</span>
+                  <div className="flex items-center gap-3 font-mono text-[13px] tracking-widest text-white/90">
+                    <span className="w-2.5 h-2.5 rounded-full border border-white/40 flex items-center justify-center text-[8px]">◇</span>
                     HINDI — NATIVE
                   </div>
-                  <div className="flex items-center gap-3 font-mono text-[11px] tracking-widest text-white/80">
-                    <span className="w-2.5 h-2.5 rounded-full border border-white/40 flex items-center justify-center text-[7px]">◇</span>
+                  <div className="flex items-center gap-3 font-mono text-[13px] tracking-widest text-white/90">
+                    <span className="w-2.5 h-2.5 rounded-full border border-white/40 flex items-center justify-center text-[8px]">◇</span>
                     ENGLISH — FLUENT
                   </div>
-                  <div className="flex items-center gap-3 font-mono text-[11px] tracking-widest text-white/80">
-                    <span className="w-2.5 h-2.5 rounded-full border border-white/40 flex items-center justify-center text-[7px]">◇</span>
+                  <div className="flex items-center gap-3 font-mono text-[13px] tracking-widest text-white/90">
+                    <span className="w-2.5 h-2.5 rounded-full border border-white/40 flex items-center justify-center text-[8px]">◇</span>
                     TELUGU — FLUENT
                   </div>
                 </div>
@@ -266,7 +266,7 @@ function HomePage() {
                     <span className="w-1.5 h-1.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity" />
                   </span>
 
-                  <div className="font-mono text-[10px] tracking-widest text-white/50 mb-2">
+                  <div className="font-mono text-[12px] tracking-widest text-white/60 mb-2 font-medium">
                     {item.period}
                   </div>
 
@@ -274,8 +274,8 @@ function HomePage() {
                     {item.role}
                   </h3>
 
-                  <div className="font-sans text-[12px] font-semibold text-white/95 mb-2">
-                    {item.company} <span className="text-white/40 font-normal">· {item.type}</span>
+                  <div className="font-sans text-[13px] font-semibold text-white/95 mb-2">
+                    {item.company} <span className="text-white/50 font-normal">· {item.type}</span>
                   </div>
 
                   <p className="font-sans text-[15px] leading-relaxed text-white/70 max-w-xl">
@@ -294,7 +294,7 @@ function HomePage() {
       <section id="projects" className="py-24 md:py-36 border-t border-white/10 bg-black">
         <div className="max-w-[1440px] mx-auto px-6 md:px-12">
           
-          <div className="font-mono text-[10px] tracking-[0.3em] text-white/40 mb-6 uppercase">
+          <div className="font-mono text-[12px] tracking-[0.3em] text-white/50 mb-6 uppercase">
             03 / SELECTED WORK
           </div>
           <h2 className="font-display text-[9vw] md:text-[5vw] font-bold tracking-wider leading-[0.9] text-white uppercase mb-14">
@@ -324,30 +324,30 @@ function HomePage() {
                         </h3>
                       </div>
                       
-                      <div className="font-mono text-[9px] tracking-wider text-white/40 uppercase mb-3 leading-tight">
+                      <div className="font-mono text-[11px] tracking-wider text-white/60 uppercase mb-3 leading-tight font-medium">
                         {proj.tech}
                       </div>
 
-                      <p className="font-sans text-[12px] leading-relaxed text-white/60 mb-4">
+                      <p className="font-sans text-[14px] leading-relaxed text-white/70 mb-4">
                         {proj.desc}
                       </p>
                     </div>
 
                     {/* Bottom Action Links */}
-                    <div className="pt-3 border-t border-white/10 flex items-center justify-between font-mono text-[10px] text-white/70">
+                    <div className="pt-3 border-t border-white/10 flex items-center justify-between font-mono text-[12px] text-white/80 font-medium">
                       <a
                         href={proj.repo}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:text-white flex items-center gap-1 transition-colors"
                       >
-                        Repo <ExternalLink size={10} />
+                        Repo <ExternalLink size={12} />
                       </a>
                       <a
                         href={proj.demo}
                         className="hover:text-white flex items-center gap-1 transition-colors"
                       >
-                        Demo <ExternalLink size={10} />
+                        Demo <ExternalLink size={12} />
                       </a>
                     </div>
                   </div>
@@ -380,10 +380,10 @@ function HomePage() {
                 <h3 className="font-display text-xl font-bold text-white tracking-widest uppercase mb-1">
                   MSc — INFORMATION TECHNOLOGY
                 </h3>
-                <div className="font-sans text-[12px] font-semibold text-white/80">
+                <div className="font-sans text-[14px] font-semibold text-white/90">
                   DG Ruparel College
                 </div>
-                <div className="font-mono text-[10px] tracking-wider text-white/40 mt-1">
+                <div className="font-mono text-[12px] tracking-wider text-white/60 mt-1 font-medium">
                   2026 — Present
                 </div>
               </div>
@@ -401,10 +401,10 @@ function HomePage() {
                 <h3 className="font-display text-xl font-bold text-white tracking-widest uppercase mb-1">
                   BSc — INFORMATION TECHNOLOGY
                 </h3>
-                <div className="font-sans text-[12px] font-semibold text-white/80">
+                <div className="font-sans text-[14px] font-semibold text-white/90">
                   VIVA College · University of Mumbai
                 </div>
-                <div className="font-mono text-[10px] tracking-wider text-white/40 mt-1">
+                <div className="font-mono text-[12px] tracking-wider text-white/60 mt-1 font-medium">
                   2022 — 2025 · CGPA: 8.2 / 10
                 </div>
               </div>
@@ -422,10 +422,10 @@ function HomePage() {
                 <h3 className="font-display text-xl font-bold text-white tracking-widest uppercase mb-1">
                   HSC — SCIENCE
                 </h3>
-                <div className="font-sans text-[12px] font-semibold text-white/80">
+                <div className="font-sans text-[14px] font-semibold text-white/90">
                   Utkarsha Vidyalaya
                 </div>
-                <div className="font-mono text-[10px] tracking-wider text-white/40 mt-1">
+                <div className="font-mono text-[12px] tracking-wider text-white/60 mt-1 font-medium">
                   2020 — 2022
                 </div>
               </div>
@@ -453,7 +453,7 @@ function HomePage() {
           
           {/* Left: Journey Timeline */}
           <div>
-            <div className="font-mono text-[10px] tracking-[0.3em] text-white/40 mb-6 uppercase">
+            <div className="font-mono text-[12px] tracking-[0.3em] text-white/50 mb-6 uppercase">
               04 / LET'S CONNECT
             </div>
             
@@ -461,7 +461,7 @@ function HomePage() {
               LET'S BUILD<br />SOMETHING<br />INTELLIGENT.
             </h2>
 
-            <div className="font-mono text-[10px] tracking-[0.25em] text-white/70 uppercase mb-8">
+            <div className="font-mono text-[12px] tracking-[0.25em] text-white/80 uppercase mb-8 font-semibold">
               CHRONOLOGICAL JOURNEY
             </div>
 
@@ -476,10 +476,10 @@ function HomePage() {
               ].map((step) => (
                 <div key={step.year} className="relative group flex items-center gap-6">
                   <span className="absolute -left-[37px] top-1.5 w-2.5 h-2.5 rounded-full border border-white/40 bg-black group-hover:border-white transition-colors" />
-                  <span className="font-mono text-[13px] font-bold tracking-widest text-white shrink-0 min-w-[45px]">
+                  <span className="font-mono text-[15px] font-bold tracking-widest text-white shrink-0 min-w-[50px]">
                     {step.year}
                   </span>
-                  <span className="font-sans text-[13px] text-white/70">
+                  <span className="font-sans text-[15px] text-white/80">
                     {step.desc}
                   </span>
                 </div>
@@ -491,7 +491,7 @@ function HomePage() {
           <div id="contact" className="flex flex-col justify-center items-start lg:pl-8">
             <div className="w-full border border-white/20 bg-black/40 backdrop-blur-xl p-8 rounded-2xl relative overflow-hidden group hover:border-white/40 transition-all duration-300 shadow-2xl">
               
-              <div className="font-mono text-[9px] tracking-[0.3em] text-white/50 mb-3 uppercase">
+              <div className="font-mono text-[11px] tracking-[0.3em] text-white/60 mb-3 uppercase font-semibold">
                 HAVE AN IDEA?
               </div>
 
@@ -501,23 +501,23 @@ function HomePage() {
 
               <div className="w-full h-[1px] bg-white/10 my-6" />
 
-              <div className="space-y-4 font-sans text-[13px] text-white/80">
+              <div className="space-y-4 font-sans text-[15px] text-white/90">
                 <div className="flex items-center gap-3">
-                  <User size={16} className="text-white/60 shrink-0" />
+                  <User size={18} className="text-white/70 shrink-0" />
                   <span className="text-white font-medium">Himanshi Yenugupalli</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <MapPin size={16} className="text-white/60 shrink-0" />
+                  <MapPin size={18} className="text-white/70 shrink-0" />
                   <span className="text-white">Mumbai, India</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Mail size={16} className="text-white/60 shrink-0" />
+                  <Mail size={18} className="text-white/70 shrink-0" />
                   <a href="mailto:himanshiyenugalli@gmail.com" className="text-white hover:underline">
                     himanshiyenugalli@gmail.com
                   </a>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Phone size={16} className="text-white/60 shrink-0" />
+                  <Phone size={18} className="text-white/70 shrink-0" />
                   <span className="text-white">+91 70584 69422</span>
                 </div>
               </div>
@@ -525,7 +525,7 @@ function HomePage() {
               <div className="mt-8">
                 <a
                   href="mailto:himanshiyenugalli@gmail.com"
-                  className="w-full py-3.5 border border-white/30 rounded-full hover:border-white hover:bg-white/10 font-mono text-[11px] tracking-widest text-white uppercase flex items-center justify-center gap-2 transition-all duration-300"
+                  className="w-full py-3.5 border border-white/30 rounded-full hover:border-white hover:bg-white/10 font-mono text-[12px] tracking-widest text-white uppercase flex items-center justify-center gap-2 transition-all duration-300 font-medium"
                 >
                   START A CONVERSATION →
                 </a>
@@ -540,11 +540,11 @@ function HomePage() {
                   className="flex items-center gap-3 text-white/70 hover:text-white group/soc transition-colors"
                 >
                   <div className="p-2 rounded-lg bg-white/5 border border-white/10 group-hover/soc:border-white/30">
-                    <Linkedin size={16} />
+                    <Linkedin size={18} />
                   </div>
                   <div>
-                    <div className="font-mono text-[9px] tracking-widest text-white/40 uppercase">LINKEDIN</div>
-                    <div className="font-mono text-[11px] text-white/80">linkedin.com/in/himanshi-yenugupalli</div>
+                    <div className="font-mono text-[11px] tracking-widest text-white/50 uppercase font-medium">LINKEDIN</div>
+                    <div className="font-mono text-[13px] text-white/90">linkedin.com/in/himanshi-yenugupalli</div>
                   </div>
                 </a>
 
@@ -555,11 +555,11 @@ function HomePage() {
                   className="flex items-center gap-3 text-white/70 hover:text-white group/soc transition-colors"
                 >
                   <div className="p-2 rounded-lg bg-white/5 border border-white/10 group-hover/soc:border-white/30">
-                    <Github size={16} />
+                    <Github size={18} />
                   </div>
                   <div>
-                    <div className="font-mono text-[9px] tracking-widest text-white/40 uppercase">GITHUB</div>
-                    <div className="font-mono text-[11px] text-white/80">github.com/himanshiyenugupalli</div>
+                    <div className="font-mono text-[11px] tracking-widest text-white/50 uppercase font-medium">GITHUB</div>
+                    <div className="font-mono text-[13px] text-white/90">github.com/himanshiyenugupalli</div>
                   </div>
                 </a>
               </div>
@@ -572,9 +572,9 @@ function HomePage() {
 
       {/* FOOTER */}
       <footer className="border-t border-white/10 bg-black py-8 relative z-10">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-[10px] text-white/40">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-[12px] text-white/50">
           <div className="flex flex-col gap-1 items-center md:items-start">
-            <span className="text-white/80 tracking-widest font-bold">HIMANSHI YENUGUPALLI</span>
+            <span className="text-white/90 tracking-widest font-bold">HIMANSHI YENUGUPALLI</span>
             <span>AI DATA · ML · TECHNOLOGY</span>
           </div>
           <div>© 2026</div>

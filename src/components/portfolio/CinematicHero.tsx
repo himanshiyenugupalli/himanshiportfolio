@@ -60,14 +60,14 @@ export function CinematicHero() {
 
           <motion.div
             variants={itemVariants}
-            className="font-sans text-[11px] md:text-[12px] font-bold tracking-[0.3em] text-white/90 uppercase mb-5"
+            className="font-sans text-[13px] md:text-[14px] font-bold tracking-[0.3em] text-white/90 uppercase mb-5"
           >
             AI DATA · ML · TECHNOLOGY
           </motion.div>
 
           <motion.p
             variants={itemVariants}
-            className="font-sans text-[14px] md:text-[15px] leading-relaxed text-white/60 max-w-md mb-8"
+            className="font-sans text-[16px] md:text-[17px] leading-relaxed text-white/70 max-w-md mb-8"
           >
             AI & ML professional with experience in data annotation, AI evaluation, machine learning, and intelligent systems.
           </motion.p>
@@ -75,7 +75,7 @@ export function CinematicHero() {
           {/* Location Pin */}
           <motion.div
             variants={itemVariants}
-            className="flex items-center gap-2.5 font-mono text-[11px] tracking-wider text-white/50 mb-8 uppercase"
+            className="flex items-center gap-2.5 font-mono text-[13px] tracking-wider text-white/70 mb-8 uppercase"
           >
             <svg
               className="w-3.5 h-3.5"
