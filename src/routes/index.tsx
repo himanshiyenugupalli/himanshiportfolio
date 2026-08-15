@@ -149,9 +149,21 @@ function HomePage() {
               </ScrollReveal>
             </div>
 
-            {/* Right: Paragraphs + Signature */}
+            {/* Right: Paragraphs + Profile Avatar + Signature */}
             <div className="flex flex-col justify-center relative z-10 lg:pl-12">
-              <ScrollReveal className="text-[15px] md:text-[16px] leading-relaxed text-white/70 space-y-6" delay={0.3}>
+              {/* Profile Avatar */}
+              <ScrollReveal className="mb-6 flex items-center gap-4" delay={0.2}>
+                <img
+                  src="/himanshi.jpg"
+                  alt="Himanshi Yenugupalli"
+                  className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-2 border-white/20 shadow-lg"
+                />
+                <div className="font-mono text-[11px] tracking-widest text-white/50 uppercase">
+                  HIMANSHI YENUGUPALLI
+                </div>
+              </ScrollReveal>
+
+              <ScrollReveal className="text-[17px] md:text-[18px] leading-relaxed text-white/75 space-y-6" delay={0.3}>
                 <p>
                   I design, build, and optimize data-centric solutions that power intelligent systems. My work sits at the intersection of human judgment and machine learning — where high-quality data, thoughtful annotation, and precise evaluation shape the behavior of AI in the real world.
                 </p>
@@ -211,7 +223,7 @@ function HomePage() {
               
               <div className="w-12 h-[1px] bg-white mb-6" />
               
-              <p className="font-sans text-[14px] leading-relaxed text-white/60 mb-12 max-w-sm">
+              <p className="font-sans text-[16px] leading-relaxed text-white/70 mb-12 max-w-sm">
                 I contribute to the foundation of intelligent systems by creating high-quality training data that powers the next generation of AI.
               </p>
 
@@ -266,7 +278,7 @@ function HomePage() {
                     {item.company} <span className="text-white/40 font-normal">· {item.type}</span>
                   </div>
 
-                  <p className="font-sans text-[13px] leading-relaxed text-white/60 max-w-xl">
+                  <p className="font-sans text-[15px] leading-relaxed text-white/70 max-w-xl">
                     {item.desc}
                   </p>
                 </div>
