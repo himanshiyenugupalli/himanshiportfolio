@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import LiquidChrome from "./LiquidChrome";
 
 export function CinematicHero() {
   const [loaded, setLoaded] = useState(false);
@@ -31,16 +30,12 @@ export function CinematicHero() {
   };
 
   return (
-    <section className="relative w-full min-h-screen bg-black overflow-hidden flex flex-col justify-center">
+    <section className="relative w-full min-h-screen bg-transparent overflow-hidden flex flex-col justify-center">
       {/* 2-Column Grid Layout */}
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 w-full grid grid-cols-1 md:grid-cols-[1.1fr_1fr] items-center gap-12 pt-20">
         
-        {/* Left Side: Giant Liquid Chrome Sculpture */}
-        <div className="relative w-full h-[50vh] md:h-[80vh] flex items-center justify-center overflow-visible select-none chrome-interactive">
-          <div className="absolute w-[120%] h-[120%] -left-[20%] md:-left-[35%] top-[10%] md:top-0 scale-105 opacity-90">
-            <LiquidChrome preset="hero" interactive={true} />
-          </div>
-        </div>
+        {/* Left Side: Transparent visual area for fixed background canvas */}
+        <div className="relative w-full h-[40vh] md:h-[70vh] flex items-center justify-center overflow-visible select-none pointer-events-none" />
 
         {/* Right Side: Identity Typography */}
         <motion.div

@@ -4,7 +4,7 @@ import { CinematicHero } from "@/components/portfolio/CinematicHero";
 import { Cursor } from "@/components/portfolio/Cursor";
 import { Linkedin, Github, ExternalLink, User, MapPin, Mail, Phone } from "lucide-react";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
-import LiquidChrome from "@/components/portfolio/LiquidChrome";
+import { LiquidFrameAnimation } from "@/components/portfolio/LiquidFrameAnimation";
 import {
   LiscorePreview,
   SocialEyePreview,
@@ -116,12 +116,13 @@ function HomePage() {
     <div id="top" className="bg-black text-white min-h-screen relative font-sans overflow-x-hidden selection:bg-white/20">
       <Nav />
       <Cursor />
+      <LiquidFrameAnimation />
 
       {/* 1. HERO */}
       <CinematicHero />
 
       {/* 2. ABOUT */}
-      <section id="about" className="py-24 md:py-36 border-t border-white/10 relative overflow-hidden bg-black">
+      <section id="about" className="py-24 md:py-36 border-t border-white/10 relative overflow-hidden bg-transparent z-10">
         <div className="max-w-[1440px] mx-auto px-6 md:px-12">
           {/* Section Indicator */}
           <div className="font-mono text-[10px] tracking-[0.3em] text-white/40 mb-6 uppercase">
@@ -130,18 +131,13 @@ function HomePage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-12 items-center relative">
             
-            {/* Left: Giant Typography + Sculpture Layer */}
+            {/* Left: Giant Typography */}
             <div className="relative flex flex-col justify-center">
               <ScrollReveal className="relative z-10" delay={0.1}>
                 <h2 className="font-display text-[9vw] md:text-[5vw] font-bold tracking-wider leading-[0.9] text-white uppercase mb-6">
                   ABOUT ME
                 </h2>
               </ScrollReveal>
-
-              {/* Liquid Chrome Behind Text */}
-              <div className="absolute w-[110%] h-[110%] -left-[10%] top-[-5%] opacity-75 pointer-events-none select-none z-0">
-                <LiquidChrome preset="about" interactive={false} />
-              </div>
 
               {/* Overlapping Typography layout */}
               <ScrollReveal className="relative z-10 font-display text-[11vw] md:text-[5.5vw] font-bold tracking-tight leading-[0.85] text-white/95 uppercase" delay={0.25}>
@@ -196,12 +192,12 @@ function HomePage() {
       </section>
 
       {/* 3. EXPERIENCE */}
-      <section id="experience" className="py-24 md:py-36 border-t border-white/10 bg-black">
+      <section id="experience" className="py-24 md:py-36 border-t border-white/10 bg-transparent z-10 relative">
         <div className="max-w-[1440px] mx-auto px-6 md:px-12">
           
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-16">
             
-            {/* Left Col: Introduction + Languages + Chrome shape */}
+            {/* Left Col: Introduction + Languages */}
             <div>
               <div className="font-mono text-[10px] tracking-[0.3em] text-white/40 mb-6 uppercase">
                 02 / PROFESSIONAL JOURNEY
@@ -238,11 +234,6 @@ function HomePage() {
                     TELUGU — FLUENT
                   </div>
                 </div>
-              </div>
-
-              {/* Extra Experience Chrome Geometry */}
-              <div className="w-full h-[250px] mt-12 opacity-80 pointer-events-none select-none">
-                <LiquidChrome preset="experience" interactive={false} />
               </div>
             </div>
 
