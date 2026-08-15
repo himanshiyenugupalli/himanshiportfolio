@@ -105,7 +105,38 @@ const CAPABILITIES = [
   "HTML / CSS",
   "JAVA",
   "MYSQL",
-  "UI / UX",
+];
+
+const TECHNICAL_SKILLS = [
+  "Data Annotation",
+  "RLHF / RLSF",
+  "Data Labelling",
+  "Annotation QA / QC",
+  "Text / Image / Audio Annotation",
+  "Conversational AI Testing",
+  "Intent & Dialogue Labeling",
+  "Customer Sentiment Analysis",
+  "Image Classification",
+  "Bounding Boxes",
+  "Prompt Engineering",
+  "Basic AI/ML Concepts",
+  "HTML5 & CSS3",
+  "JavaScript",
+  "Python",
+  "Java",
+  "MySQL",
+  "Networking",
+];
+
+const TOOLS_AND_PLATFORMS = [
+  "VS Code",
+  "Git / GitHub",
+  "Netlify",
+  "Apache Tomcat",
+  "Hugging Face",
+  "Microsoft Office Suite",
+  "AWS Basics",
+  "Supabase",
 ];
 
 function HomePage() {
@@ -188,21 +219,61 @@ function HomePage() {
 
           {/* Capabilities Horizontal Strip */}
           <div className="mt-20 border-t border-white/10 pt-8">
-            <div className="font-mono text-[11px] tracking-[0.3em] text-white/50 mb-8 uppercase font-semibold">
+            <div className="font-mono text-[12px] tracking-[0.3em] text-white/50 mb-6 uppercase font-semibold">
               CAPABILITIES
             </div>
             
             {/* Capability Strip */}
-            <div className="grid grid-cols-2 md:grid-cols-6 border-b border-white/10">
+            <div className="grid grid-cols-2 md:grid-cols-[repeat(auto-fit,minmax(180px,1fr))] border-b border-white/10 mb-12">
               {CAPABILITIES.map((cap) => (
                 <div
                   key={cap}
-                  className="py-5 px-4 font-mono text-[12px] md:text-[13px] tracking-wider text-white/90 border-r border-t border-white/10 flex items-center justify-center text-center uppercase font-medium hover:bg-white/5 transition-colors"
+                  className="py-4 px-4 font-mono text-[12px] md:text-[13px] tracking-wider text-white/90 border-r border-t border-white/10 flex items-center justify-center text-center uppercase font-medium hover:bg-white/5 transition-colors"
                 >
                   {cap}
                 </div>
               ))}
             </div>
+
+            {/* Technical Skills & Tools/Platforms Breakdown */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
+              {/* Technical Skills */}
+              <div className="border border-white/15 bg-black/40 backdrop-blur-sm p-6 rounded-xl">
+                <div className="font-mono text-[12px] tracking-[0.25em] text-white/70 uppercase mb-4 font-semibold border-b border-white/10 pb-3 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-white/60" />
+                  TECHNICAL SKILLS
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {TECHNICAL_SKILLS.map((skill) => (
+                    <span
+                      key={skill}
+                      className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 font-mono text-[12px] md:text-[13px] text-white/85 hover:border-white/30 transition-colors"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Tools & Platforms */}
+              <div className="border border-white/15 bg-black/40 backdrop-blur-sm p-6 rounded-xl">
+                <div className="font-mono text-[12px] tracking-[0.25em] text-white/70 uppercase mb-4 font-semibold border-b border-white/10 pb-3 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-white/60" />
+                  TOOLS & PLATFORMS
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {TOOLS_AND_PLATFORMS.map((tool) => (
+                    <span
+                      key={tool}
+                      className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 font-mono text-[12px] md:text-[13px] text-white/85 hover:border-white/30 transition-colors"
+                    >
+                      {tool}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
           </div>
 
         </div>
