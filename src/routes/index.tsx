@@ -1,481 +1,585 @@
-import { useRef, lazy, Suspense } from "react";
+import { useState } from "react";
 import { Nav } from "@/components/portfolio/Nav";
-import { ScrollProgress } from "@/components/portfolio/ScrollProgress";
-import { PixelRobot } from "@/components/portfolio/PixelRobot";
 import { CinematicHero } from "@/components/portfolio/CinematicHero";
-import { Section } from "@/components/portfolio/Section";
-import { StatsDashboard } from "@/components/portfolio/StatsDashboard";
-import { AnnotationProcess } from "@/components/portfolio/AnnotationProcess";
-import { RubricShowcase } from "@/components/portfolio/RubricShowcase";
-import { useReveal } from "@/hooks/use-reveal";
-import { Mail, Linkedin, Github, Award, Cloud, Code2, GraduationCap, ServerCog, FileSpreadsheet, ExternalLink, CheckCircle } from "lucide-react";
+import { Cursor } from "@/components/portfolio/Cursor";
+import { Linkedin, Github, ExternalLink, User, MapPin, Mail, Phone } from "lucide-react";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
-import { StaggerGroup } from "@/components/motion/StaggerGroup";
-
-import ChromeHeadphones from "@/components/ChromeHeadphones";
-
-/** Profile photo — served as a static file from /public */
-const HIMANSHI_PHOTO = "/himanshi.jpg";
+import LiquidChrome from "@/components/portfolio/LiquidChrome";
+import {
+  LiscorePreview,
+  SocialEyePreview,
+  CalmPrepPreview,
+  CarbonLensPreview,
+  TravelChecklistPreview,
+} from "@/components/portfolio/ProjectPreviews";
+import { createFileRoute } from "@tanstack/react-router";
 
 const EXP = [
   {
-    period: "Jan 2026 — Present", company: "Uber AI Solutions", type: "Freelance",
-    role: "AI Data Annotator (Freelance)",
-    bullets: [
-      "Conducted high-precision audio annotation, data labeling, and quality evaluation to support AI model training and fine-tuning.",
-      "Maintained strict adherence to project guidelines while achieving consistently high accuracy rates in multilingual datasets.",
-      "Collaborated remotely in fast-paced environments, delivering timely and reliable annotation outputs.",
-    ],
+    period: "JAN 2026 — PRESENT",
+    company: "Uber AI Solutions",
+    type: "Freelance / Remote",
+    role: "AI DATA ANNOTATOR",
+    desc: "Annotate and evaluate diverse data types including images, text, and documents to support the development of high-quality AI models for real-world applications.",
   },
   {
-    period: "Jan 2026 — Present", company: "Prolific", type: "Freelance",
-    role: "RLHF Contributor (Freelance)",
-    bullets: [
-      "Generated high-quality human feedback data for AI model alignment, focusing on information analysis and response evaluation.",
-      "Performed structured annotation tasks and followed research protocols to enhance model safety, accuracy, and reasoning capabilities.",
-      "Delivered consistent, guideline-compliant contributions supporting ongoing AI research initiatives.",
-    ],
+    period: "JAN 2026 — PRESENT",
+    company: "Prolific",
+    type: "Freelance / Remote",
+    role: "RLHF CONTRIBUTOR",
+    desc: "Contribute to reinforcement learning from human feedback projects by providing thoughtful, accurate, and consistent responses that improve model safety and helpfulness.",
   },
   {
-    period: "Oct 2025", company: "clickworker", type: "Freelance",
-    role: "Image Annotator (Freelance)",
-    bullets: [
-      "Executed detailed image annotation tasks including categorization, labeling, and bounding box creation for machine learning datasets.",
-    ],
+    period: "OCT 2025",
+    company: "clickworker",
+    type: "Freelance / Remote",
+    role: "IMAGE ANNOTATOR",
+    desc: "Annotate images for object detection, classification, and segmentation tasks to support computer vision model training and evaluation.",
   },
   {
-    period: "Sep 2025 — Jan 2026", company: "DataAnnotation Tech", type: "Contract",
-    role: "AI Data Annotator (Freelance)",
-    bullets: [
-      "Specialized in RLHF and RLSF methodologies to improve AI performance across medical, educational, and conversational domains.",
-      "Conducted rubric-based evaluations, image classification, text categorization, and response ranking in Hindi, English, and Telugu.",
-      "Provided culturally nuanced and linguistically accurate annotations, significantly contributing to multilingual model development.",
-    ],
+    period: "SEP 2025 — JAN 2026",
+    company: "DataAnnotation Tech",
+    type: "Freelance / Remote",
+    role: "ANNOTATION / QA SPECIALIST",
+    desc: "Reviewed and refined AI-generated responses, ensured annotation quality, and maintained consistency across complex guidelines and projects.",
   },
 ];
-
-const ANNOT = ["RLHF", "RLSF", "SFT", "DPO Preference Pairs", "Prompt Engineering", "Response Ranking", "Rubric Authoring", "Hallucination Detection", "Safety Red-Teaming", "Bias Auditing", "Multi-turn Dialogue", "Image Captioning", "Audio Transcription"];
-const TECH = ["Python", "JavaScript", "Java", "HTML", "CSS", "MySQL", "Git", "Apache Tomcat", "Label Studio", "Notion", "Jupyter", "VS Code"];
-const LANGS = ["Hindi · Native", "English · Fluent", "Telugu · Conversational"];
 
 const PROJECTS = [
   {
-    n: "QA-01", title: "LiScore",
+    title: "LISCORE",
     subtitle: "MSc IT Research Project (Ongoing)",
-    desc: "An AI-powered license health scanner that evaluates GitHub repositories and generates a 0–100 / A–F compatibility score with detailed reports and embeddable badges. Implemented real-time repo scanning for licenses, dependencies, and SPDX headers; extending into a full License Integrity Monitor with change tracking and drift detection.",
-    tech: ["React", "Vite", "TypeScript", "Bun", "Netlify"],
-    status: "ONGOING",
+    tech: "React / Vite / TypeScript / Bun / Netlify",
+    desc: "AI-powered GitHub license health scanner that evaluates GitHub repositories & compatibility score.",
+    component: LiscorePreview,
+    repo: "https://github.com/himanshiyenugupalli",
+    demo: "#",
   },
   {
-    n: "QA-02", title: "SocialEye",
-    subtitle: "Vibe2Ship Hackathon (CodeNinjas x Google)",
-    desc: "An AI-Powered Hyperlocal Civic Issue Reporting & Resolution web application. Implemented user authentication, profile management, and real-time issue tracking using Supabase. Emphasized community-driven problem solving with clean, responsive UI/UX.",
-    tech: ["Next.js", "Supabase", "Netlify"],
-    status: "SHIPPED",
+    title: "SOCIALEYE",
+    subtitle: "Vibe2Ship Hackathon",
+    tech: "Next.js / Supabase / Netlify",
+    desc: "AI-powered hyperlocal civic issue reporting & resolution web application with real-time tracking.",
+    component: SocialEyePreview,
+    repo: "https://github.com/himanshiyenugupalli",
+    demo: "#",
   },
   {
-    n: "QA-03", title: "CalmPrep",
+    title: "CALMPREP",
     subtitle: "PromptWars Hackathon",
-    desc: "Developed an AI-powered mental wellness assistant designed specifically for students during high-stakes exams. Integrated modern tech stack with Supabase backend and deployed on Netlify with SSR configuration.",
-    tech: ["React", "Supabase", "Netlify", "Ollama"],
-    status: "SHIPPED",
+    tech: "React / Supabase / Netlify / Ollama",
+    desc: "AI-powered mental wellness companion designed for students during high-stakes competitive exams.",
+    component: CalmPrepPreview,
+    repo: "https://github.com/himanshiyenugupalli",
+    demo: "#",
   },
   {
-    n: "QA-04", title: "CarbonLens",
+    title: "CARBONLENS",
     subtitle: "Online PromptWars Hackathon",
-    desc: "Developed a personal carbon footprint tracker web application. Implemented features for tracking and visualizing personal carbon emissions with a modern, responsive UI.",
-    tech: ["TypeScript", "Vite", "Netlify"],
-    status: "SHIPPED",
+    tech: "TypeScript / Vite / Netlify",
+    desc: "Personal carbon footprint tracking web application with data visualizer and emission metrics.",
+    component: CarbonLensPreview,
+    repo: "https://github.com/himanshiyenugupalli",
+    demo: "#",
   },
   {
-    n: "QA-05", title: "TravelChecklist",
-    subtitle: "Outlier AI CodeCircuit Hackathon",
-    desc: "Designed a user-friendly, culturally sensitive travel packing checklist web application. Implemented responsive design, accessibility features, and deployed on Netlify.",
-    tech: ["HTML5", "CSS3", "JavaScript", "Netlify"],
-    status: "SHIPPED",
+    title: "TRAVELCHECKLIST",
+    subtitle: "Outlier AI CodeCircuit",
+    tech: "HTML5 / CSS3 / JavaScript / Netlify",
+    desc: "Responsive travel packing checklist web app supporting custom packing rules and progress tracking.",
+    component: TravelChecklistPreview,
+    repo: "https://github.com/himanshiyenugupalli",
+    demo: "#",
   },
 ];
 
-const CERTS = [
-  { icon: Award, name: "McKinsey Forward Program", issuer: "McKinsey & Company · Jun 2026" },
-  { icon: Award, name: "Technical Support Fundamentals", issuer: "Google · Sep 2025" },
-  { icon: Cloud, name: "AWS Cloud Practitioner Essentials", issuer: "AWS · Jul 2025" },
-  { icon: Code2, name: "MERN Stack Development", issuer: "edba academy · May 2025" },
-  { icon: ServerCog, name: "Cloud Computing Workshop", issuer: "IIT Bombay · Dec 2024" },
-  { icon: Cloud, name: "AWS Solutions Architecture Simulation", issuer: "Forage · Jun 2024" },
-  { icon: ServerCog, name: "Technology Virtual Internship", issuer: "Deloitte Australia · Jan 2024" },
+const CAPABILITIES = [
+  "DATA ANNOTATION",
+  "RLHF / RLSF",
+  "CONVERSATIONAL AI",
+  "ANNOTATION QA / QC",
+  "PROMPT ENGINEERING",
+  "IMAGE CLASSIFICATION",
+  "PYTHON",
+  "JAVASCRIPT",
+  "HTML / CSS",
+  "JAVA",
+  "MYSQL",
+  "UI / UX",
 ];
 
 function HomePage() {
-  useReveal();
-  const aboutRef = useRef<HTMLDivElement>(null);
-  const rubricRef = useRef<HTMLDivElement>(null);
+  const [activeExp, setActiveExp] = useState<number | null>(null);
+  const [activeEdu, setActiveEdu] = useState<number | null>(null);
 
   return (
-    <div id="top" style={{ position: "relative", zIndex: 3 }}>
+    <div id="top" className="bg-black text-white min-h-screen relative font-sans overflow-x-hidden selection:bg-white/20">
       <Nav />
-      <ScrollProgress />
-      <PixelRobot />
-      <div className="fx-grid" />
+      <Cursor />
 
-      {/* HERO — cinematic two-stage scroll experience */}
+      {/* 1. HERO */}
       <CinematicHero />
 
-      {/* STATS DASHBOARD WIDGETS */}
-      <div className="mx-auto max-w-[1380px] px-6 md:px-10 lg:px-12">
-        <StatsDashboard />
-      </div>
+      {/* 2. ABOUT */}
+      <section id="about" className="py-24 md:py-36 border-t border-white/10 relative overflow-hidden bg-black">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-12">
+          {/* Section Indicator */}
+          <div className="font-mono text-[10px] tracking-[0.3em] text-white/40 mb-6 uppercase">
+            01 / PROFILE
+          </div>
 
-      {/* ABOUT */}
-      <Section id="about" index="01" label="ABOUT" tag="ANNOTATOR SPEC SHEET">
-        <div ref={aboutRef} className="relative">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-12 items-center relative">
+            
+            {/* Left: Giant Typography + Sculpture Layer */}
+            <div className="relative flex flex-col justify-center">
+              <ScrollReveal className="relative z-10" delay={0.1}>
+                <h2 className="font-display text-[9vw] md:text-[5vw] font-bold tracking-wider leading-[0.9] text-white uppercase mb-6">
+                  ABOUT ME
+                </h2>
+              </ScrollReveal>
 
-          <div className="grid md:grid-cols-[300px_1fr] gap-8 md:gap-10 items-start">
-            {/* Photo frame */}
-            <div className="reveal-left flex justify-center md:justify-start">
-              <div className="photo-wrap float-y">
-                <div className="photo-frame border-2 border-amber-500/40 rounded-lg overflow-hidden shadow-xl">
-                  <img src={HIMANSHI_PHOTO} alt="Himanshi Yenugupalli portrait" loading="lazy" />
-                </div>
-                <div
-                  className="mt-3 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-center"
-                  style={{ background: "#151a24", border: "1px solid rgba(230, 201, 160,0.25)", color: "#e6c9a0", borderRadius: 4 }}
-                >
-                  SUBJECT: HIMANSHI Y.
-                </div>
+              {/* Liquid Chrome Behind Text */}
+              <div className="absolute w-[110%] h-[110%] -left-[10%] top-[-5%] opacity-75 pointer-events-none select-none z-0">
+                <LiquidChrome preset="about" interactive={false} />
               </div>
+
+              {/* Overlapping Typography layout */}
+              <ScrollReveal className="relative z-10 font-display text-[11vw] md:text-[5.5vw] font-bold tracking-tight leading-[0.85] text-white/95 uppercase" delay={0.25}>
+                <div className="mb-2">HUMAN</div>
+                <div className="mb-2">INTELLIGENCE</div>
+                <div className="text-white/40 my-3 text-[8vw] md:text-[4vw]">×</div>
+                <div className="mb-2">ARTIFICIAL</div>
+                <div>INTELLIGENCE</div>
+              </ScrollReveal>
             </div>
 
-            {/* Annotator Data Sheet Card */}
-            <div className="reveal card border border-amber-500/20 bg-zinc-900/60 p-6">
-              <div className="flex items-center justify-between border-b border-zinc-800 pb-3 mb-4 font-mono text-xs text-muted">
-                <span className="text-amber-500 font-semibold">[ ANNOTATOR_PROFILE.DAT ]</span>
-                <span>CONFIDENCE: HIGH</span>
-              </div>
-
-              <div className="space-y-3 text-sm text-text2 leading-relaxed">
+            {/* Right: Paragraphs + Signature */}
+            <div className="flex flex-col justify-center relative z-10 lg:pl-12">
+              <ScrollReveal className="text-[15px] md:text-[16px] leading-relaxed text-white/70 space-y-6" delay={0.3}>
                 <p>
-                  <strong className="text-text">Himanshi Yenugupalli</strong> is an AI Data Annotator & RLHF Specialist focusing on instruction tuning (SFT), reward model preference ranking, and multilingual annotation QA.
+                  I design, build, and optimize data-centric solutions that power intelligent systems. My work sits at the intersection of human judgment and machine learning — where high-quality data, thoughtful annotation, and precise evaluation shape the behavior of AI in the real world.
                 </p>
-                <div className="grid sm:grid-cols-2 gap-3 pt-2 font-mono text-xs">
-                  <div className="p-2.5 rounded bg-zinc-950/80 border border-zinc-800">
-                    <span className="text-muted block text-[10px] uppercase">Core Modalities</span>
-                    <span className="text-amber-400 font-medium">Text · Multilingual · Audio</span>
-                  </div>
-                  <div className="p-2.5 rounded bg-zinc-950/80 border border-zinc-800">
-                    <span className="text-muted block text-[10px] uppercase">Languages</span>
-                    <span className="text-amber-400 font-medium">Hindi (Native) · English · Telugu</span>
-                  </div>
-                </div>
-                <p className="pt-2 text-xs">
-                  Obsessed with rubric clarity, edge-case disambiguation, and honest label distributions to ensure reward models generalize effectively.
+                <p>
+                  I care about accuracy, clarity, and impact. Every dataset, prompt, and model interaction is an opportunity to create technology that is more helpful, fair, and human-centered.
                 </p>
-              </div>
+              </ScrollReveal>
+
+              {/* Signature */}
+              <ScrollReveal className="mt-8" delay={0.45}>
+                <svg className="w-40 h-20 text-white/80" viewBox="0 0 200 80" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 50 C40 30, 60 20, 80 45 C100 70, 110 10, 120 40 C130 70, 150 30, 180 35 M80 35 L120 35" />
+                </svg>
+              </ScrollReveal>
             </div>
           </div>
 
-          {/* Process workflow showcase */}
-          <AnnotationProcess />
-        </div>
-      </Section>
-
-      {/* EXPERIENCE */}
-      <Section id="experience" index="02" label="EXPERIENCE" tag="WORK HISTORY & SFT">
-        <div className="relative border-l-2 border-zinc-800/80 ml-4 md:ml-8 pl-6 md:pl-10 space-y-12">
-          {/* Timeline connecting line */}
-          <div className="absolute left-[-2px] top-0 bottom-0 origin-top">
-            <ScrollReveal className="w-[2px] h-full bg-amber-500/60 origin-top" y={0} delay={0} />
+          {/* Capabilities Horizontal Strip */}
+          <div className="mt-20 border-t border-white/10 pt-8">
+            <div className="font-mono text-[9px] tracking-[0.3em] text-white/40 mb-8 uppercase">
+              CAPABILITIES
+            </div>
+            
+            {/* Capability Strip */}
+            <div className="grid grid-cols-2 md:grid-cols-6 border-b border-white/10">
+              {CAPABILITIES.map((cap) => (
+                <div
+                  key={cap}
+                  className="py-5 px-4 font-mono text-[10px] md:text-[11px] tracking-wider text-white/80 border-r border-t border-white/10 flex items-center justify-center text-center uppercase hover:bg-white/5 transition-colors"
+                >
+                  {cap}
+                </div>
+              ))}
+            </div>
           </div>
 
-          {EXP.map((e, i) => (
-            <ScrollReveal
-              key={i}
-              className="relative"
-              delay={i * 0.15}
-              y={25}
-            >
-              {/* Timeline marker */}
-              <span className="absolute -left-[31px] md:-left-[45px] top-1.5 flex items-center justify-center w-4 h-4 rounded-full bg-zinc-950 border-2 border-amber-500 shadow-[0_0_8px_rgba(230, 201, 160,0.5)] z-10" />
+        </div>
+      </section>
 
-              <div className="card grid md:grid-cols-[200px_1fr] gap-6 border border-zinc-800 bg-zinc-900/50 hover:border-amber-500/35 transition-all duration-300 hover:shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
-                <div>
-                  <div className="font-mono text-[11px] text-muted">{e.period}</div>
-                  <div className="font-mono text-[13px] font-semibold text-amber-500 mt-1">{e.company}</div>
-                  <span className="inline-block mt-2 font-mono text-[10px] text-text2 px-2 py-0.5 rounded border border-amber-500/20 bg-amber-500/5">{e.type}</span>
+      {/* 3. EXPERIENCE */}
+      <section id="experience" className="py-24 md:py-36 border-t border-white/10 bg-black">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-12">
+          
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-16">
+            
+            {/* Left Col: Introduction + Languages + Chrome shape */}
+            <div>
+              <div className="font-mono text-[10px] tracking-[0.3em] text-white/40 mb-6 uppercase">
+                02 / PROFESSIONAL JOURNEY
+              </div>
+              <h2 className="font-display text-[9vw] md:text-[5vw] font-bold tracking-wider leading-[0.9] text-white uppercase mb-4">
+                EXPERIENCE
+              </h2>
+              <div className="font-sans text-[11px] tracking-[0.2em] font-bold text-white/90 uppercase mb-6">
+                BUILDING BETTER DATA FOR BETTER AI
+              </div>
+              
+              <div className="w-12 h-[1px] bg-white mb-6" />
+              
+              <p className="font-sans text-[14px] leading-relaxed text-white/60 mb-12 max-w-sm">
+                I contribute to the foundation of intelligent systems by creating high-quality training data that powers the next generation of AI.
+              </p>
+
+              {/* Interactive Languages display */}
+              <div className="mt-12 space-y-4">
+                <div className="font-mono text-[9px] tracking-[0.3em] text-white/40 uppercase mb-4">
+                  LANGUAGES
                 </div>
-                <div>
-                  <h3 className="editorial-h3 text-lg font-bold text-text">{e.role}</h3>
-                  <ul className="mt-3 space-y-2">
-                    {e.bullets.map((b, j) => (
-                      <li key={j} className="flex gap-2 text-text2 text-[14px]">
-                        <span className="text-amber-500">▸</span>
-                        <span>{b}</span>
-                      </li>
-                    ))}
-                  </ul>
+                <div className="flex flex-col gap-3.5">
+                  <div className="flex items-center gap-3 font-mono text-[11px] tracking-widest text-white/80">
+                    <span className="w-2.5 h-2.5 rounded-full border border-white/40 flex items-center justify-center text-[7px]">◇</span>
+                    HINDI — NATIVE
+                  </div>
+                  <div className="flex items-center gap-3 font-mono text-[11px] tracking-widest text-white/80">
+                    <span className="w-2.5 h-2.5 rounded-full border border-white/40 flex items-center justify-center text-[7px]">◇</span>
+                    ENGLISH — FLUENT
+                  </div>
+                  <div className="flex items-center gap-3 font-mono text-[11px] tracking-widest text-white/80">
+                    <span className="w-2.5 h-2.5 rounded-full border border-white/40 flex items-center justify-center text-[7px]">◇</span>
+                    TELUGU — FLUENT
+                  </div>
                 </div>
               </div>
-            </ScrollReveal>
-          ))}
-        </div>
 
-        {/* Sample Rubric / Critique Showcase & Headphones layout */}
-        <div ref={rubricRef} className="grid grid-cols-1 lg:grid-cols-[1fr_480px] gap-12 items-center mt-12">
-          <div>
-            <RubricShowcase />
-          </div>
-          <div className="w-full h-[320px] lg:h-[480px] relative pointer-events-none z-20">
-            <ChromeHeadphones sectionRef={rubricRef} />
-          </div>
-        </div>
-      </Section>
-
-      {/* SKILLS */}
-      <Section id="skills" index="03" label="SKILLS" tag="COMPETENCY MATRIX">
-        <StaggerGroup className="grid md:grid-cols-3 gap-6">
-          {[
-            { label: "Annotation Craft", caption: "Labeling & Rubrics", pills: ANNOT, icon: "◆" },
-            { label: "Technical Tools", caption: "Stack & Platforms", pills: TECH, icon: "◈" },
-            { label: "Linguistic QA", caption: "Native & Conversational", pills: LANGS, icon: "◉" },
-          ].map((g) => (
-            <div
-              key={g.label}
-              className="card border border-zinc-800 bg-zinc-900/60 p-5 hover:border-amber-500/35 hover:-translate-y-1 hover:shadow-[0_4px_20px_rgba(230, 201, 160,0.08)] transition-all duration-300"
-            >
-              <div className="flex items-center justify-between border-b border-zinc-800 pb-3 mb-4">
-                <h3 className="font-display font-bold text-lg text-text">{g.label}</h3>
-                <span className="text-amber-500 font-mono text-sm">{g.icon}</span>
+              {/* Extra Experience Chrome Geometry */}
+              <div className="w-full h-[250px] mt-12 opacity-80 pointer-events-none select-none">
+                <LiquidChrome preset="experience" interactive={false} />
               </div>
-              <p className="font-mono text-xs text-muted mb-4">{g.caption}</p>
-              <div className="flex flex-wrap gap-1.5">
-                {g.pills.map((p) => (
-                  <span
-                    key={p}
-                    className="font-mono text-[11px] px-2.5 py-1 rounded bg-zinc-950 text-text2 border border-zinc-800 hover:border-amber-500/40 hover:text-amber-400 hover:scale-105 transition-all duration-200"
-                  >
-                    {p}
+            </div>
+
+            {/* Right Col: Timeline */}
+            <div className="relative border-l border-white/20 pl-8 md:pl-12 space-y-12">
+              {EXP.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="relative group transition-opacity duration-300"
+                  style={{
+                    opacity: activeExp === null || activeExp === idx ? 1 : 0.45,
+                  }}
+                  onMouseEnter={() => setActiveExp(idx)}
+                  onMouseLeave={() => setActiveExp(null)}
+                >
+                  {/* Custom Chrome Node */}
+                  <span className="absolute -left-[38px] md:-left-[54px] top-1.5 w-4 h-4 rounded-full bg-black border border-white/40 group-hover:scale-125 group-hover:border-white transition-all duration-300 flex items-center justify-center">
+                    <span className="w-1.5 h-1.5 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity" />
                   </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </StaggerGroup>
-      </Section>
 
-      {/* PROJECTS — Restyled as QA Tickets */}
-      <Section id="projects" index="04" label="PROJECTS" tag="QA TICKETS & CAPSTONE">
-        <div className="space-y-6">
-          {/* FEATURED PROJECT */}
-          {PROJECTS.slice(0, 1).map((p) => (
-            <ScrollReveal key={p.n} y={30} delay={0.1}>
-              <div className="card border border-zinc-800 bg-zinc-900/60 p-6 hover:border-amber-500/40 hover:-translate-y-1 transition-all duration-300 shadow-lg flex flex-col justify-between md:grid md:grid-cols-[1fr_300px] gap-6">
-                <div>
-                  <div className="flex items-center justify-between font-mono text-xs text-muted mb-3 pb-2 border-b border-zinc-800">
-                    <span className="text-amber-500 font-semibold">[{p.n} // FEATURED CAPSTONE]</span>
-                    <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-1">
-                      <CheckCircle size={10} /> {p.status}
-                    </span>
+                  <div className="font-mono text-[10px] tracking-widest text-white/50 mb-2">
+                    {item.period}
                   </div>
-                  <h3 className="font-display font-bold text-2xl text-text mb-3">{p.title}</h3>
-                  <p className="text-text2 text-[14px] leading-relaxed mb-6">{p.desc}</p>
-                  
-                  <div className="flex gap-4 font-mono text-xs mt-auto">
-                    <a href="#" className="text-amber-500 hover:underline flex items-center gap-1 font-semibold">
-                      Repository <ExternalLink size={12} />
-                    </a>
-                    <a href="#" className="text-amber-500 hover:underline flex items-center gap-1 font-semibold">
-                      Demo <ExternalLink size={12} />
-                    </a>
+
+                  <h3 className="font-display text-2xl font-bold tracking-wide text-white mb-0.5">
+                    {item.role}
+                  </h3>
+
+                  <div className="font-sans text-[12px] font-semibold text-white/95 mb-2">
+                    {item.company} <span className="text-white/40 font-normal">· {item.type}</span>
                   </div>
+
+                  <p className="font-sans text-[13px] leading-relaxed text-white/60 max-w-xl">
+                    {item.desc}
+                  </p>
                 </div>
+              ))}
+            </div>
 
-                <div className="flex flex-col justify-between border-t md:border-t-0 md:border-l border-zinc-800/80 pt-4 md:pt-0 md:pl-6">
-                  <div>
-                    <div className="font-mono text-[10px] uppercase text-muted mb-2.5">Technologies Used</div>
-                    <div className="flex flex-wrap gap-1.5 mb-4">
-                      {p.tech.map((t) => (
-                        <span key={t} className="font-mono text-[10.5px] px-2.5 py-1 rounded bg-zinc-950 text-text2 border border-zinc-800 hover:border-amber-500/30 transition-colors">
-                          {t}
-                        </span>
-                      ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* 4. PROJECTS SECTION WITH PROPER LAYOUT & PREVIEW IMAGES */}
+      <section id="projects" className="py-24 md:py-36 border-t border-white/10 bg-black">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-12">
+          
+          <div className="font-mono text-[10px] tracking-[0.3em] text-white/40 mb-6 uppercase">
+            03 / SELECTED WORK
+          </div>
+          <h2 className="font-display text-[9vw] md:text-[5vw] font-bold tracking-wider leading-[0.9] text-white uppercase mb-14">
+            PROJECTS
+          </h2>
+
+          {/* Clean 5-column grid layout for desktop */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-28 items-stretch">
+            {PROJECTS.map((proj) => {
+              const PreviewComponent = proj.component;
+              return (
+                <div
+                  key={proj.title}
+                  className="group relative border border-white/15 bg-[#080808] p-5 rounded-xl flex flex-col justify-between hover:border-white/50 hover:-translate-y-1.5 transition-all duration-300 min-h-[460px] shadow-lg will-change-transform transform-gpu"
+                >
+                  {/* Top: Project Screen UI Preview Frame */}
+                  <div className="w-full h-44 mb-5 rounded-lg overflow-hidden shrink-0 group-hover:scale-[1.02] transition-transform duration-300 will-change-transform transform-gpu">
+                    <PreviewComponent />
+                  </div>
+
+                  {/* Middle Content */}
+                  <div className="flex-1 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between mb-1">
+                        <h3 className="font-display text-2xl font-bold tracking-wider text-white group-hover:text-white uppercase">
+                          {proj.title}
+                        </h3>
+                      </div>
+                      
+                      <div className="font-mono text-[9px] tracking-wider text-white/40 uppercase mb-3 leading-tight">
+                        {proj.tech}
+                      </div>
+
+                      <p className="font-sans text-[12px] leading-relaxed text-white/60 mb-4">
+                        {proj.desc}
+                      </p>
+                    </div>
+
+                    {/* Bottom Action Links */}
+                    <div className="pt-3 border-t border-white/10 flex items-center justify-between font-mono text-[10px] text-white/70">
+                      <a
+                        href={proj.repo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-white flex items-center gap-1 transition-colors"
+                      >
+                        Repo <ExternalLink size={10} />
+                      </a>
+                      <a
+                        href={proj.demo}
+                        className="hover:text-white flex items-center gap-1 transition-colors"
+                      >
+                        Demo <ExternalLink size={10} />
+                      </a>
                     </div>
                   </div>
                 </div>
-              </div>
-            </ScrollReveal>
-          ))}
-
-          {/* SUB-GRID */}
-          <StaggerGroup className="grid md:grid-cols-2 gap-6">
-            {PROJECTS.slice(1).map((p) => (
-              <div
-                key={p.n}
-                className="card border border-zinc-800 bg-zinc-900/60 p-5 hover:border-amber-500/40 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between h-full"
-              >
-                <div>
-                  <div className="flex items-center justify-between font-mono text-xs text-muted mb-3 pb-2 border-b border-zinc-800">
-                    <span className="text-amber-500 font-semibold">[{p.n}]</span>
-                    <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-1">
-                      <CheckCircle size={10} /> {p.status}
-                    </span>
-                  </div>
-                  <h3 className="font-display font-bold text-base text-text mb-2">{p.title}</h3>
-                  <p className="text-text2 text-[13px] leading-relaxed mb-4">{p.desc}</p>
-                </div>
-
-                <div>
-                  <div className="flex flex-wrap gap-1.5 pt-3 border-t border-zinc-800/60 mb-4">
-                    {p.tech.map((t) => (
-                      <span key={t} className="font-mono text-[10px] px-2 py-0.5 rounded bg-zinc-950 text-muted border border-zinc-800">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex gap-4 font-mono text-xs">
-                    <a href="#" className="text-amber-500 hover:underline flex items-center gap-1">
-                      Repository <ExternalLink size={11} />
-                    </a>
-                    <a href="#" className="text-amber-500 hover:underline flex items-center gap-1">
-                      Demo <ExternalLink size={11} />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </StaggerGroup>
-        </div>
-      </Section>
-
-      {/* EDUCATION + CERTS */}
-      <Section id="education" index="05" label="EDUCATION & CERTS" tag="CREDENTIALS">
-        <StaggerGroup className="grid md:grid-cols-3 gap-6 mb-8">
-          {[
-            { school: "DG Ruparel College of Arts, Science and Commerce", degree: "M.Sc. Information Technology", period: "2026 — Present", meta: "Mumbai, India" },
-            { school: "VIVA Institute of Pharmacy, University of Mumbai", degree: "B.Sc. Information Technology", period: "2022 — 2025", meta: "CGPA · 8.2 / 10 · Mumbai, India" },
-            { school: "Utkarsha Vidyalaya & Junior College", degree: "Higher Secondary Certificate (Science)", period: "2020 — 2022", meta: "PCM + CS · Mumbai, India" },
-          ].map((e) => (
-            <div key={e.school} className="card border border-zinc-800 bg-zinc-900/60 p-5 hover:border-amber-500/25 hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between">
-              <div className="flex items-start gap-3">
-                <GraduationCap className="text-amber-500 shrink-0 mt-1" size={22} />
-                <div>
-                  <div className="font-mono text-[11px] text-muted">{e.period}</div>
-                  <h3 className="font-display text-base font-bold text-text mt-0.5">{e.degree}</h3>
-                  <div className="text-amber-500 font-mono text-[12px] mt-1">{e.school}</div>
-                  <div className="text-text2 text-[13px] mt-2">{e.meta}</div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </StaggerGroup>
-
-        <StaggerGroup className="grid md:grid-cols-2 gap-4">
-          {CERTS.map((c) => {
-            const Icon = c.icon;
-            return (
-              <div key={c.name} className="card flex items-center gap-4 border border-zinc-800 bg-zinc-900/60 p-4 hover:border-amber-500/25 hover:-translate-y-0.5 transition-all duration-300">
-                <div className="flex items-center justify-center shrink-0 w-10 h-10 rounded bg-amber-500/10 border border-amber-500/20 text-amber-500">
-                  <Icon size={18} />
-                </div>
-                <div>
-                  <div className="text-text text-[14px] font-medium">{c.name}</div>
-                  <div className="font-mono text-[11px] text-muted">{c.issuer}</div>
-                </div>
-              </div>
-            );
-          })}
-        </StaggerGroup>
-
-        {/* Extracurricular Activities & Achievements */}
-        <div className="mt-12">
-          <div className="flex items-center gap-2 mb-4 border-b border-zinc-800 pb-3">
-            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-amber-500">
-              [ ACTIVITIES & ACHIEVEMENTS ]
-            </span>
+              );
+            })}
           </div>
-          <StaggerGroup className="grid md:grid-cols-3 gap-6">
-            {[
-              { title: "ECSOC Contributor", period: "Jul 2026 – Present", desc: "Contributing to coding challenges and collaborative initiatives." },
-              { title: "Rewriting the Code (RTC)", period: "Jun 2026 – Present", desc: "Active member in the Women in Tech community for networking and skill-building." },
-              { title: "Hackathon Participant", period: "Hackathons", desc: "PromptWars, Vibe2Ship (CodeNinjas x Google), Outlier AI CodeCircuit. Built multiple full-stack AI/web applications under time constraints." },
-            ].map((act) => (
-              <div key={act.title} className="card border border-zinc-800 bg-zinc-900/60 p-5 hover:border-amber-500/25 hover:-translate-y-0.5 transition-all duration-300">
-                <span className="font-mono text-[10px] text-muted">{act.period}</span>
-                <h4 className="font-display text-base font-bold text-text mt-1">{act.title}</h4>
-                <p className="text-xs text-text2 leading-relaxed mt-2">{act.desc}</p>
-              </div>
-            ))}
-          </StaggerGroup>
-        </div>
-      </Section>
 
-      {/* CONTACT */}
-      <Section id="contact" index="06" label="CONTACT" tag="DIRECT INQUIRY">
-        <div className="grid md:grid-cols-2 gap-10">
-          <ScrollReveal className="reveal-left" delay={0.1}>
-            <p className="text-text2 leading-relaxed mb-8 max-w-md">
-              Looking for an annotator who reads the rubric twice, verifies edge cases, and delivers high-consistency datasets? Send a message — I reply within 24 hours.
-            </p>
-            <div className="space-y-3">
+          {/* EDUCATION (right under projects) */}
+          <div className="border-t border-white/10 pt-16">
+            <h2 className="font-display text-[9vw] md:text-[5vw] font-bold tracking-wider leading-[0.9] text-white uppercase mb-12">
+              EDUCATION
+            </h2>
+
+            {/* Horizontal Timeline */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+              {/* timeline horizontal line */}
+              <div className="absolute top-[9px] left-0 right-0 h-[1px] bg-white/20 hidden md:block" />
+
+              {/* MSC */}
+              <div
+                className="relative pt-6 group"
+                onMouseEnter={() => setActiveEdu(0)}
+                onMouseLeave={() => setActiveEdu(null)}
+                style={{ opacity: activeEdu === null || activeEdu === 0 ? 1 : 0.4 }}
+              >
+                <div className="absolute top-0 left-0 w-4.5 h-4.5 rounded-full border border-white/40 bg-black flex items-center justify-center group-hover:border-white transition-colors duration-200">
+                  <span className="w-2 h-2 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+                <h3 className="font-display text-xl font-bold text-white tracking-widest uppercase mb-1">
+                  MSc — INFORMATION TECHNOLOGY
+                </h3>
+                <div className="font-sans text-[12px] font-semibold text-white/80">
+                  DG Ruparel College
+                </div>
+                <div className="font-mono text-[10px] tracking-wider text-white/40 mt-1">
+                  2026 — Present
+                </div>
+              </div>
+
+              {/* BSC */}
+              <div
+                className="relative pt-6 group"
+                onMouseEnter={() => setActiveEdu(1)}
+                onMouseLeave={() => setActiveEdu(null)}
+                style={{ opacity: activeEdu === null || activeEdu === 1 ? 1 : 0.4 }}
+              >
+                <div className="absolute top-0 left-0 w-4.5 h-4.5 rounded-full border border-white/40 bg-black flex items-center justify-center group-hover:border-white transition-colors duration-200">
+                  <span className="w-2 h-2 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+                <h3 className="font-display text-xl font-bold text-white tracking-widest uppercase mb-1">
+                  BSc — INFORMATION TECHNOLOGY
+                </h3>
+                <div className="font-sans text-[12px] font-semibold text-white/80">
+                  VIVA College · University of Mumbai
+                </div>
+                <div className="font-mono text-[10px] tracking-wider text-white/40 mt-1">
+                  2022 — 2025 · CGPA: 8.2 / 10
+                </div>
+              </div>
+
+              {/* HSC */}
+              <div
+                className="relative pt-6 group"
+                onMouseEnter={() => setActiveEdu(2)}
+                onMouseLeave={() => setActiveEdu(null)}
+                style={{ opacity: activeEdu === null || activeEdu === 2 ? 1 : 0.4 }}
+              >
+                <div className="absolute top-0 left-0 w-4.5 h-4.5 rounded-full border border-white/40 bg-black flex items-center justify-center group-hover:border-white transition-colors duration-200">
+                  <span className="w-2 h-2 rounded-full bg-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+                <h3 className="font-display text-xl font-bold text-white tracking-widest uppercase mb-1">
+                  HSC — SCIENCE
+                </h3>
+                <div className="font-sans text-[12px] font-semibold text-white/80">
+                  Utkarsha Vidyalaya
+                </div>
+                <div className="font-mono text-[10px] tracking-wider text-white/40 mt-1">
+                  2020 — 2022
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* 5. JOURNEY + CONTACT */}
+      <section id="journey" className="py-24 md:py-36 border-t border-white/10 bg-black relative overflow-hidden">
+        {/* Background Liquid Chrome Image */}
+        <div className="absolute inset-0 pointer-events-none select-none z-0">
+          <img
+            src="/liquid-chrome-bg.png"
+            alt="Liquid Chrome Background"
+            className="w-full h-full object-cover object-center opacity-85 transition-opacity duration-700"
+            loading="eager"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black opacity-50 pointer-events-none" />
+        </div>
+
+        <div className="max-w-[1440px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-16 relative z-10">
+          
+          {/* Left: Journey Timeline */}
+          <div>
+            <div className="font-mono text-[10px] tracking-[0.3em] text-white/40 mb-6 uppercase">
+              04 / LET'S CONNECT
+            </div>
+            
+            <h2 className="font-display text-[9vw] md:text-[4.5vw] font-bold tracking-wider leading-[0.9] text-white uppercase mb-12">
+              LET'S BUILD<br />SOMETHING<br />INTELLIGENT.
+            </h2>
+
+            <div className="font-mono text-[10px] tracking-[0.25em] text-white/70 uppercase mb-8">
+              CHRONOLOGICAL JOURNEY
+            </div>
+
+            {/* Vertical Chronological Journey Timeline */}
+            <div className="border-l border-white/20 pl-8 space-y-8">
               {[
-                { Icon: Mail, label: "himanshi.yenugupalli@gmail.com", href: "mailto:himanshi.yenugupalli@gmail.com" },
-                { Icon: Linkedin, label: "linkedin.com/in/himanshi-yenugupalli", href: "#" },
-                { Icon: Github, label: "github.com/himanshi-yen", href: "#" },
-              ].map(({ Icon, label, href }) => (
-                <a key={label} href={href} data-hover
-                  className="flex items-center gap-3 font-mono text-[13px] text-text2 px-4 py-3 rounded border border-zinc-800 bg-zinc-900/60 hover:border-amber-500/40 hover:text-amber-400 hover:shadow-[0_2px_12px_rgba(230, 201, 160,0.05)] transition-all duration-300 group"
-                >
-                  <Icon size={16} className="text-amber-500" />
-                  <span>{label}</span>
-                  <span className="ml-auto text-amber-500 transform transition-transform duration-200 group-hover:translate-x-1.5">→</span>
-                </a>
+                { year: "2020", desc: "Science education" },
+                { year: "2022", desc: "BSc Information Technology begins" },
+                { year: "2024", desc: "Technology workshops / virtual internship experience" },
+                { year: "2025", desc: "BSc IT completed + AI/data annotation work" },
+                { year: "2026", desc: "MSc IT + AI Data Annotation + RLHF + AI projects" },
+              ].map((step) => (
+                <div key={step.year} className="relative group flex items-center gap-6">
+                  <span className="absolute -left-[37px] top-1.5 w-2.5 h-2.5 rounded-full border border-white/40 bg-black group-hover:border-white transition-colors" />
+                  <span className="font-mono text-[13px] font-bold tracking-widest text-white shrink-0 min-w-[45px]">
+                    {step.year}
+                  </span>
+                  <span className="font-sans text-[13px] text-white/70">
+                    {step.desc}
+                  </span>
+                </div>
               ))}
             </div>
-          </ScrollReveal>
+          </div>
 
-          <ScrollReveal className="reveal-right" delay={0.2}>
-            <div className="card border border-amber-500/20 bg-zinc-900/60 p-6">
-              <div className="flex items-center gap-2 mb-5">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                <span className="font-mono text-xs text-amber-500 font-semibold">[ STATUS: AVAILABLE FOR CONTRACT ]</span>
-              </div>
-              <h3 className="font-display text-xl font-bold text-text mb-4">Roles & Specializations</h3>
+          {/* Right: Floating Contact Card */}
+          <div id="contact" className="flex flex-col justify-center items-start lg:pl-8">
+            <div className="w-full border border-white/20 bg-black/40 backdrop-blur-xl p-8 rounded-2xl relative overflow-hidden group hover:border-white/40 transition-all duration-300 shadow-2xl">
               
-              <StaggerGroup className="space-y-3 mb-6 font-mono text-xs">
-                {[
-                  "RLHF / RLSF Preference Ranking",
-                  "Multilingual SFT Data Curation",
-                  "Annotation QA & Calibration",
-                  "Safety & Red-Team Evaluation",
-                ].map((r) => (
-                  <div key={r} className="pl-3 py-2 text-text border-l-2 border-amber-500 bg-zinc-950/40 hover:bg-zinc-950/60 transition-colors">
-                    {r}
+              <div className="font-mono text-[9px] tracking-[0.3em] text-white/50 mb-3 uppercase">
+                HAVE AN IDEA?
+              </div>
+
+              <h3 className="font-display text-4xl md:text-5xl font-bold tracking-wider text-white mb-6 uppercase">
+                LET'S TALK.
+              </h3>
+
+              <div className="w-full h-[1px] bg-white/10 my-6" />
+
+              <div className="space-y-4 font-sans text-[13px] text-white/80">
+                <div className="flex items-center gap-3">
+                  <User size={16} className="text-white/60 shrink-0" />
+                  <span className="text-white font-medium">Himanshi Yenugupalli</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <MapPin size={16} className="text-white/60 shrink-0" />
+                  <span className="text-white">Mumbai, India</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Mail size={16} className="text-white/60 shrink-0" />
+                  <a href="mailto:himanshiyenugalli@gmail.com" className="text-white hover:underline">
+                    himanshiyenugalli@gmail.com
+                  </a>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Phone size={16} className="text-white/60 shrink-0" />
+                  <span className="text-white">+91 70584 69422</span>
+                </div>
+              </div>
+
+              <div className="mt-8">
+                <a
+                  href="mailto:himanshiyenugalli@gmail.com"
+                  className="w-full py-3.5 border border-white/30 rounded-full hover:border-white hover:bg-white/10 font-mono text-[11px] tracking-widest text-white uppercase flex items-center justify-center gap-2 transition-all duration-300"
+                >
+                  START A CONVERSATION →
+                </a>
+              </div>
+
+              {/* Social Links */}
+              <div className="space-y-3 mt-8 pt-6 border-t border-white/10">
+                <a
+                  href="https://linkedin.com/in/himanshi-yenugupalli"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 text-white/70 hover:text-white group/soc transition-colors"
+                >
+                  <div className="p-2 rounded-lg bg-white/5 border border-white/10 group-hover/soc:border-white/30">
+                    <Linkedin size={16} />
                   </div>
-                ))}
-              </StaggerGroup>
-              
-              <div className="flex flex-wrap gap-2">
-                {["Remote", "Contract", "Freelance", "Part-time"].map((t) => (
-                  <span key={t} className="font-mono text-xs px-2.5 py-1 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 hover:scale-105 transition-transform duration-200">
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </ScrollReveal>
-        </div>
-      </Section>
+                  <div>
+                    <div className="font-mono text-[9px] tracking-widest text-white/40 uppercase">LINKEDIN</div>
+                    <div className="font-mono text-[11px] text-white/80">linkedin.com/in/himanshi-yenugupalli</div>
+                  </div>
+                </a>
 
-      <footer className="relative border-t border-zinc-800 z-10">
-        <div className="mx-auto max-w-[1380px] px-6 md:px-10 lg:px-12 py-6 flex flex-wrap items-center justify-between gap-3">
-          <span className="font-mono text-[11px] text-muted">© 2026 Himanshi Yenugupalli // QA Lab Notebook</span>
-          <span className="font-mono text-[11px] text-muted">Curated with precision · Human feedback at scale</span>
+                <a
+                  href="https://github.com/himanshiyenugupalli"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 text-white/70 hover:text-white group/soc transition-colors"
+                >
+                  <div className="p-2 rounded-lg bg-white/5 border border-white/10 group-hover/soc:border-white/30">
+                    <Github size={16} />
+                  </div>
+                  <div>
+                    <div className="font-mono text-[9px] tracking-widest text-white/40 uppercase">GITHUB</div>
+                    <div className="font-mono text-[11px] text-white/80">github.com/himanshiyenugupalli</div>
+                  </div>
+                </a>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="border-t border-white/10 bg-black py-8 relative z-10">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-[10px] text-white/40">
+          <div className="flex flex-col gap-1 items-center md:items-start">
+            <span className="text-white/80 tracking-widest font-bold">HIMANSHI YENUGUPALLI</span>
+            <span>AI DATA · ML · TECHNOLOGY</span>
+          </div>
+          <div>© 2026</div>
         </div>
       </footer>
     </div>
   );
 }
-
-import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
   head: () => ({

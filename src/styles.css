@@ -1,6 +1,6 @@
 @import "tailwindcss";
-@source "../src";
 @import "tw-animate-css";
+@source "../src";
 
 @theme inline {
   --color-bg: var(--bg);
@@ -14,22 +14,11 @@
   --color-muted: var(--muted);
   --color-blue: var(--blue);
   --color-amber: var(--amber);
-  --color-amber-50: #fcf9f4;
-  --color-amber-100: #f7eedf;
-  --color-amber-200: #f0debf;
-  --color-amber-300: #e6c9a0;
-  --color-amber-400: #eed7b5;
-  --color-amber-500: #e6c9a0;
-  --color-amber-600: #d4b58a;
-  --color-amber-700: #9e6c38;
-  --color-amber-800: #80532b;
-  --color-amber-900: #684223;
-  --color-amber-950: #3c220f;
   --color-border-g: var(--border-g);
   --color-border-g-hover: var(--border-g-hover);
   --color-bg-g-dim: var(--bg-g-dim);
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
-  --font-display: "Fraunces", Georgia, serif;
+  --font-display: "Bebas Neue", "Archivo Narrow", sans-serif;
   --font-sans: "Inter", ui-sans-serif, system-ui;
   --color-background: var(--bg);
   --color-foreground: var(--text);
@@ -38,20 +27,20 @@
 }
 
 :root {
-  --bg: #0e1117;
-  --bg-card: #151a24;
-  --bg-elevated: #1e2534;
-  --bg-deep: #262f40;
-  --accent: #e6c9a0;
-  --accent-hover: #eed7b5;
-  --text: #f3f4f6;
-  --text2: #9ca3af;
-  --muted: #6b7280;
-  --blue: #3b82f6;
-  --amber: #e6c9a0;
-  --bg-g-dim: rgba(230, 201, 160, 0.08);
-  --border-g: rgba(230, 201, 160, 0.15);
-  --border-g-hover: rgba(230, 201, 160, 0.35);
+  --bg: #000000;
+  --bg-card: #080808;
+  --bg-elevated: #111111;
+  --bg-deep: #161616;
+  --accent: #ffffff;
+  --accent-hover: #c7c7c7;
+  --text: #ffffff;
+  --text2: #c7c7c7;
+  --muted: #777777;
+  --blue: #c7c7c7;
+  --amber: #ffffff;
+  --bg-g-dim: rgba(255, 255, 255, 0.05);
+  --border-g: rgba(255, 255, 255, 0.20);
+  --border-g-hover: rgba(255, 255, 255, 0.40);
 }
 
 @layer base {

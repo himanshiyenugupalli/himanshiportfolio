@@ -1,204 +1,68 @@
-import { useEffect, useRef, useState } from "react";
-
-const LINKS: [string, string][] = [
-  ["about", "#about"],
-  ["work", "#experience"],
-  ["skills", "#skills"],
-  ["projects", "#projects"],
-  ["contact", "#contact"],
-];
+import { useEffect, useState } from "react";
 
 export function Nav() {
-  const [active, setActive] = useState<string>("about");
   const [scrolled, setScrolled] = useState(false);
-  const [hoverIdx, setHoverIdx] = useState<number | null>(null);
-  const [pillRect, setPillRect] = useState<{ left: number; width: number } | null>(null);
-  const itemsRef = useRef<Array<HTMLAnchorElement | null>>([]);
-  const trackRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const ids = LINKS.map(([, h]) => h.slice(1));
-    const onScroll = () => {
-      setScrolled(window.scrollY > 50);
-      const y = window.scrollY + window.innerHeight * 0.35;
-      let cur = ids[0];
-      for (const id of ids) {
-        const el = document.getElementById(id);
-        if (el && el.offsetTop <= y) cur = id;
-      }
-      setActive(cur);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
     };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  // Position the glow pill behind the active (or hovered) link
-  useEffect(() => {
-    const idx =
-      hoverIdx ?? LINKS.findIndex(([, h]) => h.slice(1) === active);
-    const node = itemsRef.current[idx];
-    const track = trackRef.current;
-    if (!node || !track) return;
-    const a = node.getBoundingClientRect();
-    const b = track.getBoundingClientRect();
-    setPillRect({ left: a.left - b.left, width: a.width });
-  }, [active, hoverIdx, scrolled]);
 
   return (
     <nav
-      style={{
-        position: "fixed",
-        top: scrolled ? 10 : 18,
-        left: 0,
-        right: 0,
-        zIndex: 60,
-        fontFamily: "var(--font-sans)",
-        display: "flex",
-        justifyContent: "center",
-        pointerEvents: "none",
-        transition: "all .45s cubic-bezier(.2,.8,.2,1)",
-      }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? "bg-black/90 border-b border-white/10 py-3" : "bg-transparent py-6"
+      }`}
     >
-      <div
-        className="relative group"
-        style={{
-          pointerEvents: "auto",
-          width: "min(1280px, calc(100% - 20px))",
-          borderRadius: 22,
-          padding: scrolled ? "1px" : "0px",
-          background: scrolled
-            ? "linear-gradient(135deg, rgba(245,158,11,0.4), rgba(245,158,11,0.1) 40%, rgba(217,119,6,0.3))"
-            : "transparent",
-          boxShadow: scrolled
-            ? "0 18px 60px -10px rgba(0,0,0,0.65), 0 0 30px rgba(245,158,11,0.12)"
-            : "none",
-          transition: "all 0.3s ease",
-        }}
-      >
-        {/* inner glass surface */}
-        <div
-          style={{
-            position: "relative",
-            borderRadius: 21,
-            overflow: "hidden",
-            background: scrolled
-              ? "linear-gradient(180deg, rgba(21,26,36,0.85), rgba(14,17,23,0.92))"
-              : "transparent",
-            backdropFilter: scrolled ? "blur(12px) saturate(180%)" : "none",
-            WebkitBackdropFilter: scrolled ? "blur(12px) saturate(180%)" : "none",
-            transition: "all 0.3s ease",
-          }}
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex items-center justify-between">
+        {/* Left Brand */}
+        <a
+          href="#top"
+          className="font-display text-xl md:text-2xl font-bold tracking-[0.2em] text-white hover:opacity-80 transition-opacity"
         >
-          <div className="flex items-center justify-between gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 relative">
-            {/* LEFT — bracketed monogram logo */}
-            <a
-              href="#top"
-              data-hover
-              className="flex items-center gap-2 shrink-0 sm:pl-1.5 group/brand font-mono select-none"
-              style={{ fontFamily: "var(--font-mono)" }}
-            >
-              <span
-                className="font-bold transition-transform duration-200 group-hover/brand:scale-105"
-                style={{
-                  color: "#f59e0b",
-                  fontSize: 14,
-                  letterSpacing: "0.02em",
-                  textShadow: "0 0 12px rgba(245,158,11,0.4)",
-                }}
-              >
-                [HY]
-              </span>
-              <span
-                style={{
-                  fontSize: 12,
-                  fontWeight: 400,
-                  color: "rgba(243, 244, 246, 0.65)",
-                  letterSpacing: "0.06em",
-                }}
-              >
-                annotator
-              </span>
+          HIMANSHI
+        </a>
+
+        {/* Right Actions & Navigation */}
+        <div className="flex items-center gap-6 md:gap-10">
+          <div className="hidden md:flex items-center gap-8 font-sans text-[11px] font-medium tracking-[0.25em] text-white/70">
+            <a href="#about" className="hover:text-white transition-colors duration-250 uppercase">
+              ABOUT
             </a>
-
-            {/* CENTER — links with sliding glow pill */}
-            <div
-              ref={trackRef}
-              className="relative flex items-center p-1 rounded-full"
-              style={{
-                background: scrolled ? "rgba(0,0,0,0.35)" : "transparent",
-                border: scrolled ? "1px solid rgba(245,158,11,0.15)" : "1px solid transparent",
-                transition: "all 0.3s ease",
-              }}
-              onMouseLeave={() => setHoverIdx(null)}
-            >
-              {/* Sliding glow pill */}
-              {pillRect && scrolled && (
-                <div
-                  aria-hidden
-                  style={{
-                    position: "absolute",
-                    top: 4,
-                    bottom: 4,
-                    left: pillRect.left,
-                    width: pillRect.width,
-                    borderRadius: 999,
-                    background: "rgba(245,158,11,0.18)",
-                    boxShadow: "0 0 0 1px rgba(245,158,11,0.35) inset",
-                    transition:
-                      "left .45s cubic-bezier(.2,.8,.2,1), width .45s cubic-bezier(.2,.8,.2,1)",
-                    pointerEvents: "none",
-                  }}
-                />
-              )}
-
-              {LINKS.map(([label, href], i) => {
-                const id = href.slice(1);
-                const isActive = active === id;
-                const isHover = hoverIdx === i;
-                return (
-                  <a
-                    key={href}
-                    href={href}
-                    data-hover
-                    ref={(el) => { itemsRef.current[i] = el; }}
-                    onMouseEnter={() => setHoverIdx(i)}
-                    className="relative flex items-center gap-1 px-2.5 sm:px-4 py-1.5 rounded-full transition-colors group"
-                    style={{
-                      color: isActive || isHover ? "#f3f4f6" : "#9ca3af",
-                      zIndex: 1,
-                    }}
-                  >
-                    <span
-                      className="text-[11px] sm:text-[13px] capitalize relative pb-1"
-                      style={{ fontWeight: isActive ? 600 : 400 }}
-                    >
-                      {label}
-                      <span
-                        className="absolute bottom-0 left-0 w-full h-[1.5px] bg-amber-500 origin-left scale-x-0 transition-transform duration-200 ease-out group-hover:scale-x-100"
-                      />
-                    </span>
-                  </a>
-                );
-              })}
-            </div>
-
-            {/* RIGHT — single CTA button */}
-            <a
-              href="#contact"
-              data-hover
-              className="hidden sm:inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[12px] font-medium shrink-0 transition-all"
-              style={{
-                background: "#f59e0b",
-                color: "#0e1117",
-                boxShadow: "0 4px 14px rgba(245,158,11,0.3)",
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-1px)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.transform = "translateY(0)"; }}
-            >
-              Contact
+            <a href="#experience" className="hover:text-white transition-colors duration-250 uppercase">
+              EXPERIENCE
+            </a>
+            <a href="#projects" className="hover:text-white transition-colors duration-250 uppercase">
+              WORK
+            </a>
+            <a href="#journey" className="hover:text-white transition-colors duration-250 uppercase">
+              JOURNEY
+            </a>
+            <a href="#contact" className="hover:text-white transition-colors duration-250 uppercase">
+              CONTACT
             </a>
           </div>
+
+          {/* Sparkle icon outline button */}
+          <button
+            className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-white/80 hover:text-white hover:border-white/50 transition-all duration-200"
+            aria-label="Action"
+          >
+            <svg
+              className="w-3.5 h-3.5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+            </svg>
+          </button>
         </div>
       </div>
     </nav>
