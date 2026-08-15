@@ -68,30 +68,33 @@ export function LiquidFrameAnimation() {
       const heroRect = heroSectionEl.getBoundingClientRect();
       const chromeRect = heroChromeEl ? heroChromeEl.getBoundingClientRect() : null;
 
-      // Expand interaction area: cover the entire left visual area of the Hero
-      const interactionLeft = chromeRect ? Math.min(0, chromeRect.left) : 0;
-      const interactionRight = chromeRect ? Math.max(window.innerWidth * 0.55, chromeRect.right) : window.innerWidth * 0.55;
+      // Active interaction region: Leftmost viewport edge (0) up to the boundary where Hero text starts (~50-55% width)
+      const interactionLeft = 0;
+      const interactionRight = chromeRect ? Math.max(window.innerWidth * 0.52, chromeRect.right) : window.innerWidth * 0.52;
       const interactionTop = heroRect.top;
       const interactionBottom = heroRect.bottom;
 
-      const isInsideHeroChrome =
+      // Active only inside Hero section, from left edge up to text boundary
+      const isInsideHeroChromeArea =
         e.clientX >= interactionLeft &&
         e.clientX <= interactionRight &&
         e.clientY >= interactionTop &&
         e.clientY <= interactionBottom;
 
-      if (isInsideHeroChrome) {
-        // Relative X within the silver chrome region (-1 to +1)
-        const relX = ((e.clientX - interactionLeft) / (interactionRight - interactionLeft) - 0.5) * 2;
+      if (isInsideHeroChromeArea) {
+        // Relative X from left edge (0) to text boundary (1)
+        const relX = (e.clientX - interactionLeft) / (interactionRight - interactionLeft);
+        // Map [0, 1] to [-1, 1] for balanced left/right offset
+        const mappedX = (relX - 0.5) * 2;
         
-        // Relative Y within the silver chrome region (-1 to +1) for enhanced 3D feel
-        const relY = ((e.clientY - interactionTop) / (interactionBottom - interactionTop) - 0.5) * 2;
+        // Relative Y inside Hero region [-1, 1]
+        const mappedY = ((e.clientY - interactionTop) / (interactionBottom - interactionTop) - 0.5) * 2;
 
-        // Combined 2D cursor influence mapping to +-12 frames local morphing offset
-        const combinedInfluence = (relX * 0.75 + relY * 0.25);
-        cursorOffsetRef.current.target = Math.max(-12, Math.min(12, combinedInfluence * 12));
+        // Combined 2D cursor influence mapping to fast +-14 frames local morphing offset
+        const combinedInfluence = mappedX * 0.8 + mappedY * 0.2;
+        cursorOffsetRef.current.target = Math.max(-14, Math.min(14, combinedInfluence * 14));
       } else {
-        // Smoothly decay back to 0 when cursor leaves Hero chrome
+        // Smoothly decay back to 0 when cursor leaves Hero chrome or enters text area
         cursorOffsetRef.current.target = 0;
       }
     };
@@ -104,9 +107,9 @@ export function LiquidFrameAnimation() {
     const renderLoop = () => {
       if (!isMounted) return;
 
-      // Smoothly interpolate cursor local frame offset
+      // Fast, fluid interpolation (0.28 factor for near-instant responsiveness without lag)
       cursorOffsetRef.current.current +=
-        (cursorOffsetRef.current.target - cursorOffsetRef.current.current) * 0.1;
+        (cursorOffsetRef.current.target - cursorOffsetRef.current.current) * 0.28;
 
       // Measure continuous timeline across Hero -> About -> Experience
       const heroEl = document.getElementById("top");
