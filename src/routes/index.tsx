@@ -140,11 +140,11 @@ function HomePage() {
               </ScrollReveal>
 
               {/* Overlapping Typography layout */}
-              <ScrollReveal className="relative z-10 font-display text-[11vw] md:text-[5.5vw] font-bold tracking-tight leading-[0.85] text-white/95 uppercase" delay={0.25}>
-                <div className="mb-2">HUMAN</div>
-                <div className="mb-2">INTELLIGENCE</div>
-                <div className="text-white/40 my-3 text-[8vw] md:text-[4vw]">×</div>
-                <div className="mb-2">ARTIFICIAL</div>
+              <ScrollReveal className="relative z-10 font-display text-[7vw] md:text-[3.5vw] font-bold tracking-tight leading-[0.85] text-white/80 uppercase" delay={0.25}>
+                <div className="mb-1.5">HUMAN</div>
+                <div className="mb-1.5">INTELLIGENCE</div>
+                <div className="text-white/30 my-2 text-[5vw] md:text-[2.5vw]">×</div>
+                <div className="mb-1.5">ARTIFICIAL</div>
                 <div>INTELLIGENCE</div>
               </ScrollReveal>
             </div>
@@ -159,10 +159,10 @@ function HomePage() {
                   className="w-28 h-28 md:w-36 md:h-36 rounded-full object-cover border-2 border-white/30 shadow-2xl shrink-0"
                 />
                 <div>
-                  <div className="font-mono text-[13px] tracking-widest text-white/80 uppercase font-semibold">
+                  <div className="font-mono text-[16px] md:text-[18px] tracking-widest text-white uppercase font-bold">
                     HIMANSHI YENUGUPALLI
                   </div>
-                  <div className="font-mono text-[11px] tracking-wider text-white/40 uppercase mt-1">
+                  <div className="font-mono text-[13px] tracking-wider text-white/60 uppercase mt-1 font-medium">
                     AI DATA ANNOTATOR & QA SPECIALIST
                   </div>
                 </div>

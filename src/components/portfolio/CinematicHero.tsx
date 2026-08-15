@@ -91,7 +91,7 @@ export function CinematicHero() {
           </motion.div>
 
           {/* Buttons */}
-          <motion.div variants={itemVariants} className="flex flex-wrap gap-4">
+          <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-4">
             <a
               href="#projects"
               className="px-6 py-3 border border-white/20 hover:border-white font-mono text-[11px] tracking-widest text-white uppercase transition-all duration-300"
@@ -103,6 +103,13 @@ export function CinematicHero() {
               className="px-6 py-3 border border-white/20 hover:border-white font-mono text-[11px] tracking-widest text-white uppercase transition-all duration-300"
             >
               CONTACT →
+            </a>
+            <a
+              href="/resume.pdf"
+              download="Himanshi_Yenugupalli_Resume.pdf"
+              className="px-6 py-3 rounded-full border border-white/40 bg-white/10 hover:bg-white hover:text-black font-mono text-[11px] tracking-widest text-white uppercase transition-all duration-300 flex items-center justify-center gap-1.5 shadow-lg"
+            >
+              RESUME ↓
             </a>
           </motion.div>
         </motion.div>
