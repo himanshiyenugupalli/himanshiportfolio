@@ -217,26 +217,13 @@ function HomePage() {
             </div>
           </div>
 
-          {/* Capabilities Horizontal Strip */}
+          {/* Capabilities Section */}
           <div className="mt-20 border-t border-white/10 pt-8">
             <div className="font-mono text-[12px] tracking-[0.3em] text-white/50 mb-6 uppercase font-semibold">
               CAPABILITIES
             </div>
-            
-            {/* Capability Strip */}
-            <div className="grid grid-cols-2 md:grid-cols-[repeat(auto-fit,minmax(180px,1fr))] border-b border-white/10 mb-12">
-              {CAPABILITIES.map((cap) => (
-                <div
-                  key={cap}
-                  className="py-4 px-4 font-mono text-[12px] md:text-[13px] tracking-wider text-white/90 border-r border-t border-white/10 flex items-center justify-center text-center uppercase font-medium hover:bg-white/5 transition-colors"
-                >
-                  {cap}
-                </div>
-              ))}
-            </div>
 
-            {/* Technical Skills & Tools/Platforms Breakdown */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Technical Skills */}
               <div className="border border-white/15 bg-black/40 backdrop-blur-sm p-6 rounded-xl">
                 <div className="font-mono text-[12px] tracking-[0.25em] text-white/70 uppercase mb-4 font-semibold border-b border-white/10 pb-3 flex items-center gap-2">
@@ -273,7 +260,6 @@ function HomePage() {
                 </div>
               </div>
             </div>
-
           </div>
 
         </div>
