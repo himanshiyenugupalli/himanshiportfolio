@@ -74,8 +74,11 @@ export function LiquidFrameAnimation() {
       const interactionTop = heroRect.top;
       const interactionBottom = heroRect.bottom;
 
-      // Active only inside Hero section, from left edge up to text boundary
+      // Strict scoping: Cursor interaction is active ONLY when user is inside the Hero section
+      const isInsideHeroSection = heroRect.top <= 0 && heroRect.bottom > 80;
+
       const isInsideHeroChromeArea =
+        isInsideHeroSection &&
         e.clientX >= interactionLeft &&
         e.clientX <= interactionRight &&
         e.clientY >= interactionTop &&
@@ -94,7 +97,7 @@ export function LiquidFrameAnimation() {
         const combinedInfluence = mappedX * 0.8 + mappedY * 0.2;
         cursorOffsetRef.current.target = Math.max(-14, Math.min(14, combinedInfluence * 14));
       } else {
-        // Smoothly decay back to 0 when cursor leaves Hero chrome or enters text area
+        // Smoothly decay back to 0 when cursor leaves Hero chrome or when user scrolls to About/Experience
         cursorOffsetRef.current.target = 0;
       }
     };
