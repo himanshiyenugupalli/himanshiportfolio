@@ -217,48 +217,91 @@ function HomePage() {
             </div>
           </div>
 
-          {/* Capabilities Section */}
-          <div className="mt-20 border-t border-white/10 pt-8">
-            <div className="font-mono text-[12px] tracking-[0.3em] text-white/50 mb-6 uppercase font-semibold">
+          {/* Capabilities Section - Asymmetrical 2-Column Layout */}
+          <div className="mt-20 border-t border-white/10 pt-10">
+            <div className="font-mono text-[12px] tracking-[0.3em] text-white/50 mb-8 uppercase font-semibold">
               CAPABILITIES
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Technical Skills */}
-              <div className="border border-white/15 bg-black/40 backdrop-blur-sm p-6 rounded-xl">
-                <div className="font-mono text-[12px] tracking-[0.25em] text-white/70 uppercase mb-4 font-semibold border-b border-white/10 pb-3 flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-white/60" />
-                  TECHNICAL SKILLS
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {TECHNICAL_SKILLS.map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 font-mono text-[12px] md:text-[13px] text-white/85 hover:border-white/30 transition-colors"
-                    >
-                      {skill}
-                    </span>
-                  ))}
+            {/* Grid Container: Compact Left Column (Annotation Card) + Right Column (Languages & Tools stacked) */}
+            <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-6 lg:gap-10 items-start -ml-2 lg:-ml-6">
+              
+              {/* LEFT COLUMN: Compact Hexagonal AI Data Annotation & RLHF QA Card */}
+              <div 
+                className="relative bg-black/30 backdrop-blur-md p-4 md:p-5 border border-white/15 group hover:border-indigo-400/40 transition-all duration-300 shadow-2xl"
+                style={{
+                  clipPath: "polygon(18px 0%, calc(100% - 18px) 0%, 100% 18px, 100% calc(100% - 18px), calc(100% - 18px) 100%, 18px 100%, 0% calc(100% - 18px), 0% 18px)",
+                }}
+              >
+                <div>
+                  <div className="font-mono text-[11px] tracking-[0.2em] text-white/70 uppercase mb-4 font-semibold border-b border-white/10 pb-3 flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
+                    AI ANNOTATION & QA
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {[
+                      "Data Annotation", "RLHF / RLSF", "Data Labelling", "Annotation QA / QC", 
+                      "Text/Image/Audio", "Conversational AI", "Intent & Dialogue", 
+                      "Sentiment Analysis", "Image Classification", "Bounding Boxes", 
+                      "Prompt Engineering", "Basic AI/ML"
+                    ].map((skill) => (
+                      <div
+                        key={skill}
+                        className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:border-indigo-400/50 hover:bg-white/10 font-mono text-[11px] md:text-[12px] text-white/90 transition-all duration-300 font-medium cursor-default"
+                      >
+                        {skill}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              {/* Tools & Platforms */}
-              <div className="border border-white/15 bg-black/40 backdrop-blur-sm p-6 rounded-xl">
-                <div className="font-mono text-[12px] tracking-[0.25em] text-white/70 uppercase mb-4 font-semibold border-b border-white/10 pb-3 flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-white/60" />
-                  TOOLS & PLATFORMS
+              {/* RIGHT COLUMN: Stacked Vertically (Languages & Core Tech on top, Tools & Ecosystem below) */}
+              <div className="flex flex-col gap-8 justify-between">
+                
+                {/* Languages & Core Tech (Top Right) */}
+                <div className="border border-white/12 bg-black/25 backdrop-blur-md p-6 md:p-8 rounded-2xl relative overflow-hidden group hover:border-white/25 transition-all duration-300 shadow-xl">
+                  <div className="font-mono text-[12px] tracking-[0.25em] text-white/70 uppercase mb-5 font-semibold flex items-center gap-2 border-b border-white/10 pb-4">
+                    <span className="w-2 h-2 rounded-full bg-cyan-400" />
+                    LANGUAGES & CORE TECH
+                  </div>
+                  <div className="flex flex-wrap gap-3">
+                    {[
+                      "Python", "JavaScript", "HTML5 & CSS3", "Java", "MySQL", "Networking"
+                    ].map((tech) => (
+                      <div
+                        key={tech}
+                        className="px-4 py-2.5 rounded-full bg-white/5 border border-white/10 hover:border-cyan-400/50 hover:bg-white/10 hover:shadow-[0_0_15px_rgba(6,182,212,0.15)] font-mono text-[12px] md:text-[13px] text-white/90 transition-all duration-300 font-medium cursor-default"
+                      >
+                        {tech}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  {TOOLS_AND_PLATFORMS.map((tool) => (
-                    <span
-                      key={tool}
-                      className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 font-mono text-[12px] md:text-[13px] text-white/85 hover:border-white/30 transition-colors"
-                    >
-                      {tool}
-                    </span>
-                  ))}
+
+                {/* Tools & Ecosystem (Bottom Right) */}
+                <div className="border border-white/12 bg-black/25 backdrop-blur-md p-6 md:p-8 rounded-2xl relative overflow-hidden group hover:border-white/25 transition-all duration-300 shadow-xl">
+                  <div className="font-mono text-[12px] tracking-[0.25em] text-white/70 uppercase mb-5 font-semibold flex items-center gap-2 border-b border-white/10 pb-4">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                    TOOLS & ECOSYSTEM
+                  </div>
+                  <div className="flex flex-wrap gap-3">
+                    {[
+                      "VS Code", "Git / GitHub", "Netlify", "Apache Tomcat", 
+                      "Hugging Face", "Microsoft Office Suite", "AWS Basics", "Supabase"
+                    ].map((tool) => (
+                      <div
+                        key={tool}
+                        className="px-4 py-2.5 rounded-full bg-white/5 border border-white/10 hover:border-emerald-400/50 hover:bg-white/10 hover:shadow-[0_0_15px_rgba(16,185,129,0.15)] font-mono text-[12px] md:text-[13px] text-white/90 transition-all duration-300 font-medium cursor-default"
+                      >
+                        {tool}
+                      </div>
+                    ))}
+                  </div>
                 </div>
+
               </div>
+
             </div>
           </div>
 
