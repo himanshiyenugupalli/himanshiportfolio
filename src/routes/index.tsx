@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Nav } from "@/components/portfolio/Nav";
 import { CinematicHero } from "@/components/portfolio/CinematicHero";
 import { Cursor } from "@/components/portfolio/Cursor";
@@ -426,53 +426,61 @@ function HomePage() {
             PROJECTS
           </h2>
 
-          {/* Clean 5-column grid layout for desktop */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-28 items-stretch">
-            {PROJECTS.map((proj) => {
+          {/* Clean Asymmetrical Modern Grid Layout for Projects */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 mb-28 items-stretch">
+            {PROJECTS.map((proj, idx) => {
               const PreviewComponent = proj.component;
+              const isLarge = idx === 0;
+
               return (
                 <div
                   key={proj.title}
-                  className="group relative border border-white/15 bg-[#080808] p-5 rounded-xl flex flex-col justify-between hover:border-white/50 hover:-translate-y-1.5 transition-all duration-300 min-h-[460px] shadow-lg will-change-transform transform-gpu"
+                  className={`group relative border border-white/15 bg-black/40 backdrop-blur-xl p-7 md:p-8 rounded-2xl flex flex-col justify-between hover:border-white/40 hover:bg-black/60 transition-all duration-300 shadow-2xl ${
+                    isLarge ? "lg:col-span-2 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center" : ""
+                  }`}
                 >
-                  {/* Top: Project Screen UI Preview Frame */}
-                  <div className="w-full h-44 mb-5 rounded-lg overflow-hidden shrink-0 group-hover:scale-[1.02] transition-transform duration-300 will-change-transform transform-gpu">
+                  {/* Project Screen UI Preview Frame */}
+                  <div className={`w-full ${isLarge ? "h-64 md:h-72" : "h-52 md:h-60"} mb-6 lg:mb-0 rounded-xl overflow-hidden shrink-0 group-hover:scale-[1.01] transition-transform duration-300 border border-white/10 shadow-lg`}>
                     <PreviewComponent />
                   </div>
 
-                  {/* Middle Content */}
-                  <div className="flex-1 flex flex-col justify-between">
+                  {/* Project Content & Details */}
+                  <div className="flex flex-col justify-between h-full">
                     <div>
-                      <div className="flex items-center justify-between mb-1">
-                        <h3 className="font-display text-2xl font-bold tracking-wider text-white group-hover:text-white uppercase">
-                          {proj.title}
-                        </h3>
+                      <div className="flex items-center gap-2 mb-2 font-mono text-[11px] tracking-widest text-white/50 uppercase font-medium">
+                        <span className="text-white/40">0{idx + 1}</span>
+                        <span>•</span>
+                        <span>{proj.subtitle}</span>
                       </div>
-                      
-                      <div className="font-mono text-[11px] tracking-wider text-white/60 uppercase mb-3 leading-tight font-medium">
+
+                      <h3 className="font-display text-2xl md:text-3xl font-bold tracking-wider text-white uppercase mb-2">
+                        {proj.title}
+                      </h3>
+
+                      <div className="font-mono text-[11px] tracking-wider text-white/60 uppercase mb-4 font-semibold">
                         {proj.tech}
                       </div>
 
-                      <p className="font-sans text-[14px] leading-relaxed text-white/70 mb-4">
+                      <p className="font-sans text-[15px] leading-relaxed text-white/75 mb-6">
                         {proj.desc}
                       </p>
                     </div>
 
-                    {/* Bottom Action Links */}
-                    <div className="pt-3 border-t border-white/10 flex items-center justify-between font-mono text-[12px] text-white/80 font-medium">
+                    {/* Action Links */}
+                    <div className="pt-4 border-t border-white/10 flex items-center justify-between font-mono text-[12px] text-white/90 font-medium">
                       <a
                         href={proj.repo}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover:text-white flex items-center gap-1 transition-colors"
+                        className="hover:text-white flex items-center gap-1.5 transition-colors px-4 py-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10"
                       >
-                        Repo <ExternalLink size={12} />
+                        Repository <ExternalLink size={12} />
                       </a>
                       <a
                         href={proj.demo}
-                        className="hover:text-white flex items-center gap-1 transition-colors"
+                        className="hover:text-white flex items-center gap-1.5 transition-colors px-4 py-2 rounded-full bg-white/10 border border-white/20 hover:bg-white hover:text-black font-semibold"
                       >
-                        Demo <ExternalLink size={12} />
+                        Live Demo <ExternalLink size={12} />
                       </a>
                     </div>
                   </div>

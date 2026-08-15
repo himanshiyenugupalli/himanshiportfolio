@@ -1,49 +1,62 @@
-import { useEffect, useState } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useEffect, useState, useRef } from "react";
 
 export function Cursor() {
+  const dotRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
   const [hovered, setHovered] = useState(false);
   const [chromeHovered, setChromeHovered] = useState(false);
-  const cursorX = useMotionValue(-100);
-  const cursorY = useMotionValue(-100);
-
-  const springConfig = { damping: 40, stiffness: 400, mass: 0.4 };
-  const cursorSpringX = useSpring(cursorX, springConfig);
-  const cursorSpringY = useSpring(cursorY, springConfig);
 
   useEffect(() => {
+    let mouseX = -100;
+    let mouseY = -100;
+    let ringX = -100;
+    let ringY = -100;
     let rafId: number | null = null;
     let lastTarget: HTMLElement | null = null;
 
     const moveCursor = (e: MouseEvent) => {
-      cursorX.set(e.clientX);
-      cursorY.set(e.clientY);
+      mouseX = e.clientX;
+      mouseY = e.clientY;
 
       const target = e.target as HTMLElement | null;
       if (target !== lastTarget) {
         lastTarget = target;
-        if (rafId) cancelAnimationFrame(rafId);
-        rafId = requestAnimationFrame(() => {
-          if (!target) return;
-          const tagName = target.tagName;
-          const isDirectInteractive =
-            tagName === "A" || tagName === "BUTTON" || tagName === "INPUT" || tagName === "TEXTAREA";
-          const isInteractive =
-            isDirectInteractive || !!target.closest("a, button, [role='button'], input, textarea, [data-hover]");
-          const isChrome = target.classList?.contains("chrome-interactive") || !!target.closest(".chrome-interactive");
+        if (!target) return;
+        const tagName = target.tagName;
+        const isDirectInteractive =
+          tagName === "A" || tagName === "BUTTON" || tagName === "INPUT" || tagName === "TEXTAREA";
+        const isInteractive =
+          isDirectInteractive || !!target.closest("a, button, [role='button'], input, textarea, [data-hover]");
+        const isChrome = target.classList?.contains("chrome-interactive") || !!target.closest(".chrome-interactive");
 
-          setHovered(isInteractive);
-          setChromeHovered(isChrome);
-        });
+        setHovered(isInteractive);
+        setChromeHovered(isChrome);
       }
     };
 
+    const render = () => {
+      // Smooth lerp for ring follower
+      ringX += (mouseX - ringX) * 0.25;
+      ringY += (mouseY - ringY) * 0.25;
+
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+      }
+      if (ringRef.current) {
+        ringRef.current.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+      }
+
+      rafId = requestAnimationFrame(render);
+    };
+
     window.addEventListener("mousemove", moveCursor, { passive: true });
+    rafId = requestAnimationFrame(render);
+
     return () => {
       window.removeEventListener("mousemove", moveCursor);
       if (rafId) cancelAnimationFrame(rafId);
     };
-  }, [cursorX, cursorY]);
+  }, []);
 
   // Support reduced motion preference
   const [reducedMotion, setReducedMotion] = useState(false);
@@ -64,26 +77,23 @@ export function Cursor() {
           cursor: none !important;
         }
       `}</style>
-      <motion.div
-        className="fixed top-0 left-0 w-2.5 h-2.5 bg-white rounded-full pointer-events-none z-50 -translate-x-1/2 -translate-y-1/2mix-blend-difference"
-        style={{
-          x: cursorSpringX,
-          y: cursorSpringY,
-        }}
-        animate={{
-          scale: hovered ? 1.5 : chromeHovered ? 2.5 : 1,
-        }}
+      <div
+        ref={dotRef}
+        className={`fixed top-0 left-0 w-2.5 h-2.5 bg-white rounded-full pointer-events-none z-[999] transition-transform duration-75 ease-out mix-blend-difference ${
+          hovered ? "scale-150" : chromeHovered ? "scale-[2.5]" : "scale-100"
+        }`}
+        style={{ willChange: "transform" }}
       />
-      <motion.div
-        className="fixed top-0 left-0 w-8 h-8 border border-white/40 rounded-full pointer-events-none z-50 -translate-x-1/2 -translate-y-1/2"
-        style={{
-          x: cursorSpringX,
-          y: cursorSpringY,
-        }}
-        animate={{
-          scale: hovered ? 1.8 : chromeHovered ? 2.2 : 1,
-          borderColor: hovered ? "rgba(255, 255, 255, 0.9)" : "rgba(255, 255, 255, 0.4)",
-        }}
+      <div
+        ref={ringRef}
+        className={`fixed top-0 left-0 w-8 h-8 border rounded-full pointer-events-none z-[999] transition-all duration-150 ease-out ${
+          hovered
+            ? "scale-150 border-white/90"
+            : chromeHovered
+            ? "scale-[2.2] border-white/80"
+            : "scale-100 border-white/40"
+        }`}
+        style={{ willChange: "transform" }}
       />
     </>
   );
