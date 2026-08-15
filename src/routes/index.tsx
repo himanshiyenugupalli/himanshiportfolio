@@ -140,10 +140,10 @@ function HomePage() {
               </ScrollReveal>
 
               {/* Overlapping Typography layout */}
-              <ScrollReveal className="relative z-10 font-display text-[7vw] md:text-[3.5vw] font-bold tracking-tight leading-[0.85] text-white/80 uppercase" delay={0.25}>
+              <ScrollReveal className="relative z-10 font-display text-[5.5vw] md:text-[2.8vw] font-bold tracking-tight leading-[0.85] text-white/75 uppercase" delay={0.25}>
                 <div className="mb-1.5">HUMAN</div>
                 <div className="mb-1.5">INTELLIGENCE</div>
-                <div className="text-white/30 my-2 text-[5vw] md:text-[2.5vw]">×</div>
+                <div className="text-white/30 my-2 text-[4vw] md:text-[2vw]">×</div>
                 <div className="mb-1.5">ARTIFICIAL</div>
                 <div>INTELLIGENCE</div>
               </ScrollReveal>
@@ -152,23 +152,23 @@ function HomePage() {
             {/* Right: Paragraphs + Profile Avatar + Signature */}
             <div className="flex flex-col justify-center relative z-10 lg:pl-12">
               {/* Profile Avatar */}
-              <ScrollReveal className="mb-6 flex items-center gap-5" delay={0.2}>
+              <ScrollReveal className="mb-6 flex items-center gap-4" delay={0.2}>
                 <img
                   src="/himanshi.jpg"
                   alt="Himanshi Yenugupalli"
-                  className="w-28 h-28 md:w-36 md:h-36 rounded-full object-cover border-2 border-white/30 shadow-2xl shrink-0"
+                  className="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover border-2 border-white/25 shadow-xl shrink-0"
                 />
                 <div>
-                  <div className="font-mono text-[16px] md:text-[18px] tracking-widest text-white uppercase font-bold">
+                  <div className="font-mono text-[14px] md:text-[16px] tracking-widest text-white uppercase font-bold">
                     HIMANSHI YENUGUPALLI
                   </div>
-                  <div className="font-mono text-[13px] tracking-wider text-white/60 uppercase mt-1 font-medium">
+                  <div className="font-mono text-[12px] tracking-wider text-white/50 uppercase mt-1 font-medium">
                     AI DATA ANNOTATOR & QA SPECIALIST
                   </div>
                 </div>
               </ScrollReveal>
 
-              <ScrollReveal className="text-[19px] md:text-[20px] leading-relaxed text-white/85 space-y-6" delay={0.3}>
+              <ScrollReveal className="text-[17px] md:text-[18px] leading-relaxed text-white/80 space-y-5" delay={0.3}>
                 <p>
                   I design, build, and optimize data-centric solutions that power intelligent systems. My work sits at the intersection of human judgment and machine learning — where high-quality data, thoughtful annotation, and precise evaluation shape the behavior of AI in the real world.
                 </p>
@@ -178,8 +178,8 @@ function HomePage() {
               </ScrollReveal>
 
               {/* Styled Cursive Signature */}
-              <ScrollReveal className="mt-4" delay={0.45}>
-                <div className="font-['Brush_Script_MT',cursive] text-4xl md:text-5xl text-white/70 mt-5 -rotate-3 inline-block select-none tracking-wide">
+              <ScrollReveal className="mt-3" delay={0.45}>
+                <div className="font-['Brush_Script_MT',cursive] text-3xl md:text-4xl text-white/70 mt-4 -rotate-3 inline-block select-none tracking-wide">
                   Himanshi Y.
                 </div>
               </ScrollReveal>
