@@ -52,8 +52,8 @@ const PROJECTS = [
     tech: "React / Vite / TypeScript / Bun / Netlify",
     desc: "AI-powered GitHub license health scanner that evaluates GitHub repositories & compatibility score.",
     component: LiscorePreview,
-    repo: "https://github.com/himanshiyenugupalli",
-    demo: "#",
+    repo: "https://github.com/himanshiyenugupalli/LiScore",
+    demo: "https://liscore.netlify.app/",
   },
   {
     title: "SOCIALEYE",
@@ -61,8 +61,8 @@ const PROJECTS = [
     tech: "Next.js / Supabase / Netlify",
     desc: "AI-powered hyperlocal civic issue reporting & resolution web application with real-time tracking.",
     component: SocialEyePreview,
-    repo: "https://github.com/himanshiyenugupalli",
-    demo: "#",
+    repo: "https://github.com/himanshiyenugupalli/SocialEye",
+    demo: "https://socialeyev2s.netlify.app/",
   },
   {
     title: "CALMPREP",
@@ -70,8 +70,8 @@ const PROJECTS = [
     tech: "React / Supabase / Netlify / Ollama",
     desc: "AI-powered mental wellness companion designed for students during high-stakes competitive exams.",
     component: CalmPrepPreview,
-    repo: "https://github.com/himanshiyenugupalli",
-    demo: "#",
+    repo: "https://github.com/himanshiyenugupalli/CalmPrep",
+    demo: "https://calmprep.netlify.app/",
   },
   {
     title: "CARBONLENS",
@@ -79,8 +79,8 @@ const PROJECTS = [
     tech: "TypeScript / Vite / Netlify",
     desc: "Personal carbon footprint tracking web application with data visualizer and emission metrics.",
     component: CarbonLensPreview,
-    repo: "https://github.com/himanshiyenugupalli",
-    demo: "#",
+    repo: "https://github.com/himanshiyenugupalli/CarbonLens",
+    demo: "https://carbonlenspw.netlify.app/",
   },
   {
     title: "TRAVELCHECKLIST",
@@ -88,8 +88,8 @@ const PROJECTS = [
     tech: "HTML5 / CSS3 / JavaScript / Netlify",
     desc: "Responsive travel packing checklist web app supporting custom packing rules and progress tracking.",
     component: TravelChecklistPreview,
-    repo: "https://github.com/himanshiyenugupalli",
-    demo: "#",
+    repo: "https://github.com/himanshiyenugupalli/TravelChecklist_codecircuit",
+    demo: "https://travelchecklistcodecircuit.netlify.app/",
   },
 ];
 
@@ -478,6 +478,8 @@ function HomePage() {
                       </a>
                       <a
                         href={proj.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="hover:text-white flex items-center gap-1.5 transition-colors px-4 py-2 rounded-full bg-white/10 border border-white/20 hover:bg-white hover:text-black font-semibold"
                       >
                         Live Demo <ExternalLink size={12} />

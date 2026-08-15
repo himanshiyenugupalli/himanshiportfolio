@@ -107,6 +107,8 @@ export function CinematicHero() {
             <a
               href="/resume.pdf"
               download="Himanshi_Yenugupalli_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-6 py-3 rounded-full border border-white/40 bg-white/10 hover:bg-white hover:text-black font-mono text-[11px] tracking-widest text-white uppercase transition-all duration-300 flex items-center justify-center gap-1.5 shadow-lg"
             >
               RESUME ↓
