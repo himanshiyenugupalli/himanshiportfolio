@@ -152,18 +152,23 @@ function HomePage() {
             {/* Right: Paragraphs + Profile Avatar + Signature */}
             <div className="flex flex-col justify-center relative z-10 lg:pl-12">
               {/* Profile Avatar */}
-              <ScrollReveal className="mb-6 flex items-center gap-4" delay={0.2}>
+              <ScrollReveal className="mb-6 flex items-center gap-5" delay={0.2}>
                 <img
                   src="/himanshi.jpg"
                   alt="Himanshi Yenugupalli"
-                  className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-2 border-white/20 shadow-lg"
+                  className="w-28 h-28 md:w-36 md:h-36 rounded-full object-cover border-2 border-white/30 shadow-2xl shrink-0"
                 />
-                <div className="font-mono text-[12px] tracking-widest text-white/60 uppercase font-semibold">
-                  HIMANSHI YENUGUPALLI
+                <div>
+                  <div className="font-mono text-[13px] tracking-widest text-white/80 uppercase font-semibold">
+                    HIMANSHI YENUGUPALLI
+                  </div>
+                  <div className="font-mono text-[11px] tracking-wider text-white/40 uppercase mt-1">
+                    AI DATA ANNOTATOR & QA SPECIALIST
+                  </div>
                 </div>
               </ScrollReveal>
 
-              <ScrollReveal className="text-[17px] md:text-[18px] leading-relaxed text-white/75 space-y-6" delay={0.3}>
+              <ScrollReveal className="text-[19px] md:text-[20px] leading-relaxed text-white/85 space-y-6" delay={0.3}>
                 <p>
                   I design, build, and optimize data-centric solutions that power intelligent systems. My work sits at the intersection of human judgment and machine learning — where high-quality data, thoughtful annotation, and precise evaluation shape the behavior of AI in the real world.
                 </p>
@@ -172,11 +177,11 @@ function HomePage() {
                 </p>
               </ScrollReveal>
 
-              {/* Signature */}
-              <ScrollReveal className="mt-8" delay={0.45}>
-                <svg className="w-40 h-20 text-white/80" viewBox="0 0 200 80" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20 50 C40 30, 60 20, 80 45 C100 70, 110 10, 120 40 C130 70, 150 30, 180 35 M80 35 L120 35" />
-                </svg>
+              {/* Styled Cursive Signature */}
+              <ScrollReveal className="mt-4" delay={0.45}>
+                <div className="font-['Brush_Script_MT',cursive] text-4xl md:text-5xl text-white/70 mt-5 -rotate-3 inline-block select-none tracking-wide">
+                  Himanshi Y.
+                </div>
               </ScrollReveal>
             </div>
           </div>
