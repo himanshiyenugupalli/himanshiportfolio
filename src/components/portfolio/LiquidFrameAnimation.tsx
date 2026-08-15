@@ -58,23 +58,38 @@ export function LiquidFrameAnimation() {
       if (window.matchMedia("(pointer: coarse)").matches) return;
 
       const heroChromeEl = document.querySelector("[data-hero-chrome]");
-      if (!heroChromeEl) {
+      const heroSectionEl = document.getElementById("top");
+      
+      if (!heroSectionEl) {
         cursorOffsetRef.current.target = 0;
         return;
       }
 
-      const rect = heroChromeEl.getBoundingClientRect();
+      const heroRect = heroSectionEl.getBoundingClientRect();
+      const chromeRect = heroChromeEl ? heroChromeEl.getBoundingClientRect() : null;
+
+      // Expand interaction area: cover the entire left visual area of the Hero
+      const interactionLeft = chromeRect ? Math.min(0, chromeRect.left) : 0;
+      const interactionRight = chromeRect ? Math.max(window.innerWidth * 0.55, chromeRect.right) : window.innerWidth * 0.55;
+      const interactionTop = heroRect.top;
+      const interactionBottom = heroRect.bottom;
+
       const isInsideHeroChrome =
-        e.clientX >= rect.left &&
-        e.clientX <= rect.right &&
-        e.clientY >= rect.top &&
-        e.clientY <= rect.bottom;
+        e.clientX >= interactionLeft &&
+        e.clientX <= interactionRight &&
+        e.clientY >= interactionTop &&
+        e.clientY <= interactionBottom;
 
       if (isInsideHeroChrome) {
-        // Calculate relative position within Hero chrome region (-1 to +1)
-        const relX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
-        // Map to a subtle local frame offset range (max +-6 frames)
-        cursorOffsetRef.current.target = relX * 6;
+        // Relative X within the silver chrome region (-1 to +1)
+        const relX = ((e.clientX - interactionLeft) / (interactionRight - interactionLeft) - 0.5) * 2;
+        
+        // Relative Y within the silver chrome region (-1 to +1) for enhanced 3D feel
+        const relY = ((e.clientY - interactionTop) / (interactionBottom - interactionTop) - 0.5) * 2;
+
+        // Combined 2D cursor influence mapping to +-12 frames local morphing offset
+        const combinedInfluence = (relX * 0.75 + relY * 0.25);
+        cursorOffsetRef.current.target = Math.max(-12, Math.min(12, combinedInfluence * 12));
       } else {
         // Smoothly decay back to 0 when cursor leaves Hero chrome
         cursorOffsetRef.current.target = 0;
