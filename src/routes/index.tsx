@@ -217,18 +217,18 @@ function HomePage() {
             </div>
           </div>
 
-          {/* Capabilities Section - Asymmetrical 2-Column Layout */}
+          {/* Capabilities Section - 3-Column Layout */}
           <div className="mt-20 border-t border-white/10 pt-10">
             <div className="font-mono text-[12px] tracking-[0.3em] text-white/50 mb-8 uppercase font-semibold">
               CAPABILITIES
             </div>
 
-            {/* Grid Container: Compact Left Column (Annotation Card) + Right Column (Languages & Tools stacked) */}
-            <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-6 lg:gap-10 items-start -ml-2 lg:-ml-6">
+            {/* 3-Column Grid Container: Left (Annotation), Middle (Languages & Tools), Right (Java & Human/AI Logos) */}
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr_0.45fr] gap-6 lg:gap-8 items-stretch">
               
-              {/* LEFT COLUMN: Compact Hexagonal AI Data Annotation & RLHF QA Card */}
+              {/* LEFT COLUMN: AI Data Annotation & RLHF QA Card (with Chat & Python logos) */}
               <div 
-                className="relative bg-black/30 backdrop-blur-md p-4 md:p-5 border border-white/15 group hover:border-indigo-400/40 transition-all duration-300 shadow-2xl"
+                className="relative bg-black/30 backdrop-blur-md p-5 md:p-6 border border-white/15 group hover:border-indigo-400/40 transition-all duration-300 shadow-2xl flex flex-col justify-between"
                 style={{
                   clipPath: "polygon(18px 0%, calc(100% - 18px) 0%, 100% 18px, 100% calc(100% - 18px), calc(100% - 18px) 100%, 18px 100%, 0% calc(100% - 18px), 0% 18px)",
                 }}
@@ -241,9 +241,9 @@ function HomePage() {
                   <div className="flex flex-wrap gap-2">
                     {[
                       "Data Annotation", "RLHF / RLSF", "Data Labelling", "Annotation QA / QC", 
-                      "Text/Image/Audio", "Conversational AI", "Intent & Dialogue", 
-                      "Sentiment Analysis", "Image Classification", "Bounding Boxes", 
-                      "Prompt Engineering", "Basic AI/ML"
+                      "Text / Image / Audio Annotation", "Conversational AI Testing", "Intent & Dialogue Labeling", 
+                      "Customer Sentiment Analysis", "Image Classification", "Bounding Boxes", 
+                      "Prompt Engineering", "Basic AI/ML Concepts"
                     ].map((skill) => (
                       <div
                         key={skill}
@@ -253,25 +253,35 @@ function HomePage() {
                       </div>
                     ))}
                   </div>
+
+                  {/* 3D Chromatic Logos (Chat & Python - Balanced & Perfectly Fitted) */}
+                  <div className="mt-6 pt-4 border-t border-white/10 grid grid-cols-2 gap-3 items-center justify-items-center">
+                    <div className="p-3 rounded-xl bg-white/[0.04] border border-white/15 flex items-center justify-center w-full h-24 md:h-28 hover:border-white/35 hover:bg-white/[0.08] transition-all shadow-md">
+                      <img src="/logo-chat.png" alt="Conversational AI Chat" className="h-18 md:h-22 w-auto object-contain mix-blend-screen drop-shadow-[0_0_12px_rgba(255,255,255,0.4)] brightness-115" />
+                    </div>
+                    <div className="p-3 rounded-xl bg-white/[0.04] border border-white/15 flex items-center justify-center w-full h-24 md:h-28 hover:border-white/35 hover:bg-white/[0.08] transition-all shadow-md">
+                      <img src="/logo-python.png" alt="Python Language" className="h-18 md:h-22 w-auto object-contain mix-blend-screen drop-shadow-[0_0_12px_rgba(255,255,255,0.4)] brightness-115" />
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {/* RIGHT COLUMN: Stacked Vertically (Languages & Core Tech on top, Tools & Ecosystem below) */}
-              <div className="flex flex-col gap-8 justify-between">
+              {/* MIDDLE COLUMN: Stacked Vertically (Languages & Core Tech on top, Tools & Ecosystem below) */}
+              <div className="flex flex-col gap-6 justify-between">
                 
-                {/* Languages & Core Tech (Top Right) */}
-                <div className="border border-white/12 bg-black/25 backdrop-blur-md p-6 md:p-8 rounded-2xl relative overflow-hidden group hover:border-white/25 transition-all duration-300 shadow-xl">
+                {/* Languages & Core Tech (Middle Top) */}
+                <div className="border border-white/12 bg-black/25 backdrop-blur-md p-6 rounded-2xl relative overflow-hidden group hover:border-white/25 transition-all duration-300 shadow-xl">
                   <div className="font-mono text-[12px] tracking-[0.25em] text-white/70 uppercase mb-5 font-semibold flex items-center gap-2 border-b border-white/10 pb-4">
                     <span className="w-2 h-2 rounded-full bg-cyan-400" />
                     LANGUAGES & CORE TECH
                   </div>
-                  <div className="flex flex-wrap gap-3">
+                  <div className="flex flex-wrap gap-2.5">
                     {[
                       "Python", "JavaScript", "HTML5 & CSS3", "Java", "MySQL", "Networking"
                     ].map((tech) => (
                       <div
                         key={tech}
-                        className="px-4 py-2.5 rounded-full bg-white/5 border border-white/10 hover:border-cyan-400/50 hover:bg-white/10 hover:shadow-[0_0_15px_rgba(6,182,212,0.15)] font-mono text-[12px] md:text-[13px] text-white/90 transition-all duration-300 font-medium cursor-default"
+                        className="px-3.5 py-2 rounded-full bg-white/5 border border-white/10 hover:border-cyan-400/50 hover:bg-white/10 hover:shadow-[0_0_15px_rgba(6,182,212,0.15)] font-mono text-[12px] md:text-[13px] text-white/90 transition-all duration-300 font-medium cursor-default"
                       >
                         {tech}
                       </div>
@@ -279,20 +289,20 @@ function HomePage() {
                   </div>
                 </div>
 
-                {/* Tools & Ecosystem (Bottom Right) */}
-                <div className="border border-white/12 bg-black/25 backdrop-blur-md p-6 md:p-8 rounded-2xl relative overflow-hidden group hover:border-white/25 transition-all duration-300 shadow-xl">
+                {/* Tools & Ecosystem (Middle Bottom) */}
+                <div className="border border-white/12 bg-black/25 backdrop-blur-md p-6 rounded-2xl relative overflow-hidden group hover:border-white/25 transition-all duration-300 shadow-xl">
                   <div className="font-mono text-[12px] tracking-[0.25em] text-white/70 uppercase mb-5 font-semibold flex items-center gap-2 border-b border-white/10 pb-4">
                     <span className="w-2 h-2 rounded-full bg-emerald-400" />
                     TOOLS & ECOSYSTEM
                   </div>
-                  <div className="flex flex-wrap gap-3">
+                  <div className="flex flex-wrap gap-2.5">
                     {[
                       "VS Code", "Git / GitHub", "Netlify", "Apache Tomcat", 
                       "Hugging Face", "Microsoft Office Suite", "AWS Basics", "Supabase"
                     ].map((tool) => (
                       <div
                         key={tool}
-                        className="px-4 py-2.5 rounded-full bg-white/5 border border-white/10 hover:border-emerald-400/50 hover:bg-white/10 hover:shadow-[0_0_15px_rgba(16,185,129,0.15)] font-mono text-[12px] md:text-[13px] text-white/90 transition-all duration-300 font-medium cursor-default"
+                        className="px-3.5 py-2 rounded-full bg-white/5 border border-white/10 hover:border-emerald-400/50 hover:bg-white/10 hover:shadow-[0_0_15px_rgba(16,185,129,0.15)] font-mono text-[12px] md:text-[13px] text-white/90 transition-all duration-300 font-medium cursor-default"
                       >
                         {tool}
                       </div>
@@ -300,6 +310,16 @@ function HomePage() {
                   </div>
                 </div>
 
+              </div>
+
+              {/* RIGHT COLUMN (Far Right Margin): Java Logo (Top) + Human/AI Logo (Bottom) stacked vertically */}
+              <div className="flex flex-col gap-6 items-center justify-between">
+                <div className="p-4 rounded-2xl bg-black/25 backdrop-blur-md border border-white/15 flex items-center justify-center w-full h-[48%] min-h-[140px] hover:border-white/35 hover:bg-white/[0.08] transition-all shadow-xl">
+                  <img src="/logo-java.png" alt="Java Technology" className="h-24 md:h-28 w-auto object-contain mix-blend-screen drop-shadow-[0_0_15px_rgba(255,255,255,0.4)] brightness-115" />
+                </div>
+                <div className="p-4 rounded-2xl bg-black/25 backdrop-blur-md border border-white/15 flex items-center justify-center w-full h-[48%] min-h-[140px] hover:border-white/35 hover:bg-white/[0.08] transition-all shadow-xl">
+                  <img src="/logo-human-ai.png" alt="Human AI Evaluation" className="h-24 md:h-28 w-auto object-contain mix-blend-screen drop-shadow-[0_0_15px_rgba(255,255,255,0.4)] brightness-115" />
+                </div>
               </div>
 
             </div>
