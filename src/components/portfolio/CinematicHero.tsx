@@ -35,7 +35,7 @@ export function CinematicHero() {
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 w-full grid grid-cols-1 md:grid-cols-[1.1fr_1fr] items-center gap-12 pt-20">
         
         {/* Left Side: Transparent visual area for fixed background canvas */}
-        <div className="relative w-full h-[40vh] md:h-[70vh] flex items-center justify-center overflow-visible select-none pointer-events-none" />
+        <div data-hero-chrome className="relative w-full h-[40vh] md:h-[70vh] flex items-center justify-center overflow-visible select-none pointer-events-auto" />
 
         {/* Right Side: Identity Typography */}
         <motion.div

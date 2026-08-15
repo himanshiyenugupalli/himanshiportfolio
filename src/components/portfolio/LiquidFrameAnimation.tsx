@@ -14,12 +14,10 @@ export function LiquidFrameAnimation() {
   const framesCache = useRef<(HTMLImageElement | null)[]>(new Array(121).fill(null));
   const currentFrameRef = useRef<number>(0);
 
-  // Subtle mouse parallax state
-  const mouseRef = useRef<{ x: number; y: number; targetX: number; targetY: number }>({
-    x: 0,
-    y: 0,
-    targetX: 0,
-    targetY: 0,
+  // Local frame offset driven strictly by cursor over Hero chrome
+  const cursorOffsetRef = useRef<{ current: number; target: number }>({
+    current: 0,
+    target: 0,
   });
 
   const [opacity, setOpacity] = useState<number>(1);
@@ -54,12 +52,33 @@ export function LiquidFrameAnimation() {
       };
     }
 
-    // 2. Mouse Parallax Handler (Desktop)
+    // 2. Local Mouse Interaction over Hero Chrome Interaction Area
     const handleMouseMove = (e: MouseEvent) => {
-      const normX = (e.clientX / window.innerWidth - 0.5) * 2; // -1 to 1
-      const normY = (e.clientY / window.innerHeight - 0.5) * 2; // -1 to 1
-      mouseRef.current.targetX = normX * 25; // Subtle max 25px offset
-      mouseRef.current.targetY = normY * 25;
+      // Disable cursor effect on touch-only / coarse pointer devices
+      if (window.matchMedia("(pointer: coarse)").matches) return;
+
+      const heroChromeEl = document.querySelector("[data-hero-chrome]");
+      if (!heroChromeEl) {
+        cursorOffsetRef.current.target = 0;
+        return;
+      }
+
+      const rect = heroChromeEl.getBoundingClientRect();
+      const isInsideHeroChrome =
+        e.clientX >= rect.left &&
+        e.clientX <= rect.right &&
+        e.clientY >= rect.top &&
+        e.clientY <= rect.bottom;
+
+      if (isInsideHeroChrome) {
+        // Calculate relative position within Hero chrome region (-1 to +1)
+        const relX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+        // Map to a subtle local frame offset range (max +-6 frames)
+        cursorOffsetRef.current.target = relX * 6;
+      } else {
+        // Smoothly decay back to 0 when cursor leaves Hero chrome
+        cursorOffsetRef.current.target = 0;
+      }
     };
 
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
@@ -70,9 +89,9 @@ export function LiquidFrameAnimation() {
     const renderLoop = () => {
       if (!isMounted) return;
 
-      // Smooth damp mouse offset
-      mouseRef.current.x += (mouseRef.current.targetX - mouseRef.current.x) * 0.05;
-      mouseRef.current.y += (mouseRef.current.targetY - mouseRef.current.y) * 0.05;
+      // Smoothly interpolate cursor local frame offset
+      cursorOffsetRef.current.current +=
+        (cursorOffsetRef.current.target - cursorOffsetRef.current.current) * 0.1;
 
       // Measure continuous timeline across Hero -> About -> Experience
       const heroEl = document.getElementById("top");
@@ -90,12 +109,18 @@ export function LiquidFrameAnimation() {
         // Normalized progress [0, 1] across Hero -> About -> Experience
         let progress = Math.max(0, Math.min(1, relativeScroll / (totalHeight - window.innerHeight)));
 
-        // Calculate target frame index
+        // Calculate base frame index from scroll
         const totalFrames = FRAME_FILES.length;
-        const targetFrame = Math.max(0, Math.min(totalFrames - 1, Math.floor(progress * (totalFrames - 1))));
+        const baseFrame = Math.max(0, Math.min(totalFrames - 1, Math.floor(progress * (totalFrames - 1))));
 
-        currentFrameRef.current = targetFrame;
-        renderFrame(targetFrame);
+        // Add local cursor frame offset (clamped to valid frame boundaries)
+        const effectiveFrame = Math.max(
+          0,
+          Math.min(totalFrames - 1, Math.round(baseFrame + cursorOffsetRef.current.current))
+        );
+
+        currentFrameRef.current = effectiveFrame;
+        renderFrame(effectiveFrame);
 
         // Fade out transition as user scrolls past Experience into Projects
         if (projectsEl) {
@@ -126,7 +151,7 @@ export function LiquidFrameAnimation() {
     };
   }, []);
 
-  // Gracefully render current or nearest loaded frame onto Canvas while preserving aspect ratio
+  // Gracefully render target frame onto stationary Canvas
   const renderFrame = (frameIndex: number) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -186,13 +211,9 @@ export function LiquidFrameAnimation() {
         drawHeight = drawWidth / imgRatio;
       }
 
-      // Apply subtle mouse parallax offset
-      const mouseX = mouseRef.current.x;
-      const mouseY = mouseRef.current.y;
-
-      // Align flush to viewport left edge (drawX = 0) with subtle mouse offset
-      const drawX = mouseX;
-      const drawY = (canvasHeight - drawHeight) / 2 + mouseY;
+      // Canvas remains physically stationary flush to viewport left edge
+      const drawX = 0;
+      const drawY = (canvasHeight - drawHeight) / 2;
 
       ctx.drawImage(imgToDraw, drawX, drawY, drawWidth, drawHeight);
     }
