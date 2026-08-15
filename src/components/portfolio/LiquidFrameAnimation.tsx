@@ -217,24 +217,30 @@ export function LiquidFrameAnimation() {
       let drawWidth = canvasWidth;
       let drawHeight = canvasHeight;
 
-      // Scale to fit nicely without stretching/distortion
-      if (canvasRatio > imgRatio) {
-        drawHeight = canvasHeight;
-        drawWidth = drawHeight * imgRatio;
-      } else {
-        drawWidth = canvasWidth;
-        drawHeight = drawWidth / imgRatio;
-      }
+      let drawX = 0;
+      let drawY = (canvasHeight - drawHeight) / 2;
 
-      // On desktop/large screens, scale up slightly if needed so it stays prominent on left
-      if (canvasWidth > 768) {
+      if (canvasWidth <= 768) {
+        // MOBILE BREAKPOINT (<= 768px): Make animation substantially larger across phone width
+        drawWidth = canvasWidth * 0.94; // 94% of mobile viewport width with 3% breathing room on edges
+        drawHeight = drawWidth / imgRatio;
+        drawX = (canvasWidth - drawWidth) / 2; // Centered horizontally in mobile viewport
+        drawY = (canvasHeight - drawHeight) / 2;
+      } else {
+        // DESKTOP BREAKPOINT (> 768px): Preserve exact existing left-flush positioning and desktop scaling
+        if (canvasRatio > imgRatio) {
+          drawHeight = canvasHeight;
+          drawWidth = drawHeight * imgRatio;
+        } else {
+          drawWidth = canvasWidth;
+          drawHeight = drawWidth / imgRatio;
+        }
+
         drawWidth = Math.max(drawWidth, canvasWidth * 0.55);
         drawHeight = drawWidth / imgRatio;
+        drawX = 0;
+        drawY = (canvasHeight - drawHeight) / 2;
       }
-
-      // Canvas remains physically stationary flush to viewport left edge
-      const drawX = 0;
-      const drawY = (canvasHeight - drawHeight) / 2;
 
       ctx.drawImage(imgToDraw, drawX, drawY, drawWidth, drawHeight);
     }
