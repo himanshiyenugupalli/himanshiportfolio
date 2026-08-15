@@ -173,18 +173,25 @@ export function LiquidFrameAnimation() {
 
       // Scale to fit nicely without stretching/distortion
       if (canvasRatio > imgRatio) {
-        drawWidth = canvasWidth * 0.9;
-        drawHeight = drawWidth / imgRatio;
-      } else {
-        drawHeight = canvasHeight * 0.9;
+        drawHeight = canvasHeight;
         drawWidth = drawHeight * imgRatio;
+      } else {
+        drawWidth = canvasWidth;
+        drawHeight = drawWidth / imgRatio;
+      }
+
+      // On desktop/large screens, scale up slightly if needed so it stays prominent on left
+      if (canvasWidth > 768) {
+        drawWidth = Math.max(drawWidth, canvasWidth * 0.55);
+        drawHeight = drawWidth / imgRatio;
       }
 
       // Apply subtle mouse parallax offset
       const mouseX = mouseRef.current.x;
       const mouseY = mouseRef.current.y;
 
-      const drawX = (canvasWidth - drawWidth) / 2 + mouseX;
+      // Align flush to viewport left edge (drawX = 0) with subtle mouse offset
+      const drawX = mouseX;
       const drawY = (canvasHeight - drawHeight) / 2 + mouseY;
 
       ctx.drawImage(imgToDraw, drawX, drawY, drawWidth, drawHeight);
